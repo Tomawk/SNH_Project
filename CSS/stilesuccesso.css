@@ -1,0 +1,56 @@
+@font-face { font-family: Ikaros; src: url('http://localhost/Progetto%20PWEB/CSS/Font/Ikaros-Regular.otf'); } 
+@font-face { font-family: Circular; src: url('http://localhost/Progetto%20PWEB/CSS/Font/CircularSTD-Medium.otf'); } 
+@font-face { font-family: Raleway; src: url('http://localhost/Progetto%20PWEB/CSS/Font/Raleway-Regular.ttf'); } 
+
+#center_div {
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:  46vw;
+    height: 30vw;
+    margin-left:-23vw; /* -1/2 width */
+    margin-top: -15vw; /* -1/2 height */
+    box-shadow: 9px 9px 127px 16px rgba(0,0,0,0.5);
+}
+
+.imgdiv{
+    text-align: center;
+    width: 100%;
+    height: 28%;
+    position: relative;
+}
+
+img.check {
+    width: 15%;
+    position: relative;
+    top: 1vw;
+}
+
+#intestation{
+	font-family: Circular, sans-serif;
+	text-align: center;
+	font-weight: lighter;
+}
+
+#intestation h1{
+	font-size: 4vw;
+	position: relative;
+	top: -2vw;
+	color: #4d4d4d;
+}
+
+#intestation p{
+	font-size: 1.5vw;
+	color: #262626;
+}
+
+#intestation a{
+	font-size: 0.8vw;
+	text-decoration: none;
+	color: #4d4dff;
+
+}
+
+#intestation a:visited{
+	color: #4d4dff;
+}

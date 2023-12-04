@@ -1,0 +1,201 @@
+#resoconto{
+	width: 50%;
+	border: 2px solid black;
+	min-height: 47vw;
+}
+
+p{
+	font-family: Raleway, sans-serif;
+	font-size: 1.2vw;
+	padding: 0vw 2vw;
+}
+
+@font-face { font-family: Raleway; src: url('http://localhost/Progetto%20PWEB/CSS/Font/Raleway-Regular.ttf'); } 
+@font-face { font-family: Franklin Gothic Book; src: url('http://localhost/Progetto%20PWEB/CSS/Font/franklin-gothic-book.ttf'); } 
+@font-face { font-family: Ikaros; src: url('http://localhost/Progetto%20PWEB/CSS/Font/Ikaros-Regular.otf'); } 
+@font-face { font-family: Circular; src: url('http://localhost/Progetto%20PWEB/CSS/Font/CircularSTD-Medium.otf'); } 
+
+h1{
+	font-family: Raleway, sans-serif;
+	text-align: center;
+	font-size: 2.5vw;
+	color: black;
+	font-weight: lighter;
+	position: relative;
+	top: 1vw;
+	left: 5vw;
+	font-style: italic;
+	width: 80%;
+	background-color: #e6e6e6;
+}
+
+h2{
+	font-family: Raleway, sans-serif;
+	font-size: 1.5vw;
+	padding: 0.5vw 2vw;
+	color: black;
+	position: relative;
+	top: 0.5vw;
+	font-style: italic;
+	width: 91.5%;
+	background-color: #e6e6e6;
+
+}
+
+h3{
+	text-align: center;
+	font-family: Raleway, sans-serif;
+	font-size: 1.5vw;
+	position: relative;
+	top: -1vw;
+	font-style: italic;
+}
+
+.icon{
+	width: 5%;
+	height: 5%;
+	position: relative;
+	top: 0.6vw;
+}
+
+#preview{
+	position: fixed;
+	border: 2px solid black;
+	width: 25vw;
+	height: 25vw;
+	right: 12%;
+	top: 1%;
+}
+
+#preview p{
+	font-family: Raleway, sans-serif;
+	text-align: center;
+	font-size: 1.5vw;
+	font-weight: bold;
+	width: 84%;
+	background-color: #e6e6e6;
+	position: relative;
+	top: -0.5vw;
+}
+
+hr{
+	width: 80%;
+	border-top: 2px solid black;
+	position: relative;
+	top: 1vw;
+}
+
+
+#preview img{
+	display: none;
+	width: 80%;
+	position: absolute;
+	top: 3vw;
+	left: 10.5%;
+	z-index: 1;
+}
+
+#preview #tpomodoro{
+	z-index: 2;
+}
+
+#preview #cmozzarella{
+	z-index: 3;
+}
+
+ #preview #ipomodorini{
+ 	z-index: 4;
+ }
+
+#preview #ipeperoni , #preview #ifunghi, #preview #isalamino, #preview #ipatatine, #preview #icipolla, #preview #iwurstel, #preview #ipcotto, #preview #iacciughe{
+	z-index: 5;
+}
+
+#preview #icapperi, #preview #irucola, #preview #iolive, #preview #ibasilico, #preview #iorigano{
+	z-index: 6;
+}
+
+#details{
+	background-color: #e6e6e6;
+	position: fixed;
+	width: 35%;
+	height: 25%;
+	border: 2px solid black;
+	top: 62%;
+	right: 7%;
+
+}
+
+#details p{
+	font-family: Raleway, sans-serif;
+	font-size: 1.2vw;
+	position: relative;
+	top: -1.5vw;
+}
+
+#pulsanti{
+	width: 40%;
+	height: 6%;
+	position: fixed;
+	right: 4.5%;
+	top: 90%;
+}
+
+#add_order{
+	border: none;
+	background-color: #00cc00;
+	color: #f2f2f2;
+	font-size: 1.5vw;
+	border-radius: 5px;
+	padding: 0.5vw 2vw;
+	text-align: center;
+	position: fixed;
+	bottom: 2vw;
+	right: 10vw;
+}
+
+#add_order:hover{
+	background: rgba(0,0,0,0);
+	color: #00cc00;
+	box-shadow: inset 0 0 0 3px #00cc00;
+}
+
+#cancel_order{
+	border: none;
+	background-color: #e60000;
+	color: #f2f2f2;
+	font-size: 1.5vw;
+	border-radius: 5px;
+	padding: 0.5vw 2vw;
+	text-align: center;
+	position: fixed;
+	bottom: 2vw;
+	right: 30vw;
+}
+
+#cancel_order:hover{
+	background: rgba(0,0,0,0);
+	color: #e60000;
+	box-shadow: inset 0 0 0 3px #e60000;
+}
+
+#total{
+	position: fixed;
+	top: 51.5%;
+	right: 14%;
+	height: 4vw;
+	width: 20vw;
+}
+
+#total p{
+	font-size: 2vw;
+	font-family: Raleway, sans-serif;
+	font-weight: bold;
+	background-color: yellow;
+	text-align: center;
+	width: 15vw;
+}
+
+#total p strong{
+	color: red;
+}

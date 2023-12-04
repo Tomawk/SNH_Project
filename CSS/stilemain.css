@@ -1,0 +1,1029 @@
+/* Main */
+
+@font-face { font-family: Raleway; src: url('http://localhost/Progetto%20PWEB/CSS/Font/Raleway-Regular.ttf'); } 
+@font-face { font-family: 'Franklin Gothic Book'; src: url('http://localhost/Progetto%20PWEB/CSS/Font/franklin-gothic-book.ttf'); } 
+@font-face { font-family: Ikaros; src: url('http://localhost/Progetto%20PWEB/CSS/Font/Ikaros-Regular.otf'); } 
+@font-face { font-family: Circular; src: url('http://localhost/Progetto%20PWEB/CSS/Font/CircularSTD-Medium.otf'); } 
+
+body {
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.topnav{
+  position: fixed;
+  top: 0;
+  width: 98.8%;
+  height: 4.09vw;
+  z-index: 300;
+    background-color: black;
+    overflow: hidden;
+}
+
+.topnav table{
+  margin:auto;
+}
+
+.topnav td a{
+    position:relative;
+    top: 0.95vw;
+    color: #f2f2f2;
+    text-align: center;
+    font-family: 'Franklin Gothic Book', sans-serif;
+    padding: 1.2vw 1.1vw;
+    text-decoration: none;
+    font-size: 1.5VW;
+    height: 4vw;
+}
+
+.topnav td a:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.rightnav {
+	position: fixed;
+	right: 0.5vw;
+	top: 85px;
+	background-color: rgba(255,255,255,0.5);
+	border-radius: 5px;
+	z-index: 300;
+  width: 3vw;
+  height: 9vw;
+}
+
+.rightnav table{
+	margin: auto;
+}
+
+.rightnav table td{
+  width: 2.5vw;
+  height: 2.5vw;
+  position: relative;
+  top: 0.2vw;
+}
+
+#instagram{
+  width: 100%;
+  background-image: url('../immagini/instagram_icon_black.png');
+  background-size: cover;
+  background-repeat:   no-repeat;
+  background-position: center center;   
+}
+
+#instagram:hover{
+  cursor: pointer;
+  background-image: url('../immagini/instagram_icon_color.png');
+  background-size: cover;
+  background-repeat:   no-repeat;
+  background-position: center center;   
+}
+
+#facebook{
+  width: 100%;
+  background-image: url('../immagini/facebook_icon_black.png');
+  background-size: cover;
+  background-repeat:   no-repeat;
+  background-position: center center;   
+}
+
+#facebook:hover{
+  cursor: pointer;
+  background-image: url('../immagini/facebook_icon_color.png');
+  background-size: cover;
+  background-repeat:   no-repeat;
+  background-position: center center;   
+}
+
+#google{
+  background-image: url('../immagini/google_icon_black.png');
+  background-size: cover;
+  background-repeat:   no-repeat;
+  background-position: center center;   
+}
+
+#google:hover{
+  cursor: pointer;
+  background-image: url('../immagini/google_icon_color.png');
+  background-size: cover;
+  background-repeat:   no-repeat;
+  background-position: center center;   
+}
+
+.tutorial{
+  position: fixed;
+  right: 0.5vw;
+  top: 35%;
+  width: 10vw;
+  height: 3vw;
+  border: 4px solid #cc2900;
+  z-index: 300;
+  background-color: #ff751a;
+  border-top-left-radius: 200px;
+  border-bottom-left-radius: 200px;
+  -webkit-animation: anim_tutor 2s ease-in-out;
+  animation: anim_tutor 2s ease-in-out;
+}
+
+@-webkit-keyframes anim_tutor {
+  0% { right: -15vw; }
+  100% { right: 0.5vw; }
+}
+
+@keyframes anim_tutor {
+  0%  { right: -15vw; }
+  100% { right: 0.5vw; }
+}
+
+.tutorial div{
+  position: absolute;
+  top: 0.7vw;
+  left: 1vw;
+  width: 1.5vw;
+  height: 1.5vw;
+}
+
+.tutorial div img{
+  width: 100%;
+}
+
+.tutorial p{
+  position: absolute;
+  top: -0.55vw;
+  left: 3.5vw;
+  height: 1.5vw;
+  width: 5vw;
+  font-family: Raleway, sans-serif;
+  font-size: 1.1vw;
+}
+
+.tutorial a{
+  color: black;
+  font-weight: bold;
+}
+
+.tutorial a:hover{
+  opacity: 0.8;
+}
+
+.mainpic {
+	position: relative;
+	top: -1vw;
+    height: 43.5vw;
+    width: 100%;
+    background-image: url('../immagini/pizzalq.jpg');
+	  background-size: cover;
+	  background-repeat:   no-repeat;
+    background-position: center center;   
+}
+
+.firstdiv {
+    height: 32vw;
+    position: relative;
+    top: -0.5vw;
+}
+
+#title{
+	color: #f2f2f2;
+	font-family: 'Raleway', sans-serif;
+	font-size: 8vw;
+	position: relative;
+	left: 15%;
+	top: 35%;
+  -webkit-animation: anim_1 2s ease-in-out;
+  animation: anim_1 2s ease-in-out;
+}
+
+#subtitle{
+	color: #f2f2f2;
+	font-family: 'Raleway', sans-serif;
+	font-size: 3vw;
+	position: relative;
+	left: 21%;
+	top: 20%;
+  -webkit-animation: anim_2 4s ease-in-out;
+  animation: anim_2 4s ease-in-out;
+}
+
+/* Animazione Slide Text */
+
+@-webkit-keyframes anim_1 {
+	0%, 0% { left: -100%; opacity: 0; }
+  100%, 100% { left: 15%; opacity: 1; }
+}
+
+@keyframes anim_1 {
+  0%, 0% { left: -100%; opacity: 0; }
+  100%, 100% { left: 15%; opacity: 1; }
+}
+
+@-webkit-keyframes anim_2 {	
+	0%, 0% { left: -100%; opacity: 0; }
+  100%, 100% { left: 21%; opacity: 1; }
+}
+
+@keyframes anim_2 { 
+  0%, 0% { left: -100%; opacity: 0; }
+  100%, 100% { left: 21%; opacity: 1; }
+}
+
+.production{
+    position: relative;
+    top: 15%;
+    left: 15%;
+    height: 25vw;
+    width: 30%;
+}
+
+#title1{
+	font-family: Circular, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	font-size: 2vw;
+	color: #505050;
+}
+
+#subtitle1 {
+	font-family: Circular, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	font-size: 1.2vw;
+	position: relative;
+	top: -4.8vw;
+	color: #505050;
+}
+
+#subtitle2 {
+	font-family: Circular, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	font-size: 1.2vw;
+	position: relative;
+	top: -6.3vw;
+	color: #505050;
+}
+
+#linea {
+	width: 105%;
+	position: relative;
+	top: -5vw;
+	left: -2%;
+}
+
+.production a{
+	text-decoration: none;
+	font-family: Circular, sans-serif;
+	font-size: 1.2vw;
+	position: relative;
+	bottom: 3vw;
+	left: 37%;
+	color: #808080;
+	font-style: italic;
+}
+
+.production a:hover{
+	color: #505050;
+}
+
+.rightimage {
+    position: relative;
+    top: -24vw;
+    left: 55%;
+    height: 28vw;
+    width: 35%;
+    background-image: url('../immagini/pizze.jpg');
+	background-repeat:   no-repeat;
+	background-size: cover;
+    background-position: center center;
+}
+
+#hr1{
+	position: relative;
+	top: 2.6vw;
+	width: 99%;
+    height: 0.5vw;
+    background-color: #080808;
+}
+
+#separator1{
+	position: relative;
+	top: 1vw;
+    border-radius: 5px;
+    width: 100%;
+    height: 6vw;
+}
+
+#separator1 p{
+    font-family: Raleway, sans-serif;
+    font-size: 4vw;
+    width: 40%;
+    color: #f2f2f2;
+    background-color: #080808;
+    border-radius: 10px;
+    text-align: center;
+	position: relative;
+	top: -4vw;
+	left: 30%;
+}
+
+.promotions {
+	position: relative;
+	top: 6vw;
+}
+
+.promotions table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 50%;
+    position: relative;
+    left: 25%;
+}
+
+.promotions td {
+	width: 33%;
+    height: 22vw;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0 1vw;
+    font-family: Circular, sans-serif;
+    font-size: 1.3vw;
+
+}
+
+#image1{
+	background-image: url('../immagini/tutorial.jpg');
+	background-repeat:   no-repeat;
+	background-size: 22vw;
+	background-position: center center;
+}
+
+#image2{
+	background-image: url('../immagini/sardine.jpg');
+	background-repeat:   no-repeat;
+	background-size: cover;
+  background-position: center center; 
+}
+
+
+#image3{
+	background-image: url('../immagini/order.jpg');
+	background-repeat:   no-repeat;
+	background-size: 15vw;
+    background-position: center center; 
+}
+
+
+#separator2 {
+	position: relative;
+	top: 10vw;
+    border-radius: 0.5vw;
+    width: 100%;
+    height: 7vw;
+}
+
+#hr2{
+	position: relative;
+	top: 2.5vw;
+	width: 99%;
+    height: 0.4vw;
+    background-color: #080808;
+}
+
+#separator2 p {
+    font-family: Raleway, sans-serif;
+    font-size: 4vw;
+    width: 40%;
+    color: #f2f2f2;
+    background-color: #080808;
+    border-radius: 1vw;
+    text-align: center;
+	  position: relative;
+	  top: -4vw;
+	  left: 30%;
+}
+
+
+.reservation {
+    position: relative;
+    top: 13vw;
+    width: 98.5%;
+    height: 11vw;
+}
+
+
+#myForm{
+	text-align: center;
+	font-family: Circular, sans-serif;
+	font-size: 1.5vw;
+}
+
+#theDate{
+	border: 3px solid #080808;
+	font-family: Circular, sans-serif;
+	font-size: 1.5vw;
+	padding: 0.25vw 0.5vw;
+	text-align: center;
+}
+
+input:hover{
+	background-color: #DCDCDC;
+}
+
+#firstname,input[type="number"]{
+	border: 3px solid #080808;
+	font-family: Circular, sans-serif;
+	font-size: 1.5vw;
+	padding: 0.3vw;
+	width: 10%;
+	text-align: center;
+}
+
+
+input[type="submit"]{
+	border: none;
+	background-color: #080808;
+	color: #f2f2f2;
+	font-size: 1.5vw;
+	border-radius: 5px;
+	padding: 0.5vw 2vw;
+	position: absolute;
+	top: 7vw;
+	left: 48%;
+	text-align: center;
+}
+
+input[type="submit"]:hover{
+	background: rgba(0,0,0,0);
+	color: #080808;
+	box-shadow: inset 0 0 0 3px #080808;
+}
+
+#theTime {
+	border: 3px solid #080808;
+	font-family: Circular, sans-serif;
+	font-size: 1.5vw;
+	padding: 0.4vw 0.7vw;
+	width: 10%;
+	position: relative;
+	top: 0.1vw;
+}
+
+#theTime:hover {
+	background-color: #DCDCDC;
+}
+
+@-webkit-keyframes shake {
+  10%, 90% {
+    transform: translateX(-1px);
+  }
+  
+  20%, 80% {
+    transform: translateX(2px);
+  }
+
+  30%, 50%, 70% {
+    transform: translateX(-4px);
+  }
+
+  40%, 60% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translateX(-1px);
+  }
+  
+  20%, 80% {
+    transform: translateX(2px);
+  }
+
+  30%, 50%, 70% {
+    transform: translateX(-4px);
+  }
+
+  40%, 60% {
+    transform: translateX(4px);
+  }
+}
+
+#alertbox {
+	display: none;
+	background-color: #ff9741;
+	width: 92.5%;
+	height: 2.5vw;
+	position: relative;
+	top: 13vw;
+	padding: 2vw 4vw;
+	font-size: 1.8vw;
+	font-family: Raleway, sans-serif;
+	color: #f2f2f2;
+}
+
+
+.contacts {
+	position: relative;
+	top: 14.5vw;
+  height: 50vw;
+  background-color: #080808;
+}
+
+.contacts h2{
+	color: #f2f2f2;
+	font-size: 4vw;
+	font-family: Raleway, sans-serif;
+	text-align: center;
+	position: relative;
+	top: 2vw;
+}
+
+#leftp {
+
+	color: #f2f2f2;
+	font-size: 1.8vw;
+	font-family: Circular, sans-serif;
+	position: relative;
+	left: 10%;
+	top: 6vw;
+	width: 40%;
+}
+
+#leftp strong {
+	color: #FF3300;
+	text-decoration: none;
+}
+
+#leftp a {
+	color: #f2f2f2;
+}
+
+#leftp a:hover{
+	color: #E0E0E0;
+}
+
+#map{
+	width: 35%;
+	height: 22vw;
+	position: relative;
+	top: -16vw;
+	left: 58%;
+	z-index: 250;
+  background-image: url('../immagini/map.png');
+  background-size: cover;
+  background-repeat:   no-repeat;
+  background-position: center center; 
+}
+
+#map:hover{
+  cursor: pointer;
+}
+
+.contacts img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 3.5vw;
+    height: 3.5vw;
+    position: relative;
+    top: -20vw;
+}
+
+#copyright {
+	color: #f2f2f2;
+	font-size: 0.8vw;
+	font-family: Raleway, sans-serif;
+	text-align: center;
+	position: relative;
+	top: 17vw;
+}
+
+/* INFO MODAL */
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #ff1a1a;
+    border: none;
+    cursor: pointer;
+}
+
+.cancelbtn:hover {
+    opacity: 0.8;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    width: 100%;
+    height: 30%;
+    position: relative;
+}
+
+img.avatar {
+    width: 22%;
+    position: relative;
+    top: 1em;
+
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+    font-family: Raleway, sans-serif;
+}
+
+/* The Modal (background) */
+
+.inputmodal {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Style of modal buttons */
+.modalbutton {
+    background-color: black;
+    color: #f2f2f2;
+    padding: 1vw 1.2vw;
+    margin: 0.5vw 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1vw;
+}
+
+.modalbutton:hover {
+    opacity: 0.8;
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 300; /* Sit on top */
+    padding-top: 7vw; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 50%;
+    height: 75%;
+    font-family: Raleway, sans-serif;
+    vertical-align: middle;
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 20px;
+    top: 0.1em;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}
+
+/* MODAL 2 */
+
+/* Full-width input fields */
+  .modal1_input, #modal1_email, #modal1_nome, #modal1_surname, #modal1_password, #modal1_repeat, #modal1_cap {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: Raleway, sans-serif;
+}
+
+/* Add a background color when the inputs get focus */
+.modal1_input:focus, #modal1_email:focus{
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for all buttons */
+#modal1button_cancel {
+  background-color: #ff1a1a;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 1;
+}
+
+#modal1button_signup {
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 1;
+}
+
+#modal1button_signup:hover, #modal1button_cancel:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbutn {
+  padding: 14px 20px;
+  background-color: #ff1a1a;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbutn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+  font-size: 1.2vw;
+}
+
+.container p{
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal1 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 300; /* Sit on top */
+    padding-top: 8vw; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+@-moz-document url-prefix() {
+
+ .modal-content1 {
+  padding: 1vw 1vw;
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 60%;
+    height: 70vw;
+    font-family: Raleway, sans-serif;
+    vertical-align: middle;
+    position: relative;
+    top: -6vw;
+  }
+
+}
+/* Modal Content/Box */
+
+@media screen and (-webkit-min-device-pixel-ratio:0){
+
+.modal-content1 {
+	padding: 1vw 1vw;
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 60%;
+    min-height: 70vw;
+    font-family: Raleway, sans-serif;
+    vertical-align: middle;
+    position: relative;
+    top: -6vw;
+    font-size: 1.2vw;
+  }
+}
+
+/* Style the horizontal ruler */
+#hrmodal1 {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Close Button (x) */
+.close1 {
+  position: absolute;
+  right: 19vw;
+  top: 1.8vw;
+  font-size: 40px;
+  font-weight: bold;
+  color: black;
+  z-index: 300;
+}
+
+.close1:hover,
+.close1:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 500px) {
+  .cancelbutn, .signupbtn {
+    width: 100%;
+  }
+}
+
+#errore_login{
+  color: black;
+  font-weight: bold;
+  border: 1px solid red;
+  background-color: #ff3333;
+  width: 50%;
+  padding: 0.1vw 1vw;
+  font-size: 1.2vw;
+}
+
+.error_register{
+  color: red;
+  font-size: 0.9vw;
+  display: none;
+}
+
+.err_reservation{
+  color: red;
+  font-size: 0.9vw;
+  font-family:  Raleway, sans-serif ;
+  position: absolute;
+  top: 178vw;
+}
+
+#nameErr{
+  left: 41%;
+}
+
+#numbErr{
+  left: 73%;
+}
+
+#dateErr{
+  left: 12%;
+}
+
+/* VALIDATION PHP REGISTER FORM */
+
+.err_register{
+  color: red;
+  font-size: 0.8vw;
+  font-family:  Raleway, sans-serif ;
+  position: absolute;
+  left: 7vw;
+
+}
+
+/* Mozilla Error */
+
+@-moz-document url-prefix() {
+
+#emailErr{
+  top: 9.5vw;
+
+}
+
+#nomeErr{
+  top: 15vw;
+}
+
+#surnameErr{
+  top: 20.2vw;
+}
+
+#usernameErr{
+  top: 25.3vw;
+  left: 7.5vw;
+}
+
+#pswErr{
+  top: 30.5vw;
+  left: 7.5vw;
+}
+
+#psw_repeatErr{
+  top: 35.8vw;
+  left: 10.5vw;
+}
+
+#cittaErr{
+  top: 40.8vw;
+}
+
+#indirizzoErr{
+  top: 50.5vw;
+}
+
+#capErr{
+  top: 51vw;
+}
+
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0){
+
+#emailErr{
+top: 11vw;
+
+}
+
+#nomeErr{
+  top: 16vw;
+}
+
+#surnameErr{
+  top: 21.2vw;
+}
+
+#usernameErr{
+  top: 26.3vw;
+  left: 7.5vw;
+}
+
+#pswErr{
+  top: 31.7vw;
+  left: 7.5vw;
+}
+
+#psw_repeatErr{
+  top: 36.3vw;
+  left: 10.5vw;
+}
+
+#cittaErr{
+  top: 41.8vw;
+}
+
+#indirizzoErr{
+  top: 50.5vw;
+}
+
+#capErr{
+  top: 52vw;
+}
+}

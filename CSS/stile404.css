@@ -1,0 +1,74 @@
+body{
+    background-color: #e6e6e6;
+}
+
+@font-face { font-family: Open Sans; src: url('http://localhost/Progetto%20PWEB/CSS/Font/OpenSans-Light.ttf'); } 
+
+#center_div {
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:  70vw;
+    min-height: 38vw;
+    margin-left:-35vw; /* -1/2 width */
+    margin-top: -19vw; /* -1/2 height */
+    border: 2px solid #a6a6a6;
+    background-color: white;
+}
+
+#image{
+    position: absolute;
+    top: 10%;
+    left: 43.6%;
+    width: 10vw;
+    height: 10vw;
+}
+
+#image img{
+    width: 100%;
+}
+
+#center_div h1{
+    position: absolute;
+    top: 19%;
+    left: 41%;
+    font-size: 8vw;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
+    color: black;
+}
+
+#center_div h3{
+    position: absolute;
+    top: 51%;
+    left: 39%;
+    font-size: 2vw;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
+    color: #404040;
+}
+
+#p1{
+    position: absolute;
+    top: 65%;
+    left: 27%;
+    font-size: 1vw;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#p2{
+    position: absolute;
+    top: 70%;
+    left: 35%;
+    font-size: 1vw;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#p2 a{
+    text-decoration: none;
+    color: #007AFF;
+}
+
+#p2 a:visited{
+    color: #007AFF;
+}

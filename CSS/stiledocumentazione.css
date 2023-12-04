@@ -1,0 +1,214 @@
+@font-face { font-family: Raleway; src: url('http://localhost/Progetto%20PWEB/CSS/Font/Raleway-Regular.ttf'); } 
+@font-face { font-family: Franklin Gothic Book; src: url('http://localhost/Progetto%20PWEB/CSS/Font/franklin-gothic-book.ttf'); } 
+@font-face { font-family: Ikaros; src: url('http://localhost/Progetto%20PWEB/CSS/Font/Ikaros-Regular.otf'); } 
+@font-face { font-family: Circular; src: url('http://localhost/Progetto%20PWEB/CSS/Font/CircularSTD-Medium.otf'); } 
+
+body {
+  background-color: black;
+  overflow-x: hidden;
+}
+
+.topnav{
+  position: fixed;
+  top: 0;
+  width: 98.8%;
+  height: 4.09vw;
+  z-index: 300;
+    background-color: black;
+    overflow: hidden;
+}
+
+.topnav table{
+  margin:auto;
+}
+
+.topnav td a{
+    position:relative;
+    top: 0.95vw;
+    color: #f2f2f2;
+    text-align: center;
+    font-family: 'Franklin Gothic Book', sans-serif;
+    padding: 1.2vw 1.1vw;
+    text-decoration: none;
+    font-size: 1.5VW;
+    height: 4vw;
+}
+
+.topnav td a:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+h1{
+  position: absolute;
+  top: 5vw;
+  width: 100%;
+  text-align: center;
+  font-family: Raleway, sans-serif;
+  font-size: 3vw;
+  color: white;
+}
+
+#who{
+  position: absolute;
+  width: 90%;
+  height: 15vw;
+  left: 5%;
+  top: 12vw;
+  background-color: white;
+}
+
+#who h2{
+  position: absolute;
+  left: 5%;
+  font-size: 1.8vw;
+  font-family: Raleway, sans-serif;
+}
+
+#who p{
+  position: absolute;
+  left: 5%;
+  top: 4vw;
+  font-size: 1.2vw;
+  font-family: Raleway, sans-serif;
+  width: 90%;
+}
+
+#who p strong{
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+#home{
+  position: absolute;
+  width: 90%;
+  height: 50vw;
+  left: 5%;
+  top: 28vw;
+  background-color: white;
+}
+
+#home h2{
+  position: absolute;
+  left: 5%;
+  font-size: 1.8vw;
+  font-family: Raleway, sans-serif;
+}
+
+#home img{
+  width: 60%;
+  position: absolute;
+  top: 7vw;
+  left: 18vw;
+}
+
+#home p strong{
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+#home p{
+  position: absolute;
+  left: 5%;
+  top: 35vw;
+  font-size: 1.2vw;
+  font-family: Raleway, sans-serif;
+  width: 90%;
+}
+
+#creation{
+  position: absolute;
+  width: 90%;
+  height: 50vw;
+  left: 5%;
+  top: 79vw;
+  background-color: white;
+}
+
+#creation h2{
+  position: absolute;
+  left: 5%;
+  font-size: 1.8vw;
+  font-family: Raleway, sans-serif;
+}
+
+#creation img{
+  width: 60%;
+  position: absolute;
+  top: 7vw;
+  left: 18vw;
+}
+
+#creation p{
+  position: absolute;
+  left: 5%;
+  top: 35vw;
+  font-size: 1.2vw;
+  font-family: Raleway, sans-serif;
+  width: 90%;
+}
+
+#carrello{
+  position: absolute;
+  width: 90%;
+  height: 50vw;
+  left: 5%;
+  top: 130vw;
+  background-color: white;
+}
+
+#carrello h2{
+  position: absolute;
+  left: 5%;
+  font-size: 1.8vw;
+  font-family: Raleway, sans-serif;
+}
+
+#carrello img{
+  width: 60%;
+  position: absolute;
+  top: 7vw;
+  left: 18vw;
+}
+
+#carrello p{
+  position: absolute;
+  left: 5%;
+  top: 35vw;
+  font-size: 1.2vw;
+  font-family: Raleway, sans-serif;
+  width: 90%;
+}
+
+#user{
+  position: absolute;
+  width: 90%;
+  height: 50vw;
+  left: 5%;
+  top: 181vw;
+  background-color: white;
+}
+
+#user h2{
+  position: absolute;
+  left: 5%;
+  font-size: 1.8vw;
+  font-family: Raleway, sans-serif;
+}
+
+#user img{
+  width: 60%;
+  position: absolute;
+  top: 7vw;
+  left: 18vw;
+}
+
+#user p{
+  position: absolute;
+  left: 5%;
+  top: 35vw;
+  font-size: 1.2vw;
+  font-family: Raleway, sans-serif;
+  width: 90%;
+}
