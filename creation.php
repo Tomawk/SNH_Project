@@ -9,7 +9,7 @@
 <html lang="it">
 	<head>
     <title> Creazione Pizza </title>
-	<link href="./CSS/stilecreation.css" rel="stylesheet" type="text/css">
+	<link href="CSS/stilecreation.css" rel="stylesheet" type="text/css">
   <link rel="icon" href="immagini/icon.png" sizes="32x32">
 	</head>
 <body onload="ApriModal()">
@@ -29,11 +29,11 @@
 <nav class="topnav">
  <table>
   <tr>
-    <td><a href="./index.php">Home</a></td>
-  <td><a href="./index.php#hr1">Promozioni</a></td>
+    <td><a href="index.php">Home</a></td>
+  <td><a href="index.php#hr1">Promozioni</a></td>
     <td><a onclick="scrollup()">Ordina Online</a></td>
-    <td><a href="./index.php#hr2">Prenotazione</a></td>
-    <td><a href="./index.php#contatti">Contatti</a></td>
+    <td><a href="index.php#hr2">Prenotazione</a></td>
+    <td><a href="index.php#contatti">Contatti</a></td>
 
 <?php /* Verifica se l'utente è loggato e nel caso mostra il bottone con il nome */
 echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</strong></a></td>';
@@ -98,7 +98,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
   <input type="radio" checked="checked" name="tomato" value="Nessuno">
   <span class="checkmark"></span>
 </label>
-<img src="./Creation/pomodoro.jpg" alt="no tomato" id="T2">
+<img src="Creation/pomodoro.jpg" alt="no tomato" id="T2">
 <label class="container">Pomodoro
   <input type="radio" name="tomato" value="Pomodoro">
   <span class="checkmark"></span>
@@ -108,22 +108,22 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
 <section id="selezioneCheese">
 <h2>&#8226; E' il momento di aggiungere il formaggio:</h2>
 
-<img src="./Creation/red_cross.png" alt="nessuno" id="C1">
+<img src="Creation/red_cross.png" alt="nessuno" id="C1">
 <label class="container">Nessuno
   <input type="radio" checked="checked" name="cheese" value="Nessuno">
   <span class="checkmark"></span>
 </label>
-<img src="./Creation/mozzarellai.jpg" alt="mozzarella" id="C2">
+<img src="Creation/mozzarellai.jpg" alt="mozzarella" id="C2">
 <label class="container">Mozzarella
   <input type="radio" name="cheese" value="Mozzarella">
   <span class="checkmark"></span>
 </label>
-<img src="./Creation/mozzarellai.jpg" alt="mozzarella" id="C3">
+<img src="Creation/mozzarellai.jpg" alt="mozzarella" id="C3">
 <label class="container">Bufala
   <input type="radio" name="cheese" value="Bufala">
   <span class="checkmark"></span>
 </label>
-<img src="./Creation/mozzarellai.jpg" alt="mozzarella" id="C4">
+<img src="Creation/mozzarellai.jpg" alt="mozzarella" id="C4">
 <label class="container">Mozzarella (- grassi)
   <input type="radio" name="cheese" value="Mozzarella (- grassi)">
   <span class="checkmark"></span>
@@ -135,25 +135,25 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
 <h2>&#8226; Adesso dai sfogo alla tua fantasia inserendo gli ingredienti che preferisci:</h2>
 
 <div>
-  <img src="./Creation/capperii.png" alt="capperi" id="A1">
+  <img src="Creation/capperii.png" alt="capperi" id="A1">
 <label class="container">Capperi
   <input type="checkbox" name="capperi" value="capperi" class="ingredients">
   <span class="checkmark"></span>
 </label>
 
-<img src="./Creation/pomodorinii.jpg" alt="pomodorini" id="A2">
+<img src="Creation/pomodorinii.jpg" alt="pomodorini" id="A2">
 <label class="container">Pomodorini
   <input type="checkbox" name="pomodorini" value="pomodorini" class="ingredients">
   <span class="checkmark"></span>
 </label>
 
-<img src="./Creation/peperonii.jpg" alt="peperoni" id="A3">
+<img src="Creation/peperonii.jpg" alt="peperoni" id="A3">
 <label class="container">Peperoni
   <input type="checkbox" name="peperoni" value="peperoni" class="ingredients">
   <span class="checkmark"></span>
 </label>
 
-<img src="./Creation/funghii.jpg" alt="funghi" id="A4">
+<img src="Creation/funghii.jpg" alt="funghi" id="A4">
 <label class="container">Funghi
   <input type="checkbox" name="funghi" value="funghi" class="ingredients">
   <span class="checkmark"></span>
@@ -173,7 +173,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
   <span class="checkmark"></span>
 </label>
 
-<img src="./Creation/patatinei.jpg" alt="patatine" id="A7">
+<img src="Creation/patatinei.jpg" alt="patatine" id="A7">
 <label class="container">Patatine
   <input type="checkbox" name="patatine" value="patatine" class="ingredients">
   <span class="checkmark"></span>
@@ -185,20 +185,20 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
   <span class="checkmark"></span>
 </label>
 
-<img src="./Creation/baconi.jpg" alt="bacon" id="A9">
+<img src="Creation/baconi.jpg" alt="bacon" id="A9">
 <label class="container">Bacon
   <input type="checkbox" name="bacon" value="bacon" class="ingredients">
   <span class="checkmark"></span>
 </label>
 
-<img src="./Creation/sardinei.png" alt="acciughe" id="A10">
+<img src="Creation/sardinei.png" alt="acciughe" id="A10">
 <label class="container">Acciughe
   <input type="checkbox" name="acciughe" value="acciughe" class="ingredients">
   <span class="checkmark"></span>
 </label>
 </div>
 <div>
-<img src="./Creation/pcottoi.jpg" alt="pcotto" id="A11">
+<img src="Creation/pcottoi.jpg" alt="pcotto" id="A11">
 <label class="container">Prosc. Cotto
   <input type="checkbox" name="pcotto" value="pcotto" class="ingredients">
   <span class="checkmark"></span>
@@ -210,7 +210,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
   <span class="checkmark"></span>
 </label>
 
-<img src="./Creation/wursteli.jpg" alt="wurstel" id="A13">
+<img src="Creation/wursteli.jpg" alt="wurstel" id="A13">
 <label class="container">Wurstel
   <input type="checkbox" name="wurstel" value="wurstel" class="ingredients">
   <span class="checkmark"></span>
@@ -233,7 +233,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
   <h2>&#8226; Seleziona la/e bevande:</h2>
     <div> 
 
-      <img src="./Creation/acquanati.jpg" alt="acqua" id="B1">
+      <img src="Creation/acquanati.jpg" alt="acqua" id="B1">
       <label class="container">Acqua Nat. (1L)
         <input type="checkbox" name="acquanat" value="AcquaNat" class="drinks">
         <span class="checkmark"></span>
@@ -242,7 +242,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
       <input type="number" name="q_acquanat" min="1" max="6"  value="1" onkeydown="return false" required>
       </label>
 
-      <img src="./Creation/acquafrii.png" alt="acqua" id="B2">
+      <img src="Creation/acquafrii.png" alt="acqua" id="B2">
       <label class="container">Acqua Friz.(1L)
         <input type="checkbox" name="acquafri" value="AcquaFri" class="drinks">
         <span class="checkmark"></span>
@@ -251,7 +251,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
       <input type="number" name="q_acquafri" min="1" max="6" value="1" onkeydown="return false" required>
       </label>
 
-      <img src="./Creation/cocacolai.jpg" alt="cocacola" id="B3">
+      <img src="Creation/cocacolai.jpg" alt="cocacola" id="B3">
       <label class="container">CocaCola (33Cl)
         <input type="checkbox" name="cola" value="CocaCola" class="drinks">
         <span class="checkmark"></span>
@@ -260,7 +260,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
       <input type="number" name="q_cola" min="1" max="6" value="1" onkeydown="return false" required>
       </label>
 
-      <img src="./Creation/spritei.png" alt="sprite" id="B4">
+      <img src="Creation/spritei.png" alt="sprite" id="B4">
       <label class="container">Sprite (33Cl)
         <input type="checkbox" name="sprite" value="sprite" class="drinks">
         <span class="checkmark"></span>
@@ -273,7 +273,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
 
     <div>
 
-      <img src="./Creation/estatepesi.png" alt="estathe" id="B5">
+      <img src="Creation/estatepesi.png" alt="estathe" id="B5">
       <label class="container">Estath&egrave; P. (33Cl)
         <input type="checkbox" name="estatepes" value="estatepes" class="drinks">
         <span class="checkmark"></span>
@@ -282,7 +282,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
       <input type="number" name="q_estatepes" min="1" max="6"  value="1" onkeydown="return false" required>
       </label>
 
-      <img src="./Creation/estatelimi.jpg" alt="estathe" id="B6">
+      <img src="Creation/estatelimi.jpg" alt="estathe" id="B6">
       <label class="container">Estath&egrave; L. (33Cl)
         <input type="checkbox" name="estatelim" value="estatelim" class="drinks">
         <span class="checkmark"></span>
@@ -291,7 +291,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
       <input type="number" name="q_estatelim" min="1" max="6"  value="1" onkeydown="return false" required>
       </label>
 
-      <img src="./Creation/fantai.jpg" alt="fanta" id="B7">
+      <img src="Creation/fantai.jpg" alt="fanta" id="B7">
       <label class="container">Fanta (33Cl)
         <input type="checkbox" name="fanta" value="fanta" class="drinks">
         <span class="checkmark"></span>
@@ -300,7 +300,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
       <input type="number" name="q_fanta" min="1" max="6"  value="1" onkeydown="return false" required>
       </label>
 
-      <img src="./Creation/7upi.jpg" alt="7up" id="B8">
+      <img src="Creation/7upi.jpg" alt="7up" id="B8">
       <label class="container">7Up (33Cl)
         <input type="checkbox" name="7up" value="7up" class="drinks">
         <span class="checkmark"></span>
@@ -314,7 +314,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
 
         <div>
 
-      <img src="./Creation/heineken.jpeg" alt="heineken" id="B9">
+      <img src="Creation/heineken.jpeg" alt="heineken" id="B9">
       <label class="container">Heineken (33Cl)
         <input type="checkbox" name="heineken" value="heineken" class="drinks">
         <span class="checkmark"></span>
@@ -323,7 +323,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
       <input type="number" name="q_heineken" min="1" max="6"  value="1" onkeydown="return false" required>
       </label>
 
-      <img src="./Creation/coronai.jpg" alt="corona" id="B10">
+      <img src="Creation/coronai.jpg" alt="corona" id="B10">
       <label class="container">Corona (33Cl)
         <input type="checkbox" name="corona" value="corona" class="drinks">
         <span class="checkmark"></span>
@@ -332,7 +332,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
       <input type="number" name="q_corona" min="1" max="6"  value="1" onkeydown="return false" required>
       </label>
 
-      <img src="./Creation/peronii.jpg" alt="peroni" id="B11">
+      <img src="Creation/peronii.jpg" alt="peroni" id="B11">
       <label class="container">Peroni (33Cl)
         <input type="checkbox" name="peroni" value="peroni" class="drinks">
         <span class="checkmark"></span>
@@ -341,7 +341,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
       <input type="number" name="q_peroni" min="1" max="6"  value="1" onkeydown="return false" required>
       </label>
 
-      <img src="./Creation/morettii.png" alt="moretti" id="B12">
+      <img src="Creation/morettii.png" alt="moretti" id="B12">
       <label class="container">Moretti (33Cl)
         <input type="checkbox" name="moretti" value="moretti" class="drinks">
         <span class="checkmark"></span>
@@ -378,7 +378,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
   <img src="./Creation/olive.png" alt="preview" id="iolive">
   <img src="./Creation/basilico.png" alt="preview" id="ibasilico">
   <img src="./Creation/origano.png" alt="preview" id="iorigano">
-  <img src="./Creation/pcotto.png" alt="preview" id="ipcotto">
+  <img src="Creation/pcotto.png" alt="preview" id="ipcotto">
   <img src="./Creation/acciughe.png" alt="preview" id="iacciughe">
   <img src="./Creation/bacon.png" alt="preview" id="ibacon">
 </aside>
@@ -398,7 +398,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
 <br>
       <button type="button" onclick="location.href = 'info.php';" class="modalbutton">Le mie informazioni</button>
       <button type="button" onclick="location.href = 'storico.php';" class="modalbutton">Storico Ordini</button>
-      <button type="button" onclick="location.href = './utility/logout.php';" class="modalbutton">Logout</button>
+      <button type="button" onclick="location.href = 'utility/logout.php';" class="modalbutton">Logout</button>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
@@ -408,6 +408,6 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
 
 <!--                                 -->
 
-<script src="./JS/creation.js"></script>
+<script src="JS/creation.js"></script>
 </body>
 </html>

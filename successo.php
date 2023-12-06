@@ -5,7 +5,7 @@
 <html lang="it">
 	<head>
 		<title> Ordine effettuato con successo </title>
-		<link href="./CSS/stilesuccesso.css" rel="stylesheet" type="text/css">
+		<link href="CSS/stilesuccesso.css" rel="stylesheet" type="text/css">
 		<link rel="icon" href="immagini/success_icon.png" sizes="32x32">
 	</head>
 <body>

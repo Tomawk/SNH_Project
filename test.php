@@ -235,7 +235,7 @@
 <html lang="it">
 	<head>
 		<title> Resoconto Ordine </title>
-		<link href="./CSS/stiletest.css" rel="stylesheet" type="text/css">
+		<link href="CSS/stiletest.css" rel="stylesheet" type="text/css">
 		<link rel="icon" href="immagini/icon.png" sizes="32x32">
 	</head>
 <body>
@@ -304,29 +304,29 @@
 <?php if(isset($_POST['basilico'])) { $totale += 0.5; echo '<p><img src="immagini/basilic_icon.png" class="icon" alt="icon"><strong> Basilico:</strong> +0.50&euro;</p>'; } ?>
 <h2> Bevande: </h2>
 
-<?php if(isset($_POST['acquanat'])) { $totale += $_POST['q_acquanat']*0.5; echo '<p><img src="immagini/acqua_icon.png" class="icon" alt="icon"><strong> Acqua Frizzante:</strong>'.' '.$_POST['q_acquanat'].' x 0.5&euro; = +'.$_POST['q_acquanat']*0.5.'&euro;</p>'; } ?>
+<?php if(isset($_POST['acquanat'])) { $totale += $_POST['q_acquanat']*0.5; echo '<p><img src="immagini/acqua_icon.png" class="icon" alt="icon"><strong> Acqua Frizzante:</strong>' .' '.$_POST['q_acquanat'].' x 0.5&euro; = +'.$_POST['q_acquanat']*0.5.'&euro;</p>'; } ?>
 
-<?php if(isset($_POST['acquafri'])) { $totale += $_POST['q_acquafri']*0.5; echo '<p><img src="immagini/acqua_icon.png" class="icon" alt="icon"><strong> Acqua Frizzante:</strong>'.' '.$_POST['q_acquafri'].' x 0.5&euro; = +'.$_POST['q_acquafri']*0.5.'&euro;</p>'; } ?>
+<?php if(isset($_POST['acquafri'])) { $totale += $_POST['q_acquafri']*0.5; echo '<p><img src="immagini/acqua_icon.png" class="icon" alt="icon"><strong> Acqua Frizzante:</strong>' .' '.$_POST['q_acquafri'].' x 0.5&euro; = +'.$_POST['q_acquafri']*0.5.'&euro;</p>'; } ?>
 
-<?php if(isset($_POST['cola'])) { $totale += $_POST['q_cola']*2; echo '<p><img src="immagini/coke_icon.png" class="icon" alt="icon"><strong> CocaCola:</strong>'.' '.$_POST['q_cola'].' x 2.00&euro; = +'.$_POST['q_cola']*2.0.'&euro;</p>'; } ?>
+<?php if(isset($_POST['cola'])) { $totale += $_POST['q_cola']*2; echo '<p><img src="immagini/coke_icon.png" class="icon" alt="icon"><strong> CocaCola:</strong>' .' '.$_POST['q_cola'].' x 2.00&euro; = +'.$_POST['q_cola']*2.0.'&euro;</p>'; } ?>
 
-<?php if(isset($_POST['sprite'])) { $totale += $_POST['q_sprite']*2; echo '<p><img src="immagini/sprite_icon.png" class="icon" alt="icon"><strong> Sprite:</strong>'.' '.$_POST['q_sprite'].' x 2.00&euro; = +'.$_POST['q_sprite']*2.0.'&euro;</p>'; } ?>
+<?php if(isset($_POST['sprite'])) { $totale += $_POST['q_sprite']*2; echo '<p><img src="immagini/sprite_icon.png" class="icon" alt="icon"><strong> Sprite:</strong>' .' '.$_POST['q_sprite'].' x 2.00&euro; = +'.$_POST['q_sprite']*2.0.'&euro;</p>'; } ?>
 
-<?php if(isset($_POST['estatepes'])) { $totale += $_POST['q_estatepes']*1.5; echo '<p><img src="immagini/soda_icon.png" class="icon" alt="icon"><strong> Estat&egrave; Pesca:</strong>'.' '.$_POST['q_estatepes'].' x 1.50&euro; = +'.$_POST['q_estatepes']*1.5.'&euro;</p>'; } ?>
+<?php if(isset($_POST['estatepes'])) { $totale += $_POST['q_estatepes']*1.5; echo '<p><img src="immagini/soda_icon.png" class="icon" alt="icon"><strong> Estat&egrave; Pesca:</strong>' .' '.$_POST['q_estatepes'].' x 1.50&euro; = +'.$_POST['q_estatepes']*1.5.'&euro;</p>'; } ?>
 
-<?php if(isset($_POST['estatelim'])) { $totale += $_POST['q_estatelim']*1.5; echo '<p><img src="immagini/soda_icon.png" class="icon" alt="icon"><strong> Estat&egrave; Limone:</strong>'.' '.$_POST['q_estatelim'].' x 1.50&euro; = +'.$_POST['q_estatelim']*1.5.'&euro;</p>'; } ?>
+<?php if(isset($_POST['estatelim'])) { $totale += $_POST['q_estatelim']*1.5; echo '<p><img src="immagini/soda_icon.png" class="icon" alt="icon"><strong> Estat&egrave; Limone:</strong>' .' '.$_POST['q_estatelim'].' x 1.50&euro; = +'.$_POST['q_estatelim']*1.5.'&euro;</p>'; } ?>
 
-<?php if(isset($_POST['fanta'])) { $totale += $_POST['q_fanta']*2 ; echo '<p><img src="immagini/fanta_icon.png" class="icon" alt="icon"><strong> Fanta:</strong>'.' '.$_POST['q_fanta'].' x 2.00&euro; = +'.$_POST['q_fanta']*2.0.'&euro;</p>'; } ?>
+<?php if(isset($_POST['fanta'])) { $totale += $_POST['q_fanta']*2 ; echo '<p><img src="immagini/fanta_icon.png" class="icon" alt="icon"><strong> Fanta:</strong>' .' '.$_POST['q_fanta'].' x 2.00&euro; = +'.$_POST['q_fanta']*2.0.'&euro;</p>'; } ?>
 
-<?php if(isset($_POST['7up'])) { $totale += $_POST['q_7up']*2; echo '<p><img src="immagini/7up_icon.png" class="icon" alt="icon"><strong> 7Up:</strong>'.' '.$_POST['q_7up'].' x 2.00&euro; = +'.$_POST['q_7up']*2.0.'&euro;</p>'; } ?>
+<?php if(isset($_POST['7up'])) { $totale += $_POST['q_7up']*2; echo '<p><img src="immagini/7up_icon.png" class="icon" alt="icon"><strong> 7Up:</strong>' .' '.$_POST['q_7up'].' x 2.00&euro; = +'.$_POST['q_7up']*2.0.'&euro;</p>'; } ?>
 
-<?php if(isset($_POST['heineken'])) { $totale += $_POST['q_heikenen']*2.5; echo '<p><img src="immagini/heineken_icon.png" class="icon" alt="icon"><strong> Heineken:</strong>'.' '.$_POST['q_heineken'].' x 2.50&euro; = +'.$_POST['q_heineken']*2.5.'&euro;</p>'; } ?>
+<?php if(isset($_POST['heineken'])) { $totale += $_POST['q_heikenen']*2.5; echo '<p><img src="immagini/heineken_icon.png" class="icon" alt="icon"><strong> Heineken:</strong>' .' '.$_POST['q_heineken'].' x 2.50&euro; = +'.$_POST['q_heineken']*2.5.'&euro;</p>'; } ?>
 
-<?php if(isset($_POST['corona'])) { $totale += $_POST['q_corona']*2.5; echo '<p><img src="immagini/corona_icon.png" class="icon" alt="icon"><strong> Corona:</strong>'.' '.$_POST['q_corona'].' x 2.50&euro; = +'.$_POST['q_corona']*2.5.'&euro;</p>'; } ?>
+<?php if(isset($_POST['corona'])) { $totale += $_POST['q_corona']*2.5; echo '<p><img src="immagini/corona_icon.png" class="icon" alt="icon"><strong> Corona:</strong>' .' '.$_POST['q_corona'].' x 2.50&euro; = +'.$_POST['q_corona']*2.5.'&euro;</p>'; } ?>
 
-<?php if(isset($_POST['peroni'])) { $totale += $_POST['q_peroni']*2.5; echo '<p><img src="immagini/peroni_icon.png" class="icon" alt="icon"><strong> Peroni:</strong>'.' '.$_POST['q_peroni'].' x 2.50&euro; = +'.$_POST['q_peroni']*2.5.'&euro;</p>'; } ?>
+<?php if(isset($_POST['peroni'])) { $totale += $_POST['q_peroni']*2.5; echo '<p><img src="immagini/peroni_icon.png" class="icon" alt="icon"><strong> Peroni:</strong>' .' '.$_POST['q_peroni'].' x 2.50&euro; = +'.$_POST['q_peroni']*2.5.'&euro;</p>'; } ?>
 
-<?php if(isset($_POST['moretti'])) { $totale += $_POST['q_moretti']*2.5; echo '<p><img src="immagini/moretti_icon.png" class="icon" alt="icon"><strong> Moretti:</strong>'.' '.$_POST['q_moretti'].' x 2.50&euro; = +'.$_POST['q_moretti']*2.5.'&euro;</p>'; } ?>
+<?php if(isset($_POST['moretti'])) { $totale += $_POST['q_moretti']*2.5; echo '<p><img src="immagini/moretti_icon.png" class="icon" alt="icon"><strong> Moretti:</strong>' .' '.$_POST['q_moretti'].' x 2.50&euro; = +'.$_POST['q_moretti']*2.5.'&euro;</p>'; } ?>
 
 </div>
 <aside id="preview">
@@ -351,7 +351,7 @@
   	<?php if (isset($_POST["olive"])){ echo '<img src="./Creation/olive.png" alt="preview" id="iolive" style="display:block">';} ?>
  	<?php if (isset($_POST["basilico"])){ echo '<img src="./Creation/basilico.png" alt="preview" id="ibasilico" style="display:block">';} ?>
  	<?php if (isset($_POST["origano"])){ echo '<img src="./Creation/origano.png" alt="preview" id="iorigano" style="display:block">';} ?>
-  	<?php if (isset($_POST["pcotto"])){ echo '<img src="./Creation/pcotto.png" alt="preview" id="ipcotto" style="display:block">';} ?>
+  	<?php if (isset($_POST["pcotto"])){ echo '<img src="Creation/pcotto.png" alt="preview" id="ipcotto" style="display:block">';} ?>
  	<?php if (isset($_POST["acciughe"])){ echo '<img src="./Creation/acciughe.png" alt="preview" id="iacciughe" style="display:block">';} ?>
  	<?php if (isset($_POST["bacon"])){ echo '<img src="./Creation/bacon.png" alt="preview" id="ibacon" style="display:block">';} ?>
 </aside>
@@ -400,10 +400,10 @@
 	</p>
 </aside>
 <div id="pulsanti">
-	<form action="./utility/confirm.php">
+	<form action="utility/confirm.php">
 	<input type="submit" id="add_order" value="Aggiungi al Carrello" name="aggiungi">
 	</form>
-	<form action="./utility/annulla.php">
+	<form action="utility/annulla.php">
 	<input type="submit" id="cancel_order" value="Annulla" name="annulla">
 	</form>
 </div>

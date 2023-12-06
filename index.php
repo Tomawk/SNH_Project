@@ -8,14 +8,16 @@ require('inc/db.php');
   <title> Fastpizza Home </title>
 	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
+    <!-- Font Awesome Import -->
+    <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 	</head>
 <body>
 <nav class="topnav">
  <table>
   <tr>
-    <td><a onclick="scrollup()">Home</a></td>
-    <td><a href="#hr1">Promozioni</a></td>
-    <td><a href="creation.php">Ordina Online</a></td>
+    <td><a onclick="scrollup()"><i class="fa-solid fa-house"></i></a></td>
+    <td><a href="#hr1">News</a></td>
+    <td><a href="creation.php">Bookshelf</a></td>
     <td><a href="#hr2">Prenotazione</a></td>
     <td><a href="#contatti">Contatti</a></td>
 	
@@ -30,7 +32,7 @@ echo '
 echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</strong></a></td>';
 }
 ?>
-	<td><a href="carrello.php">Il Mio Carrello</a></td>
+	<td><a href="carrello.php"><i class="fa-solid fa-cart-shopping"></i> Shop Now</a></td>
   </tr>
 </table>
 </nav>
@@ -47,176 +49,47 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
    </tr>
   </table>
 </aside>
-<aside class="tutorial">
-  <div> <img src="./immagini/alert_icon.png" alt="alert"> </div>
-  <p> <a href="documentazione.html"> Tutorial ! </a> </p>
-</aside>
 <div class="mainpic">
-		<h1 id="title">FAST PIZZA</h1>
-		<h3 id="subtitle">La pizza come vuoi tu</h3>
+		<h1 id="title">BOOK WORM</h1>
+		<h3 id="subtitle">Your favourite bookshop</h3>
 </div>
 <div class="firstdiv">
 	<div class="production">
-	 <h2 id="title1">Componi ora la tua pizza!</h2>
+	 <h2 id="title1">Search in our bookshelf for your favourite book!</h2>
 	 <img src="immagini/greyline.png" alt="greyline" id="linea">
-	 <h4 id="subtitle1">Inizia a comporre adesso,tutto &eacute; personalizzabile!<br>
-	 Parti scegliendo l'impasto che pi&ugrave; preferisci </h4>
-	 <h4 id="subtitle2">e dai sfogo alla tua creativit&aacute;</h4>
-	 <a href="creation.php">INIZIA ORA ></a>
+	 <h4 id="subtitle1"> We pride ourselves on offering a diverse range of titles, from international bestsellers to emerging gems, ensuring a satisfying literary experience for every reader. With fast shipping and curated selections</h4>
+	 <a href="creation.php">Explore now! > </a>
     </div>
     <div class="rightimage">
 	</div>
 </div>
 <div id="separator1">
 	<hr id="hr1">
-	<p>Le nostre novit&aacute;!</p>
+	<p>News and more!</p>
 </div>
 <section class="promotions" id="promote">
 	<table>
 	 <tr>
-	 	<td> <h2> Introduzione del Tutorial! </h2> <br> Sei nuovo e non conosci Fastpizza? Ti consigliamo di dare un'occhiata al tutorial appena aggiunto!</td>
+	 	<td> <h2> Book Discount! </h2> <br> We are offering a 20% discount on a captivating selection of books. Dive into savings and stories today!</td>
 	 	<td id="image1"> </td>
 	 </tr>
 	 <tr>
 	 	<td id="image2"> </td>
-	 	<td> <h2> Nuovo Ingrediente! </h2> <br> Da oggi &egrave; possibile inserire all'interno della vostra pizza preferita l'ingrediente "Acciughe", consigliato con salsa di pomodoro e capperi!</td>
+	 	<td> <h2> Free Shipping! </h2> <br> 'Tis the season of giving! Enjoy the holiday spirit with free shipping on our site – because every book deserves to find its way home for Christmas.</td>
 	 </tr>
 	 <tr>
-	 	<td> <h2> Storico Ordini! </h2> <br> Da oggi ogni utente potr&agrave; tener traccia dello storico ordini direttamente dal proprio men&ugrave; utente!</td>
+	 	<td> <h2> Order History! </h2> <br> Starting today, every user can track their order history directly from their user menu!</td>
 	 	<td id="image3"></td>
 	 </tr>
 	</table>
 </section>
-<div id="separator2">
-	<hr id="hr2">
-	<p>Prenota adesso!</p>
-</div>
-<div class="reservation">
-  <form id="myForm" name="myForm" onsubmit="return validateForm()" method="post">
-  Data: 
-  <input type="text" id="theDate" name="theDate" required>
-  &nbsp;
-  Nome:
-  <input type="text" id="firstname" name="firstname" required>
-  &nbsp;
-  Orario:
-  <select id="theTime" name="theTime">
-  <option>12:00</option>
-  <option>12:30</option>
-  <option>13:00</option>
-  <option>13:30</option>
-  <option>14:00</option>
-  <option>14:30</option>
-  <option>18:30</option>
-  <option>19:00</option>
-  <option>19:30</option>
-  <option>20:00</option>
-  <option>20:30</option>
-  <option>21:00</option>
-  <option>21:30</option>
-  <option>22:00</option>
-  <option>22:30</option>
-  </select>
-  &nbsp;
-  N&ordm;Persone:
-  <input type="number" name="numb" min="1" max="6" onkeydown="return false" required>
-  <input type="submit" name="save" value="Submit">
-</form>
-</div>
- <?php /* Validation */
 
-
-    $date_now = date("Y-m-d");
-
-    if (empty($_POST["theDate"])) { /* Email */
-
-    $dateErr = "Inserisci una data";
-    } else 
-      {
-      $date = $_POST["theDate"];
-      if(!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$date)){
-        $dateErr = "Formato non valido, deve essere del tipo yyyy-mm-dd";
-      }
-      elseif($date_now > $date){
-        $dateErr = "Non puoi inserire una data gi&agrave; passata";
-      }
-    }
-
-  if(isset($_POST['save'])){
-
-      if (empty($_POST["firstname"])) {
-        $nameErr = "Devi inserire un nome.";
-      }
-        else{
-          if(strlen($_POST['firstname']) < 3) {
-          $nameErr = "Inserisci un nome valido.";
-          }
-           else $name = $_POST['firstname'];
-        }
-
-       if (empty($_POST["numb"])) {
-        $numbErr = "Devi inserire un numero di persone.";
-       }
-        else{
-          if($_POST['numb'] < 1 || $_POST['numb'] > 6 ) {
-          $numbErr = "Inserisci un numero di persone valido (compreso tra 1 e 6).";
-          }
-           else $numb = $_POST['numb'];
-        }
-
-       if(!isset($name)){
-         echo '<p class="err_reservation" id="nameErr">'.$nameErr.'</p>';
-         unset($nameErr);
-       }
-       if(!isset($numb)){
-         echo '<p class="err_reservation" id="numbErr">'.$numbErr.'</p>';
-       }
-
-       if(isset($dateErr)){
-          echo '<p class="err_reservation" id="dateErr">'.$dateErr.'</p>';
-       }
-
-       if(isset($name) && isset($numb) && !isset($dateErr)){
-        $query_reserv = "SELECT * FROM prenotazioni WHERE data='".$date."'AND orario='".$_POST['theTime']."'";
-        $result_reserv = mysqli_query($con,$query_reserv);
-        $result_reservCount= mysqli_num_rows($result_reserv);
-        $query_reserv1 = "SELECT * FROM prenotazioni WHERE data='".$date."'AND orario='".$_POST['theTime']."'AND nome='".$name."'";
-        $result_reserv1 = mysqli_query($con,$query_reserv1);
-        $result_reservCount1= mysqli_num_rows($result_reserv1);
-        if($result_reservCount > 6){
-          echo 
-          '
-          <div id="alertbox" style="display: block;">
-            Ci dispiace ma non ci sono tavoli liberi per il giorno '.$date.' con orario '.$_POST['theTime'].'
-          </div>
-          ';
-        }
-         else if($result_reservCount1 > 0){
-          echo 
-          '
-          <div id="alertbox" style="display: block;">
-            Ci dispiace ma &egrave; gi&agrave; presente una prenotazione in data '.$date.' con orario '.$_POST['theTime'].' a suo nome.
-          </div>
-          ';
-        } else{
-         echo '
-            <div id="alertbox" style="display: block; background-color: #6c95ec;">
-                Prenotazione effettuata con successo!
-            </div>
-            ';
-         mysqli_query($con,"INSERT INTO prenotazioni (nome, data, orario, numpersone) VALUES ('".$name."','".$date."','".$_POST["theTime"]."','".$numb."')");
-        }
-       }
-
-  }
-
-?>
 <div id="alertbox">
 </div>
 <!-- MODAL PER IL LOGIN --> 
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" method="post" name="login" action="./utility/login.php">
+  <form class="modal-content animate" method="post" name="login" action="utility/login.php">
     <div class="imgcontainer">
       <span onclick="closemodal()" class="close" title="Close Modal">&times;</span> <!-- Span chiusura modal -->
       <img src="immagini/avatar.png" alt="Avatar" class="avatar">
@@ -267,7 +140,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
 <br>
       <button type="button" onclick="location.href = 'info.php';" class="modalbutton">Le mie informazioni</button>
       <button type="button" onclick="location.href = 'storico.php';" class="modalbutton">Storico Ordini</button>
-      <button type="button" onclick="location.href = './utility/logout.php';" class="modalbutton">Logout</button>
+      <button type="button" onclick="location.href = 'utility/logout.php';" class="modalbutton">Logout</button>
     </div>
     <div class="container" style="background-color:#f1f1f1">
     </div>
@@ -280,7 +153,7 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
 
 <div id="id02" class="modal1"> <!-- Modal1 -->
   <span onclick="closemodal1()" class="close1" title="Close Modal">&times;</span>
-  <form class="modal-content1 animate" method="post" name="register" onsubmit="return validateFormRegister()" action="./utility/register.php">
+  <form class="modal-content1 animate" method="post" name="register" onsubmit="return validateFormRegister()" action="utility/register.php">
     <div class="container1">
       <h1>Registrati</h1>
       <p>Perfavore inserisci i dati nei seguenti riquadri per creare un account.</p>
@@ -378,14 +251,14 @@ echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</st
 </div>
 <!-- Fine Modal Registrazione -->
 <footer class="contacts" id="contatti">
-	<h2> Vieni a trovarci! </h2>
+	<h2> Find us! </h2>
 	<p id="leftp"> Via Filippo Turati, 12 <br>
 	56125 Pisa PI <br> <br>
-	Tutti i giorni: <br>
-	dalle 12:30 alle 15:30 <br>
-	dalle 18:30 alle 00:30 <br> <br>
-	Email: <a href="mailto:indirizzo@email.com">fastpizza@inc.corporation.it</a></p>
-	<p id="copyright"> While using this site, you agree to have read and accepted our terms of use, cookie and privacy policy. Copyright 2017-2018 by FastPizza Inc. All Rights Reserved. </p>
+	Everyday: <br>
+	from 12:30 to 15:30 <br>
+	from 18:30 to 00:30 <br> <br>
+	Email: <a href="mailto:indirizzo@email.com">bookworm@inc.corporation.it</a></p>
+	<p id="copyright"> While using this site, you agree to have read and accepted our terms of use, cookie and privacy policy. Copyright 2017-2018 by Bookworm Inc. All Rights Reserved. </p>
 	<div id="map" onclick="location.href = 'https://www.google.com/maps/place/Via+Filippo+Turati,+12,+56125+Pisa+PI/@43.7126809,10.3991586,17z/data=!3m1!4b1!4m5!3m4!1s0x12d59199440ab5c9:0x7950e3edf0d20800!8m2!3d43.7126809!4d10.4013473';"> </div>
 	<img src="immagini/arrow-up.png" alt="freccia" onclick="scrollup()" style="cursor: pointer;">
 </footer>

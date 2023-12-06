@@ -18,11 +18,11 @@ if(!isset($_SESSION['username'])){
 	<nav class="topnav">
  	<table>
  	 <tr>
-    	<td><a href="./index.php">Home</a></td>
-  		<td><a href="./index.php#hr1">Promozioni</a></td>
+    	<td><a href="index.php">Home</a></td>
+  		<td><a href="index.php#hr1">Promozioni</a></td>
     	<td><a href="creation.php">Ordina Online</a></td>
-    	<td><a href="./index.php#hr2">Prenotazione</a></td>
-    	<td><a href="./index.php#contatti">Contatti</a></td>
+    	<td><a href="index.php#hr2">Prenotazione</a></td>
+    	<td><a href="index.php#contatti">Contatti</a></td>
 
     	<?php /* Verifica se l'utente è loggato e nel caso mostra il bottone con il nome */
 		echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</strong></a></td>';
@@ -63,7 +63,7 @@ if(!isset($_SESSION['username'])){
 			<div class="image">
 				<img src="immagini/pizza_delivery.png" alt="pizza_delivery">
 			</div>
-			<h3> Ordine - '.$rows_ordini[$i]['codordine'].' </h3>
+			<h3> Ordine - ' .$rows_ordini[$i]['codordine'].' </h3>
 			<p class="quantity"> x'.$resultCount2.' - Pizza Personalizzata </p>
 			<p class="data"> Data Pagamento: <strong>'.$rows_ordini[$i]['data_pagamento'].'</strong> </p>
 			<p class="total"> Totale <br> &nbsp;&nbsp;<strong>'.$rows_ordini[$i]['totale_ordine'].'&euro; </strong></p>
@@ -89,7 +89,7 @@ if(!isset($_SESSION['username'])){
 				<br>
       			<button type="button" onclick="location.href = 'info.php';" class="modalbutton">Le mie informazioni</button>
       			<button type="button" onclick="location.href = 'storico.php';" class="modalbutton">Storico Ordini</button>
-     			 <button type="button" onclick="location.href = './utility/logout.php';" class="modalbutton">Logout</button>
+     			 <button type="button" onclick="location.href = 'utility/logout.php';" class="modalbutton">Logout</button>
     		</div>
 
     		<div class="container" style="background-color:#f1f1f1">

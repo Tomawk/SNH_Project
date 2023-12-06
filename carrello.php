@@ -18,11 +18,11 @@ if(!isset($_SESSION['username'])){
 	<nav class="topnav">
 	 <table>
   		<tr>
-    	<td><a href="./index.php">Home</a></td>
-  		<td><a href="./index.php#hr1">Promozioni</a></td>
+    	<td><a href="index.php">Home</a></td>
+  		<td><a href="index.php#hr1">Promozioni</a></td>
     	<td><a href="creation.php">Ordina Online</a></td>
-    	<td><a href="./index.php#hr2">Prenotazione</a></td>
-    	<td><a href="./index.php#contatti">Contatti</a></td>
+    	<td><a href="index.php#hr2">Prenotazione</a></td>
+    	<td><a href="index.php#contatti">Contatti</a></td>
 
 		<?php /* Verifica se l'utente è loggato e nel caso mostra il bottone con il nome */
 		echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</strong></a></td>';
@@ -93,11 +93,11 @@ if(!isset($_SESSION['username'])){
 
 			<div class="testo">
 
-				<h2> Pizza Personalizzata - #'.$rows_ordini[$i]['pizza'].' </h2>
+				<h2> Pizza Personalizzata - #' .$rows_ordini[$i]['pizza'].' </h2>
 
-				<p class="price"> '.$rows_ordini[$i]['totale'].'&euro; </p>
-				<form action="./utility/remove.php" class="remove_form" method="post">
-				<input type="submit" value="Rimuovi" class="remove_btn" name="'.$rows_ordini[$i]['pizza'].'">
+				<p class="price"> '.$rows_ordini[$i]['totale']. '&euro; </p>
+				<form action="utility/remove.php" class="remove_form" method="post">
+				<input type="submit" value="Rimuovi" class="remove_btn" name="' .$rows_ordini[$i]['pizza'].'">
 				</form>
 
 				<p class="description_p"> <strong>Impasto:</strong> '.$row3['impasto'].' <strong>Salsa:</strong> '.$row3['salsa'].' 
@@ -147,13 +147,13 @@ if(!isset($_SESSION['username'])){
 
 		<p> Subtotale Carrello &emsp; '.$totale_finale.'&euro; </p>
 		<p style="color: red"> Spedizione Gratuita &emsp; 0.00&euro; </p>
-		<h2> Totale &emsp; '.$totale_finale.'&euro; </h2>
+		<h2> Totale &emsp; '.$totale_finale. '&euro; </h2>
 
 	</div>
 	<hr style="width: 100%">
 	<footer> 
 		<a href="creation.php"> Continua ad ordinare </a>
-		<form action="./utility/pay.php" id="pay_form">
+		<form action="utility/pay.php" id="pay_form">
 		<input type="submit" id="order_complete" value="Check Out" name="checkout">
 		</form>
 	</footer>';
@@ -178,7 +178,7 @@ if(!isset($_SESSION['username'])){
 
 	  <button type="button" onclick="location.href = 'info.php';" class="modalbutton">Le mie informazioni</button>
       <button type="button" onclick="location.href = 'storico.php';" class="modalbutton">Storico Ordini</button>
-      <button type="button" onclick="location.href = './utility/logout.php';" class="modalbutton">Logout</button>
+      <button type="button" onclick="location.href = 'utility/logout.php';" class="modalbutton">Logout</button>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">

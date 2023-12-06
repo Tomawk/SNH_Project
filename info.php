@@ -29,11 +29,11 @@
 	<nav class="topnav">
  	<table>
  	 <tr>
-    	<td><a href="./index.php">Home</a></td>
-  		<td><a href="./index.php#hr1">Promozioni</a></td>
+    	<td><a href="index.php">Home</a></td>
+  		<td><a href="index.php#hr1">Promozioni</a></td>
     	<td><a href="creation.php">Ordina Online</a></td>
-    	<td><a href="./index.php#hr2">Prenotazione</a></td>
-    	<td><a href="./index.php#contatti">Contatti</a></td>
+    	<td><a href="index.php#hr2">Prenotazione</a></td>
+    	<td><a href="index.php#contatti">Contatti</a></td>
 
     	<?php /* Verifica se l'utente è loggato e nel caso mostra il bottone con il nome */
 		echo '<td><a onclick="openmodal2()"><strong>'.'<i class="fas fa-user-tie"></i>'.' '. $_SESSION["username"] . '</strong></a></td>';
@@ -78,7 +78,7 @@
 				<br>
       			<button type="button" onclick="location.href = 'info.php';" class="modalbutton">Le mie informazioni</button>
       			<button type="button" onclick="location.href = 'storico.php';" class="modalbutton">Storico Ordini</button>
-     			 <button type="button" onclick="location.href = './utility/logout.php';" class="modalbutton">Logout</button>
+     			 <button type="button" onclick="location.href = 'utility/logout.php';" class="modalbutton">Logout</button>
     		</div>
 
     		<div class="container" style="background-color:#f1f1f1">

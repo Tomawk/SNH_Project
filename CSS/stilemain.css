@@ -172,7 +172,7 @@ body {
 	top: -1vw;
     height: 43.5vw;
     width: 100%;
-    background-image: url('../immagini/pizzalq.jpg');
+    background-image: url('../immagini/book_image.jpg');
 	  background-size: cover;
 	  background-repeat:   no-repeat;
     background-position: center center;   
@@ -292,7 +292,7 @@ body {
     left: 55%;
     height: 28vw;
     width: 35%;
-    background-image: url('../immagini/pizze.jpg');
+    background-image: url('../immagini/vector_books.svg');
 	background-repeat:   no-repeat;
 	background-size: cover;
     background-position: center center;
@@ -352,14 +352,14 @@ body {
 }
 
 #image1{
-	background-image: url('../immagini/tutorial.jpg');
+	background-image: url('../immagini/book_sales.svg');
 	background-repeat:   no-repeat;
 	background-size: 22vw;
 	background-position: center center;
 }
 
 #image2{
-	background-image: url('../immagini/sardine.jpg');
+	background-image: url('../immagini/free_shipping.svg');
 	background-repeat:   no-repeat;
 	background-size: cover;
   background-position: center center; 
