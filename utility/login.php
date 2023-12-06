@@ -35,7 +35,7 @@ if (isset($_POST['username'])){
  
    if($rows==1){
    $_SESSION['username'] = $username;
-
+      
 
 
 header("location: ../index.php");
