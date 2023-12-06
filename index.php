@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('inc/db.php');
+require('sessionManager.php');
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -20,13 +21,18 @@ require('inc/db.php');
     <td><a href="#contatti">Contatti</a></td>
 	
 	<?php /* Verifica se l'utente è loggato e nel caso mostra il bottone con il nome */
+  
 	if(!isset($_SESSION["username"])){
-
+      
 echo '
     <td> <a onclick="openmodal()">Login</a></td>
     <td> <a onclick="openmodal1()">Registrati</a></td>';
 	
 }else{
+    if(!checkSession()){
+        echo 'HIJACKET ATTEMPT DETECTED';
+        exit;
+      }
 echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</strong></a></td>';
 }
 ?>

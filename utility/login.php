@@ -1,5 +1,6 @@
 <?php
 require('../inc/db.php');
+require('../sessionManager.php');
 
 session_start();
 
@@ -34,12 +35,12 @@ if (isset($_POST['username'])){
  
  
    if($rows==1){
-   $_SESSION['username'] = $username;
-      
-
-
-header("location: ../index.php");
-         }else{
+      regenerateSession();
+      $_SESSION['username'] = $username;
+      $_SESSION['IPaddress'] = $_SERVER['REMOTE_ADDR'];
+      $_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
+      header("location: ../index.php");
+   }else{
       $_SESSION['error'] = "Username o Password errati. Riprova.";
       header("location: ../index.php");
   }
