@@ -42,10 +42,10 @@ function checkSession()
         #if(!is_numeric($_SESSION['user_id']))
             #throw new Exception('No session started.');
 
-        if($_SESSION['IPaddress'] != $_SERVER['REMOTE_ADDR'])
+        if(isset($_SESSION['IPaddress']) && $_SESSION['IPaddress'] != $_SERVER['REMOTE_ADDR'])
             throw new Exception('IP Address mixmatch (possible session hijacking attempt).');
 
-        if($_SESSION['userAgent'] != $_SERVER['HTTP_USER_AGENT'])
+        if(isset($_SESSION['userAgent']) && $_SESSION['userAgent'] != $_SERVER['HTTP_USER_AGENT'])
             throw new Exception('Useragent mixmatch (possible session hijacking attempt).');
 
         #if(!$this->loadUser($_SESSION['user_id']))
