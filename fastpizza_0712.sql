@@ -299,7 +299,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'giorgi.tommaso98@gmail.com','Tommaso','Giorgi','User1','e587466319da83fe4bdf4ceae9746357','Livorno','Viale Amerigo Vespucci 42, 57128, Livorno (LI), It','57128','2023-12-06');
+INSERT INTO `users` VALUES (1,'giorgi.tommaso98@gmail.com','Tommaso','Giorgi','User1','e587466319da83fe4bdf4ceae9746357','Livorno','ucci 42, 12346, fgj , It','12346','2023-12-06');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
