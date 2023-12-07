@@ -27,8 +27,9 @@
         $value = $_POST['Value'];
         $sql = "SELECT * FROM users WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s",$where_condition);
         $where_condition = "1";
+        $stmt->bind_param("s",$where_condition);
+        
     }
     
     
