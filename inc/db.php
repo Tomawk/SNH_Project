@@ -1,8 +1,10 @@
 <?php
 
 /* connessione al db */
-
-$con = mysqli_connect("localhost","root","","fastpizza");
+$address = "localhost";
+$user = "root";
+$database = "bookworm";
+$con = mysqli_connect($address,$user,"",$database);
 
 // Verifica connessione
 

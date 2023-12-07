@@ -110,52 +110,6 @@
 
 	}
 
-// MODAL SCRIPT //
-
-// Get the modal
-var modal = document.getElementById('id01');
-var modal1 = document.getElementById('id02');
-var modal2 = document.getElementById('id03');
-var modal3 = document.getElementById('id04');
-
-function openmodal(){
-	modal.style.display='block';
-}
-
-function closemodal(){
-	modal.style.display='none';
-}
-
-// Chiudi modal quando clicchi al di fuori del modal
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-function openmodal1(){
-	modal1.style.display='block';
-}
-
-function closemodal1(){
-	modal1.style.display='none';
-}
-
-function openmodal2(){
-	modal2.style.display='block';
-}
-
-function closemodal2(){
-	modal2.style.display='none';
-}
-
-// Chiudi modal1 quando clicchi al di fuori del modal
-window.onclick = function(event) {
-    if (event.target == modal1) {
-        modal1.style.display = "none";
-    }
-}
-
 
 	function validateEmail(email) { /* Funzione per validare email */
   	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -326,7 +280,5 @@ window.onclick = function(event) {
 
 	if(errore_ == false) return false;
 		else return true;
-	
-
 	}
 
