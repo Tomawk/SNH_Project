@@ -107,4 +107,6 @@ if($resultCount%4 != 0){
     echo '</div>';
 }
 ?>
+
+<!-- TODO: Non è stata impostata una immagine di default se non è presente o non carica una dei link nel db per le copertine dei libri-->
 </body>
