@@ -6,7 +6,7 @@ require('sessionManager.php');
 <!DOCTYPE html>
 <html lang="it">
 	<head>
-  <title> Fastpizza Home </title>
+  <title> Bookworm Home </title>
 	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
     <!-- Font Awesome Import -->
@@ -18,9 +18,8 @@ require('sessionManager.php');
   <tr>
     <td><a onclick="scrollup()"><i class="fa-solid fa-house"></i></a></td>
     <td><a href="#hr1">News</a></td>
-    <td><a href="creation.php">Bookshelf</a></td>
-    <td><a href="#hr2">Prenotazione</a></td>
-    <td><a href="#contatti">Contatti</a></td>
+    <td><a href="bookshelf.php">Bookshelf</a></td>
+    <td><a href="#contatti">Contact us</a></td>
 	
 	<?php /* Verifica se l'utente è loggato e nel caso mostra il bottone con il nome */
   
