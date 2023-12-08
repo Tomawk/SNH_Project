@@ -1,5 +1,5 @@
 <?php
-function regenerateSession($username,$reload = false)
+function regenerateSession($username,$remember_selected,$reload = false)
 {
     /*
     // This token is used by forms to prevent cross site forgery attempts
@@ -32,6 +32,7 @@ function regenerateSession($username,$reload = false)
     session_start();
 
     $_SESSION["username"]=$username;
+    $_SESSION["rememberme"]=$remember_selected;
 
     // Don't want this one to expire
     //unset($_SESSION['OBSOLETE']);

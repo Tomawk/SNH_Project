@@ -1,4 +1,5 @@
 <?php
+require("../inc/db.php");
 function generate_tokens(): array
 {
     $selector = bin2hex(random_bytes(16));
@@ -22,7 +23,7 @@ function insert_user_token(int $user_id, string $selector, string $hashed_valida
     $sql = 'INSERT INTO user_tokens(user_id, selector, hashed_validator, expiry)
             VALUES(:user_id, :selector, :hashed_validator, :expiry)';
 
-    $statement = db()->prepare($sql);
+    $statement = $con()->prepare($sql);
     $statement->bindValue(':user_id', $user_id);
     $statement->bindValue(':selector', $selector);
     $statement->bindValue(':hashed_validator', $hashed_validator);

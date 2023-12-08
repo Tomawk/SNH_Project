@@ -35,9 +35,11 @@ if (isset($_POST['username'])){
  
       if($rows==1){
       //to prevent session fixation attack
-            if(regenerateSession($username)){
-                  if(isset($_POST['rememberme']))
-                        remember_me(htmlspecialchars($_COOKIE["selector"]));
+            $rememberme_selected = isset($_POST["rememberme"]) ? true : false;
+            if(regenerateSession($username,$rememberme_selected)){
+                  if($_SESSION["rememberme"]==true)
+                        remember_me($_SESSION["username"]);
+                  unset($_SESSION["rememberme"]);
             }
       }else
             $_SESSION['error'] = "Username o Password errati. Riprova.";
