@@ -5,6 +5,7 @@ require('inc/db.php');
 <!DOCTYPE html>
 <html lang="it">
 <head>
+
     <title> Bookshelf </title>
     <link href="CSS/bookshelf_style.css" rel="stylesheet" type="text/css">
     <link rel="icon" href="immagini/icon.png" sizes="32x32">
@@ -17,6 +18,8 @@ require('inc/db.php');
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 </head>
 <body>
 <nav class="topnav">
@@ -59,6 +62,17 @@ require('inc/db.php');
         </tr>
     </table>
 </aside>
+    <div id="seach_div">
+        <input type="text" placeholder="inserisci qui" id="input_field_search">
+        <select id="field_search">
+          <option value="none"></option>
+          <option value="ISBN">ISBN</option>
+          <option value="author">author</option>
+          <option value="title">title</option>
+        </select>
+        <input type="button" onclick="sendRequest()" id="search_button" value="invia">
+
+    </div>
 <?php
 
 $query = "SELECT * FROM books";
@@ -70,7 +84,7 @@ $rows = [];
 while($row = mysqli_fetch_assoc($result)){
     $rows[] = $row;
 }
-
+echo '<div id="vetrina">';
 for ($i = 0; $i < $resultCount; $i++) {
     if($i%4 == 0){
         echo '<div class="article_line">
@@ -106,7 +120,36 @@ for ($i = 0; $i < $resultCount; $i++) {
 if($resultCount%4 != 0){
     echo '</div>';
 }
+echo '</div>';
+
 ?>
+
+<script>
+    
+    function sendRequest() {
+
+        var data = new FormData();
+        data.append('Search_filed', document.getElementById("field_search").value);
+        data.append('Value', document.getElementById("input_field_search").value);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "utility/filtering_books.php", true);
+        
+        xhr.onreadystatechange = function () {
+           
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                
+              //document.getElementById("ciao").value = xhr.responseText;
+              //var vetrina = document.getElementById("vetrina");
+              //vetrina.innerHTML = xhr.responseText;
+              
+              jQuery('#vetrina').html(xhr.responseText);
+            }
+        };
+        xhr.send(data);
+    }
+
+</script>
 
 <!-- TODO: Non è stata impostata una immagine di default se non è presente o non carica una dei link nel db per le copertine dei libri-->
 </body>
