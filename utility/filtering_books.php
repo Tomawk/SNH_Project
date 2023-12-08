@@ -25,7 +25,6 @@
     $stmt->execute();
 
     $result = $stmt->get_result();
-    
 
     $resultCount=mysqli_num_rows($result);
 
