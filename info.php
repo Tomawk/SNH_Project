@@ -46,7 +46,7 @@
 	</nav>
 	<div id="center_div">
 		<div id="image">
-		<img src="immagini/user.png" alt="avatar">
+			<img src="immagini/user.png" alt="avatar">
 		</div>
 		<p id= "username"><strong><?php echo $_SESSION['username']?></strong></p>
 		<p id="storico"><strong>Utente dal: </strong><?php echo $date ?></p>
@@ -56,6 +56,7 @@
 		<p id= "indirizzo"><strong>Indirizzo: </strong><?php echo $indirizzo ?></p>
 		<p id= "citta"><strong>Citt&agrave;: </strong><?php echo $citta ?></p>
 		<p id= "cap"><strong>Cap: </strong><?php echo $cap ?></p>
+		<p><a id="change_pwd" href="password_change.php">Change password</a></p>
 		<!--
 		<form method="post">
 		<input type="submit" name="change" id="change" value="Modifica Profilo">

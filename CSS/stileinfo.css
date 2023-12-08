@@ -275,3 +275,8 @@ span.psw {
        width: 100%;
     }
 }
+#change_pwd{
+    position: absolute;
+    left: 15%;
+    top: 83%;
+}
