@@ -2,6 +2,20 @@
 require('../inc/db.php');
 // If form submitted, insert values into the database.
 session_start();
+if(isset($_SESSION["username"]))
+    {
+        header("location: ../index.php");
+    }
+
+//*+++++++++++++++++++++++++++++
+//*+++++++++++++++++++++++++++++
+//*+++++++++++++++++++++++++++++
+//aggiungere contatore per evitare brute force attack
+//*+++++++++++++++++++++++++++++
+//*+++++++++++++++++++++++++++++
+//*+++++++++++++++++++++++++++++
+
+
 
     function test_input($data) {
      $data = trim($data);
@@ -207,6 +221,9 @@ session_start();
 
     header("location: ../index.php");
         
-    } else header('location: ../index.php')
+    } else {
+        $_SESSION["signup_error"] = "error";
+        header('location: ../index.php');
+    }
 
 ?>

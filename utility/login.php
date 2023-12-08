@@ -1,13 +1,12 @@
 <?php
 require('../inc/db.php');
-require('../sessionManager.php');
+require('sessionManager.php');
+require('rememberme.php');
 
 session_start();
-
 // If form submitted, insert values into the database.
 
 if (isset($_POST['username'])){
-
         // removes backslashes
 
   $username = stripslashes($_REQUEST['username']);
@@ -34,17 +33,20 @@ if (isset($_POST['username'])){
  
  
  
-   if($rows==1){
-      regenerateSession();
-      $_SESSION['username'] = $username;
-      $_SESSION['IPaddress'] = $_SERVER['REMOTE_ADDR'];
-      $_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
-      header("location: ../index.php");
-   }else{
-      $_SESSION['error'] = "Username o Password errati. Riprova.";
-      header("location: ../index.php");
-  }
+      if($rows==1){
+      //to prevent session fixation attack
+            if(regenerateSession($username)){
+                  if(isset($_POST['rememberme']))
+                        remember_me(htmlspecialchars($_COOKIE["selector"]));
+            }
+      }else
+            $_SESSION['error'] = "Username o Password errati. Riprova.";
+      
+      //header("location: ../index.php");
+}else{
+      $_SESSION['error'] = "Generic error,contact admin.";
+      //header("location: ../index.php");
 }
+header("location: ../index.php");
 
- ?>
-
+?>

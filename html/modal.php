@@ -13,6 +13,10 @@
 
       <label><b>Password</b></label>
       <input type="password" placeholder="Inserisci Password" name="password" class="inputmodal" required>
+      <div>
+        <input type="checkbox" id="rememberme" name="rememberme" />
+        <label for="rememberme">Remember me</label>
+      </div>
       <br><br>
       <button type="submit" class="modalbutton">Login</button>
 

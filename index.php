@@ -1,7 +1,7 @@
 <?php
 session_start();
 require('inc/db.php');
-require('sessionManager.php');
+require('utility/sessionManager.php');
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -19,6 +19,9 @@ require('sessionManager.php');
     if(isset($_SESSION["error"])){
       echo 'onload ="openmodal()"';
     }
+	if(isset($_SESSION["signup_error"])){
+      echo 'onload ="openmodal1()"';
+	}
     ?>
 >
 <?php include 'html/topnav.php';?>

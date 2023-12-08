@@ -13,10 +13,6 @@ echo '
     <td> <a onclick="openmodal1()">Registrati</a></td>';
 
 }else{
-   // if(!checkSession()){
-    //    echo 'HIJACKET ATTEMPT DETECTED';
-   //     exit;
-   //   }
     echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</strong></a></td>';
 }
 ?>

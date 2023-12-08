@@ -1,22 +1,25 @@
 <?php
-function regenerateSession($reload = false)
+function regenerateSession($username,$reload = false)
 {
+    /*
     // This token is used by forms to prevent cross site forgery attempts
     #if(!isset($_SESSION['nonce']) || $reload)
         #$_SESSION['nonce'] = md5(microtime(true));
 
     #check if the IPaddress is the same 
     if(!isset($_SESSION['IPaddress']) || $reload)
-        $_SESSION['IPaddress'] = $_SERVER['REMOTE_ADDR'];
+        //$_SESSION['IPaddress'] = $_SERVER['REMOTE_ADDR'];
+        $ipaddress = $_SERVER["REMOTE_ADDR"];
 
     #check if the user agent is the same
     if(!isset($_SESSION['userAgent']) || $reload)
-        $_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
+        //$_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
+        $useragent = $_SERVER["HTTP_USER_AGENT"];
 
     // Set current session to expire in 1 minute
     $_SESSION['OBSOLETE'] = true;
     $_SESSION['EXPIRES'] = time() + 60;
-
+    */
     // Create new session without destroying the old one
     session_regenerate_id(false);
 
@@ -28,16 +31,20 @@ function regenerateSession($reload = false)
     session_id($newSession);
     session_start();
 
+    $_SESSION["username"]=$username;
+
     // Don't want this one to expire
-    unset($_SESSION['OBSOLETE']);
-    unset($_SESSION['EXPIRES']);
+    //unset($_SESSION['OBSOLETE']);
+    //unset($_SESSION['EXPIRES']);
 }
 
+/*
 function checkSession()
 {
     try{
         if(isset($_SESSION['OBSOLETE']) && ($_SESSION['EXPIRES'] < time()))
-            throw new Exception('Attempt to use expired session.');
+            //throw new Exception('Attempt to use expired session.');
+            return false;
 
         #if(!is_numeric($_SESSION['user_id']))
             #throw new Exception('No session started.');
@@ -62,5 +69,5 @@ function checkSession()
         return false;
     }
 }
-
+*/
 ?>
