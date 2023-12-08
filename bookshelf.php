@@ -26,9 +26,7 @@ require('inc/db.php');
     <table>
         <tr>
             <td><a href="index.php"><i class="fa-solid fa-house"></i></a></td>
-            <td><a href="index.php#hr1">News</a></td>
             <td><a onclick="scrollup()">Bookshelf</a></td>
-            <td><a href="index.php#contatti">Contact us</a></td>
 
             <?php /* Verifica se l'utente è loggato e nel caso mostra il bottone con il nome */
 
