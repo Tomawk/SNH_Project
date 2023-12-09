@@ -85,19 +85,8 @@ while($row = mysqli_fetch_assoc($result)){
 echo '<div id="vetrina">';
 for ($i = 0; $i < $resultCount; $i++) {
     if($i%4 == 0){
-        echo '<div class="article_line">
-        <div class="article_box">
-        <div class="book_image" style="background-image: url('.$rows[$i]['image_url'].');"></div>
-        <div class="book_title">'.$rows[$i]['title'].'</div>
-        <div class="book_author">Di <p style="display:inline; text-decoration: underline;">'.$rows[$i]['author'].'</div>
-        <div class="book_isbn"> ISBN: <p style="display:inline; font-weight: normal;">'.$rows[$i]['ISBN'].'</div>
-        <div class="book_genre"> Gendddre: <p style="display:inline; font-weight: normal;">'.$rows[$i]['genre'].'</div>
-        <div class="book_date"> Year: <p style="display:inline; font-weight: normal;">'.$rows[$i]['publication_year'].'</p></div>
-        <div class="book_price">'.$rows[$i]['price'].'€</div>
-        <button type="submit" class="book_button">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
-        </div>';
-    } else {
-        echo '<div class="article_box">
+        echo '<div class="article_line"  >
+        <div class="article_box" id ='.$i.'>
         <div class="book_image" style="background-image: url('.$rows[$i]['image_url'].');"></div>
         <div class="book_title">'.$rows[$i]['title'].'</div>
         <div class="book_author">Di <p style="display:inline; text-decoration: underline;">'.$rows[$i]['author'].'</div>
@@ -105,7 +94,18 @@ for ($i = 0; $i < $resultCount; $i++) {
         <div class="book_genre"> Genre: <p style="display:inline; font-weight: normal;">'.$rows[$i]['genre'].'</div>
         <div class="book_date"> Year: <p style="display:inline; font-weight: normal;">'.$rows[$i]['publication_year'].'</p></div>
         <div class="book_price">'.$rows[$i]['price'].'€</div>
-        <button type="submit" class="book_button">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
+        <button type="submit" class="book_button"  onclick="AddToCart('.$i.')" ><a>Add to cart </a><i class="fa-solid fa-cart-shopping" ></i></button>
+        </div>';
+    } else {
+        echo '<div class="article_box" id ='.$i.'>
+        <div class="book_image" style="background-image: url('.$rows[$i]['image_url'].');"></div>
+        <div class="book_title">'.$rows[$i]['title'].'</div>
+        <div class="book_author">Di <p style="display:inline; text-decoration: underline;">'.$rows[$i]['author'].'</div>
+        <div class="book_isbn"> ISBN: <p style="display:inline; font-weight: normal;">'.$rows[$i]['ISBN'].'</div>
+        <div class="book_genre"> Genre: <p style="display:inline; font-weight: normal;">'.$rows[$i]['genre'].'</div>
+        <div class="book_date"> Year: <p style="display:inline; font-weight: normal;">'.$rows[$i]['publication_year'].'</p></div>
+        <div class="book_price">'.$rows[$i]['price'].'€</div>
+        <button type="submit" class="book_button" onclick="AddToCart('.$i.')" ><a>Add to cart </a> <i class="fa-solid fa-cart-shopping" ></i></button>
         </div>';
         
         $temp = $i+1;
@@ -122,6 +122,7 @@ echo '</div>';
 
 ?>
 
+
 <script>
     
     function sendRequest() {
@@ -134,17 +135,49 @@ echo '</div>';
         xhr.open("POST", "utility/filtering_books.php", true);
         
         xhr.onreadystatechange = function () {
-           
             if (xhr.readyState == 4 && xhr.status == 200) {
-                
-              //document.getElementById("ciao").value = xhr.responseText;
-              //var vetrina = document.getElementById("vetrina");
-              //vetrina.innerHTML = xhr.responseText;
-              
               jQuery('#vetrina').html(xhr.responseText);
             }
         };
         xhr.send(data);
+    }
+
+    function AddToCart(i){
+        var container = document.getElementById(i);
+        var ISBN = container.childNodes[7].childNodes[1].textContent;
+        //send data
+
+        var data = new FormData();
+        data.append('ISBN', ISBN);
+        data.append('username',<?php echo "'".$_SESSION['username']."'"?>)
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "utility/add_to_cart.php", true);
+
+        xhr.onreadystatechange = function () {
+           if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log(xhr.responseText);
+            //aggiunto al carrello
+            if(xhr.responseText == 0){
+                alert("Riprova, qualcosa è andato storto")
+            }
+            else{
+                var button = container.childNodes[15];
+                var testo = button.childNodes[0];
+                testo.textContent = 'Aggiunto';
+                testo.style.color = 'green';
+
+                setInterval(function(){
+                    testo.textContent = 'Add to cart';
+                    testo.style.color = 'black';
+                }, 2000);
+            }
+           }
+       };
+       xhr.send(data);
+
+
+       
     }
 
 </script>

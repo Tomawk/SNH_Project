@@ -19,10 +19,6 @@ if(!isset($_SESSION['username'])){
 	 <table>
   		<tr>
     	<td><a href="index.php">Home</a></td>
-  		<td><a href="index.php#hr1">Promozioni</a></td>
-    	<td><a href="creation.php">Ordina Online</a></td>
-    	<td><a href="index.php#hr2">Prenotazione</a></td>
-    	<td><a href="index.php#contatti">Contatti</a></td>
 
 		<?php /* Verifica se l'utente è loggato e nel caso mostra il bottone con il nome */
 		echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</strong></a></td>';
@@ -32,14 +28,17 @@ if(!isset($_SESSION['username'])){
 	 </table>
 	</nav>
 	<div id="center_div">
-		<h1> Pizze nel tuo Carrello </h1>
+		<h1> Libri nel tuo Carrello </h1>
 		<hr>
 
 		<?php 
 
 		$totale_finale = 0; /* Contatore prezzo totale carrello */
+		
+		
+		$query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
+				where c.username = '".$_SESSION['username']."'"."  and o.stato_ordine is null;";
 
-		$query = "SELECT * FROM ordini_log WHERE utente='".$_SESSION['username']."'";
    		$result=mysqli_query($con,$query);
     	$resultCount=mysqli_num_rows($result);
 
@@ -47,96 +46,63 @@ if(!isset($_SESSION['username'])){
     		echo '<h2 id="h2_empty"> Ops! Il tuo Carrello &egrave; vuoto.. </h2>
     			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
     			  <a href="creation.php" id="a_empty"> Inizia a ordinare adesso! </a>';
+				exit();
 
     	}
+		
 
     	$rows_ordini = array();
 		while($row = mysqli_fetch_assoc($result)){
-        $rows_ordini[] = $row;
+        	$rows_ordini[] = $row;
    		}
 
 
+		//se il mio carello non è vuoto e prelievo i libri contenuti
+		$totale_finale = 0;
 		for($i = 0; $i<$resultCount; $i++){
 
-		$totale_finale += $rows_ordini[$i]['totale']; /* Incremento il totale */
+			
+			$totale_finale += floatval($rows_ordini[$i]['price'])*floatval($rows_ordini[$i]['numero_item']); /* Incremento il totale */
 
-		$query2 = "SELECT * FROM ingredienti_log WHERE pizza='".$rows_ordini[$i]['pizza']."'";
-		$result2=mysqli_query($con,$query2);
-		$resultCount2=mysqli_num_rows($result2);
-		$rows_ingredienti = array();
-		while($row2 = mysqli_fetch_assoc($result2)){
-        $rows_ingredienti[] = $row2;
-   		}
+			echo '
+			<section>
 
-   		$counter_ingredients=0; // Contatore ingredienti
+				<div class="image"> 
+					<img src='.$rows_ordini[$i]['image_url'].' alt="pizza">
+				</div>
 
-   		$query3 = "SELECT * FROM pizzacustom_log WHERE idpizza='".$rows_ordini[$i]['pizza']."'";
-   		$result3=mysqli_query($con,$query3);
-   		$row3 = mysqli_fetch_assoc($result3);
+				<div class="testo">
 
-   		$counter_drinks=0; // Contatore Bibite
+					<h2> Ordine - #' .$rows_ordini[$i]['id'].' </h2>
 
-   		$query4 = "SELECT * FROM bevande_log WHERE pizza='".$rows_ordini[$i]['pizza']."'";
-   		$result4=mysqli_query($con,$query4);
-   		$resultCount4=mysqli_num_rows($result4);
-		$rows_bibite = array();
-		while($row4 = mysqli_fetch_assoc($result4)){
-        $rows_bibite[] = $row4;
-   		}
+					<p class="price"> '.$rows_ordini[$i]['price']. '&euro; </p>
+					<form action="utility/remove.php" class="remove_form" method="post">
+						<input type="submit" value="Rimuovi" class="remove_btn">
+						<input type="text" name="id" value="' .$rows_ordini[$i]['id'].'" hidden>
+						<input type="text" name="ISBN" value="' .$rows_ordini[$i]['ISBN'].'" hidden>
+					</form>
 
-		echo '
-		<section>
+					<p class="description_p"> 
+						<strong>titolo:</strong> '.$rows_ordini[$i]['title'].' 
+						<strong>Publisher:</strong> '.$rows_ordini[$i]['publisher'].' 
+						<strong>Auhtor:</strong> '.$rows_ordini[$i]['author'].'
+						<br>
+						<strong>Numero item :</strong> '.floatval($rows_ordini[$i]['numero_item']).'
+						
+					</p>
 
-			<div class="image"> 
-				<img src="immagini/pizza_sample.jpg" alt="pizza">
-			</div>
+					<p class="description_b"> 
+						<strong>ISBN: </strong> '.$rows_ordini[$i]['ISBN'].' 
+					</p>
 
-			<div class="testo">
+				</div>
 
-				<h2> Pizza Personalizzata - #' .$rows_ordini[$i]['pizza'].' </h2>
-
-				<p class="price"> '.$rows_ordini[$i]['totale']. '&euro; </p>
-				<form action="utility/remove.php" class="remove_form" method="post">
-				<input type="submit" value="Rimuovi" class="remove_btn" name="' .$rows_ordini[$i]['pizza'].'">
-				</form>
-
-				<p class="description_p"> <strong>Impasto:</strong> '.$row3['impasto'].' <strong>Salsa:</strong> '.$row3['salsa'].' 
-					<strong>Formaggio:</strong> '.$row3['formaggio'].'
-					<br>
-					<strong>Ingredienti:</strong> ';
-					while( $counter_ingredients < $resultCount2){
-						if($counter_ingredients == 0){
-						echo' '.$rows_ingredienti[$counter_ingredients]['ingrediente'];
-						}
-						else {
-							echo ', '.$rows_ingredienti[$counter_ingredients]['ingrediente'];
-						}
-						$counter_ingredients++;
-					}
-				echo '
-				</p>
-
-				<p class="description_b"> <strong>Bibite: </strong>';
-									while( $counter_drinks < $resultCount4){
-										if($counter_drinks == 0){
-											echo''.$rows_bibite[$counter_drinks]['bevanda'].' '.'('.$rows_bibite[$counter_drinks]['quantita'].')'.'';
-										}
-										else {
-											echo ', '.$rows_bibite[$counter_drinks]['bevanda'].' '.'('.$rows_bibite[$counter_drinks]['quantita'].')';		
-										}
-									$counter_drinks++;
-									}
-				echo '
-				</p>
-
-			</div>
-
-		</section>
+			</section>
 
 
-		<br>
-		<hr>
-		';
+			<br>
+			<hr>
+			';
 	}
 
 	$_SESSION["totale"] = $totale_finale;
@@ -152,7 +118,7 @@ if(!isset($_SESSION['username'])){
 	</div>
 	<hr style="width: 100%">
 	<footer> 
-		<a href="creation.php"> Continua ad ordinare </a>
+		<a href="bookshelf.php"> Continua ad ordinare </a>
 		<form action="utility/pay.php" id="pay_form">
 		<input type="submit" id="order_complete" value="Check Out" name="checkout">
 		</form>

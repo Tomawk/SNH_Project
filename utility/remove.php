@@ -3,30 +3,42 @@
 	session_start();
     require('../inc/db.php');
 
-	$query = "SELECT * FROM ordini_log WHERE utente ='".$_SESSION['username']."'";
-	$result=mysqli_query($con,$query);
-    $resultCount=mysqli_num_rows($result);
+	$id = $_POST['id'];
+	$ISBN = $_POST['ISBN'];
+	
+	$query = "SELECT * FROM ContenutoOrdini WHERE id = '".$id."' and ISBN = '".$ISBN."'";
+	$result = mysqli_query($con,$query);
+    $row = mysqli_fetch_assoc($result);
 
-    $rows_ordini = array();
+	if($row['numero_item'] == 1){
+		//controllo quanti elementi contiene il carrello
+		$query = "SELECT * FROM ContenutoOrdini WHERE id = '".$id."'";
+		$result=mysqli_query($con,$query);
+    	$elimina_corrello=mysqli_num_rows($result); 
 
-	while($row = mysqli_fetch_assoc($result)){
-    $rows_ordini[] = $row;
-   	}
 
+		//elemino elemento
+		$query = "DELETE FROM ContenutoOrdini WHERE id = '".$id."' and ISBN = '".$ISBN."';";
+		$result=mysqli_query($con,$query);
 
-
-   	for($i = 0; $i<$resultCount; $i++){
-		if(isset($_POST[$rows_ordini[$i]['pizza']])) {
-			mysqli_query($con,"DELETE FROM ordini_log WHERE pizza='".$rows_ordini[$i]['pizza']."'");
-			mysqli_query($con,"DELETE FROM ingredienti_log WHERE pizza='".$rows_ordini[$i]['pizza']."'");
-			mysqli_query($con,"DELETE FROM bevande_log WHERE pizza='".$rows_ordini[$i]['pizza']."'");
-			mysqli_query($con,"DELETE FROM pizzacustom_log WHERE idpizza='".$rows_ordini[$i]['pizza']."'");
-
+		if($elimina_corrello == 1){
+			//resta solo un elemento nel carrello allora elimino il carrello
+			//Elimino carrello
+			$query = "DELETE FROM ordini WHERE id = '".$id."';";
+			$result=mysqli_query($con,$query);
 		}
+	
+	}
+	else{
+		//faccio update
+		$query = "UPDATE `ContenutoOrdini` SET `numero_item` = '".(floatval($row['numero_item'])-1)."' 
+                WHERE `ContenutoOrdini`.`ISBN` = '".$ISBN."'
+                AND   `ContenutoOrdini`.`username` = '".$row['username']."' 
+                AND   `ContenutoOrdini`.`id` = '".$id."';";
 
+        $result=mysqli_query($con,$query);
 	}
 
-	header('location: ../carrello.php')
-
+	header('location: ../carrello.php');
 
 ?> 
