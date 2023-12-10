@@ -13,8 +13,8 @@
 		 <p> <strong><?php echo $_SESSION["username"]; ?></strong> </p>
 <br>
 <br>
-      <button type="button" onclick="location.href = 'info.php';" class="modalbutton">Le mie informazioni</button>
-      <button type="button" onclick="location.href = 'storico.php';" class="modalbutton">Storico Ordini</button>
+      <button type="button" onclick="location.href = 'info.php';" class="modalbutton">My information</button>
+      <button type="button" onclick="location.href = 'order_history.php';" class="modalbutton">Order History</button>
       <button type="button" onclick="location.href = 'utility/logout.php';" class="modalbutton">Logout</button>
     </div>
     <div class="container" style="background-color:#f1f1f1">

@@ -29,10 +29,24 @@ echo '
           while($row = mysqli_fetch_assoc($result)){
             $resultCount += $row['numero_item'];
           }
-          echo "(".$resultCount.")";
+          echo "<u id='item_nel_carrello'>(".$resultCount.")</u>";
+
+          //gestione coockie
+         //if(!isset($_COOKIE["user"])){
+         //  //set the coockie
+         //  $cookie_name = "user";
+         //  $cookie_value = "1";
+         //  setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+         //  $_COOKIE["logged_in"] = false;
+         //}
+        }
+        else{
+          if(!$_SESSION['not_logged_in']){
+            $_SESSION['not_logged_in'] = array();
+          };
+          echo "(<u id='item_nel_carrello'>".sizeof($_SESSION['not_logged_in'])."</u>)";
         }
         ?>
-      
     </a>
   </td>
   </tr>

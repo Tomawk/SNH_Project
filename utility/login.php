@@ -2,10 +2,10 @@
 require('../inc/db.php');
 require('sessionManager.php');
 require('rememberme.php');
+require("insert_function.php");
 
 session_start();
 // If form submitted, insert values into the database.
-
 if (isset($_POST['username'])){
         // removes backslashes
 
@@ -28,7 +28,18 @@ if (isset($_POST['username'])){
  
  
       if($rows==1){
-      //to prevent session fixation attack
+            
+            $_SESSION['username'] = $username;
+            //se l'utente aveva aggiunto cose al carrello quando non era loggato, devo inserirli nel db
+            if(isset($_SESSION['not_logged_in']) and sizeof($_SESSION['not_logged_in']) > 0){
+                  //inserico elementi nel db
+                  for($i = 0; $i < sizeof($_SESSION['not_logged_in']); $i++){
+                        //questo per inviare il dato al db
+                        insert_book($_SESSION['not_logged_in'][$i],$username,$con);
+                  }
+            }
+            unset($_SESSION['not_logged_in']);
+            //to prevent session fixation attack
             $rememberme_selected = isset($_POST["rememberme"]) ? true : false;
             if(regenerateSession($username,$rememberme_selected)){
                   if($_SESSION["rememberme"]==true)
@@ -36,6 +47,9 @@ if (isset($_POST['username'])){
                         //remember_me();
                   unset($_SESSION["rememberme"]);
             }
+            
+            
+
       }else
             $_SESSION['error'] = "Username o Password errati. Riprova.";
       
