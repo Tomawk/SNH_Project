@@ -20,6 +20,7 @@ echo '
     <a href="carrello.php"><i class="fa-solid fa-cart-shopping"></i> 
       Shop Now 
         <?php 
+	      if(isset($_SESSION["username"])){
           $query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
             where c.username = '".$_SESSION['username']."'"."  and o.stato_ordine is null;";
     
@@ -29,6 +30,7 @@ echo '
             $resultCount += $row['numero_item'];
           }
           echo "(".$resultCount.")";
+        }
         ?>
       
     </a>
