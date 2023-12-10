@@ -62,7 +62,14 @@ require('utility/sessionManager.php');
 
 <div id="alertbox">
 </div>
-<?php include 'html/modal.php' ?>
-<?php include 'html/footer.php' ?>
+<?php 
+	if(isset($_SESSION["username"])){
+		include "html/modal_user.php";
+	}else{
+		include 'html/modal_login.php';
+		include 'html/modal_register.php';
+	}
+	include 'html/footer.php';
+?>
 </body>
 </html>

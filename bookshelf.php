@@ -8,6 +8,7 @@ require('inc/db.php');
 
     <title> Bookshelf </title>
     <link href="CSS/bookshelf_style.css" rel="stylesheet" type="text/css">
+    <script src="JS/modal.js" ></script>
     <link rel="icon" href="immagini/icon.png" sizes="32x32">
 
     <!-- Font Awesome Import -->
@@ -26,19 +27,7 @@ require('inc/db.php');
 <div id="intestazione">
     <h1> BOOKWORM </h1>
 </div>
-<aside class="rightnav">
-    <table>
-        <tr>
-            <td id="facebook"></td>
-        </tr>
-        <tr>
-            <td id="instagram"></td>
-        </tr>
-        <tr>
-            <td id="google"></td>
-        </tr>
-    </table>
-</aside>
+<?php include 'html/aside.php';?>
     <div id="seach_div">
         <input type="text" placeholder="inserisci qui" id="input_field_search">
         <select id="field_search">
@@ -162,5 +151,6 @@ echo '</div>';
 
 </script>
 
+<?php include 'html/modal.php';?>
 <!-- TODO: Non è stata impostata una immagine di default se non è presente o non carica una dei link nel db per le copertine dei libri-->
 </body>

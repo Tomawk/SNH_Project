@@ -1,68 +1,3 @@
-<!-- MODAL PER IL LOGIN --> 
-<div id="id01" class="modal">
-
-  <form class="modal-content animate" method="post" name="login" action="utility/login.php">
-    <div class="imgcontainer">
-      <span onclick="closemodal()" class="close" title="Close Modal">&times;</span> <!-- Span chiusura modal -->
-      <img src="immagini/avatar.png" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label><b>Username</b></label>
-      <input type="text" placeholder="Inserisci Username" name="username" class="inputmodal" required>
-
-      <label><b>Password</b></label>
-      <input type="password" placeholder="Inserisci Password" name="password" class="inputmodal" required>
-      <div>
-        <input type="checkbox" id="rememberme" name="rememberme" />
-        <label for="rememberme">Remember me</label>
-      </div>
-      <br><br>
-      <button type="submit" class="modalbutton">Login</button>
-
-      <?php
-      if(isset($_SESSION["error"])){
-
-      echo '<p id="errore_login">'.' '.$_SESSION['error'].'<p>';
-      unset($_SESSION['error']);
-      }
-
-      ?>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="closemodal()" class="cancelbtn">Cancel</button>
-      <span class="psw"><a href="recover_password.php">Password</a> dimenticata?</span>
-    </div>
-  </form>
-</div>
-
-<!-- FINE MODAL LOGIN-->
-
-<!-- MODAL PULSANTE UTENTE -->
-
-<div id="id03" class="modal">
-
-  <div class="modal-content animate">
-    <div class="imgcontainer">
-      <span onclick="closemodal2()" class="close" title="Close Modal">&times;</span> <!-- Span chiusura modal -->
-      <img src="immagini/user.png" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-		 <p> <strong><?php echo $_SESSION["username"]; ?></strong> </p>
-<br>
-<br>
-      <button type="button" onclick="location.href = 'info.php';" class="modalbutton">Le mie informazioni</button>
-      <button type="button" onclick="location.href = 'storico.php';" class="modalbutton">Storico Ordini</button>
-      <button type="button" onclick="location.href = 'utility/logout.php';" class="modalbutton">Logout</button>
-    </div>
-    <div class="container" style="background-color:#f1f1f1">
-    </div>
-  </div>
-</div>
-
-<!-- FINE MODAL UTENTE -->
 
 <!-- MODAL REGISTRAZIONE -->
 
@@ -166,4 +101,3 @@
 </div>
 <!-- Fine Modal Registrazione -->
 
-<script src="JS/modal.js" ></script>
