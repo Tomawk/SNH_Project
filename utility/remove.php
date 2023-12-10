@@ -5,40 +5,61 @@
 
 	$id = $_POST['id'];
 	$ISBN = $_POST['ISBN'];
-	
-	$query = "SELECT * FROM ContenutoOrdini WHERE id = '".$id."' and ISBN = '".$ISBN."'";
-	$result = mysqli_query($con,$query);
-    $row = mysqli_fetch_assoc($result);
+
+	$query = $query = "SELECT * FROM ContenutoOrdini WHERE ISBN = ? and id = ? ";
+    $stmt = $con->prepare($query);
+    $stmt->bind_param("si",$ISBN,$id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+	$row = mysqli_fetch_assoc($result);
+
+	if($_SESSION['username'] != $row['username']){
+		//qui un qualcuno ha modificato i dati del form cercando di modificare dati che non appertengono a lui
+		echo "Per favore, rispova. Qualcosa è andato storto";
+		exit();
+	}
 
 	if($row['numero_item'] == 1){
 		//controllo quanti elementi contiene il carrello
-		$query = "SELECT * FROM ContenutoOrdini WHERE id = '".$id."'";
-		$result=mysqli_query($con,$query);
-    	$elimina_corrello=mysqli_num_rows($result); 
 
+		$query = $query = "SELECT * FROM ContenutoOrdini WHERE id = ? ";
+    	$stmt = $con->prepare($query);
+    	$stmt->bind_param("i",$id);
+    	$stmt->execute();
+    	$result = $stmt->get_result();
+		$elimina_corrello=mysqli_num_rows($result); 
 
 		//elemino elemento
-		$query = "DELETE FROM ContenutoOrdini WHERE id = '".$id."' and ISBN = '".$ISBN."';";
-		$result=mysqli_query($con,$query);
+		$query = $query = "DELETE FROM ContenutoOrdini WHERE ISBN = ? and id = ? ";
+    	$stmt = $con->prepare($query);
+   		$stmt->bind_param("si",$ISBN,$id);
+    	$stmt->execute();
+
 
 		if($elimina_corrello == 1){
 			//resta solo un elemento nel carrello allora elimino il carrello
 			//Elimino carrello
-			$query = "DELETE FROM ordini WHERE id = '".$id."';";
-			$result=mysqli_query($con,$query);
+
+			$query = "DELETE FROM ordini WHERE id = ? ";
+    		$stmt = $con->prepare($query);
+   			$stmt->bind_param("i",$id);
+    		$stmt->execute();
 		}
-	
+
 	}
 	else{
 		//faccio update
-		$query = "UPDATE `ContenutoOrdini` SET `numero_item` = '".(floatval($row['numero_item'])-1)."' 
-                WHERE `ContenutoOrdini`.`ISBN` = '".$ISBN."'
-                AND   `ContenutoOrdini`.`username` = '".$row['username']."' 
-                AND   `ContenutoOrdini`.`id` = '".$id."';";
+		$query = "UPDATE `ContenutoOrdini` SET `numero_item` = '".(floatval($row['numero_item'])-1)."'  
+                WHERE `ContenutoOrdini`.`ISBN` = ? 
+                AND   `ContenutoOrdini`.`username` = ? 
+                AND   `ContenutoOrdini`.`id` = ? ";
 
-        $result=mysqli_query($con,$query);
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("ssi",$ISBN,$_SESSION['username'],$id);
+		
+        $stmt->execute(); 
+
 	}
 
 	header('location: ../carrello.php');
-
 ?> 

@@ -7,6 +7,7 @@
     $username = $_POST["username"];
 
     if($username != $_SESSION["username"]){
+        //qui un qualcuno ha modificato i dati del form cercando di modificare dati che non appertengono a lui
         echo 0;
         exit();
     }
@@ -25,7 +26,6 @@
         $result=mysqli_query($con,$query);
 
        
-
         //get the id
         $query = "SELECT id from `ordini` order by id DESC limit 1";
         $result=mysqli_query($con,$query);
@@ -34,8 +34,11 @@
 
         //insert the item
         $query = "INSERT INTO `ContenutoOrdini` (`ISBN`, `username`, `id`, `numero_item`) 
-            VALUES ('".$ISBN."', '".$username."', '".$id."',1 )";
-        $result=mysqli_query($con,$query);
+            VALUES ( ?, ?, ?, 1)";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("ssi",$ISBN,$username,$id);
+        $stmt->execute();
+
         echo 1;
     }
     else{
@@ -44,29 +47,36 @@
         $id = $row['id'];
 
         //controllo se li libro è gia presente
-        $query = "SELECT numero_item FROM ContenutoOrdini WHERE ISBN = '".$ISBN."' and id = '".$id."'";
-        
-        
-        $result=mysqli_query($con,$query);
+        $query = $query = "SELECT numero_item FROM ContenutoOrdini WHERE ISBN = ? and id = ? ";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("si",$ISBN,$id);
+        $stmt->execute();
+        $result = $stmt->get_result();
         $resultCount=mysqli_num_rows($result);
+
 
         if($resultCount == 0){
             //il libro non è presente
             $query = "INSERT INTO `ContenutoOrdini` (`ISBN`, `username`, `id`, `numero_item`) 
-                VALUES ('".$ISBN."', '".$username."', '".$id."',1)";
+                VALUES ( ?, ?, ?, 1)";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("ssi",$ISBN,$username,$id);
+            $stmt->execute();
 
-            $result=mysqli_query($con,$query);
         }
         else{
             $row = mysqli_fetch_assoc($result);
             //il libro è già presente
             
             $query = "UPDATE `ContenutoOrdini` SET `numero_item` = '".(floatval($row['numero_item'])+1)."' 
-                WHERE `ContenutoOrdini`.`ISBN` = '".$ISBN."'
-                AND   `ContenutoOrdini`.`username` = '".$username."' 
-                AND   `ContenutoOrdini`.`id` = '".$id."';";
+                WHERE `ContenutoOrdini`.`ISBN` = ? 
+                AND   `ContenutoOrdini`.`username` = ?  
+                AND   `ContenutoOrdini`.`id` = ? ;";
 
-            $result=mysqli_query($con,$query);
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("ssi",$ISBN,$username,$id);
+            $stmt->execute();
+
         }
         echo 1;
     }
