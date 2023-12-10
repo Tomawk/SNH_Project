@@ -63,10 +63,11 @@ require('inc/db.php');
     <div id="seach_div">
         <input type="text" placeholder="inserisci qui" id="input_field_search">
         <select id="field_search">
-          <option value="none"></option>
+          <option value="none">Select a filter</option>
           <option value="ISBN">ISBN</option>
           <option value="author">author</option>
           <option value="title">title</option>
+          <option value="genre">genre</option>
         </select>
         <input type="button" onclick="sendRequest()" id="search_button" value="invia">
 

@@ -16,8 +16,9 @@
         if($search_field == "ISBN") $sql = "SELECT * FROM books WHERE ISBN like ? ";
         else if($search_field == "title") $sql = "SELECT * FROM books WHERE title like ? ";
         else if($search_field == "author") $sql = "SELECT * FROM books WHERE author like ? ";
+        else if($search_field == "genre") $sql = "SELECT * FROM books WHERE genre like ? ";
         else exit();
-
+        
         $stmt = $con->prepare($sql);
         $where_condition = "%".$value."%";
         $stmt->bind_param("s",$where_condition);
