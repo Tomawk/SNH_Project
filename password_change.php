@@ -8,11 +8,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
   <title>Change Password</title>
   <link href="CSS/stilePasswordChange.css" rel="stylesheet" type="text/css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
 </head>
 <body>
+  <?php include 'html/topnav.php';?>
   <div class="change-password-form">
     <h2>Cambio password</h2>
     <form action="utility/elaborate_change_password.php" method="post" id="my_form">

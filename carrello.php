@@ -12,6 +12,7 @@ if(!isset($_SESSION['username'])){
 	<head>
 	<title> Carrello </title>
 	<link href="CSS/stilecarrello.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
 	</head>
 <body>
