@@ -2,45 +2,58 @@
 require('../inc/db.php');
 require('sessionManager.php');
 require('rememberme.php');
+require("insert_function.php");
 
 session_start();
 // If form submitted, insert values into the database.
-
 if (isset($_POST['username'])){
         // removes backslashes
 
-  $username = stripslashes($_REQUEST['username']);
+      $username = stripslashes($_REQUEST['username']);
 
 
-        //escapes special characters in a string
+            //escapes special characters in a string
 
 
-  $username = mysqli_real_escape_string($con,$username);
+      $username = mysqli_real_escape_string($con,$username);
 
-  $password = stripslashes($_REQUEST['password']);
+      $password = stripslashes($_REQUEST['password']);
 
-  $password = mysqli_real_escape_string($con,$password);
+      $password = mysqli_real_escape_string($con,$password);
 
 
-  //Checking is user existing in the database or not
+      //Checking is user existing in the database or not
 
-  
-   $query = "SELECT * FROM `users` WHERE username='$username' and password='".md5($password)."'";
+      
+       $query = "SELECT * FROM `users` WHERE username='$username' and password='".md5($password)."'";
 
-   $result = mysqli_query($con,$query) or die(mysql_error());
-   
-   $rows = mysqli_num_rows($result);
- 
+       $result = mysqli_query($con,$query) or die(mysql_error());
+      
+       $rows = mysqli_num_rows($result);
  
  
       if($rows==1){
-      //to prevent session fixation attack
+            
+            $_SESSION['username'] = $username;
+            //se l'utente aveva aggiunto cose al carrello quando non era loggato, devo inserirli nel db
+            if(isset($_SESSION['not_logged_in']) and sizeof($_SESSION['not_logged_in']) > 0){
+                  //inserico elementi nel db
+                  for($i = 0; $i < sizeof($_SESSION['not_logged_in']); $i++){
+                        //questo per inviare il dato al db
+                        insert_book($_SESSION['not_logged_in'][$i],$username,$con);
+                  }
+            }
+            unset($_SESSION['not_logged_in']);
+            //to prevent session fixation attack
             $rememberme_selected = isset($_POST["rememberme"]) ? true : false;
             if(regenerateSession($username,$rememberme_selected)){
                   if($_SESSION["rememberme"]==true)
                         remember_me($_SESSION["username"]);
                   unset($_SESSION["rememberme"]);
             }
+            
+            
+
       }else
             $_SESSION['error'] = "Username o Password errati. Riprova.";
       

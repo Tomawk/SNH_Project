@@ -155,9 +155,6 @@ echo '</div>';
            }
        };
        xhr.send(data);
-
-
-       
     }
 
 </script>

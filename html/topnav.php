@@ -30,9 +30,24 @@ echo '
             $resultCount += $row['numero_item'];
           }
           echo "(".$resultCount.")";
+
+          //gestione coockie
+         //if(!isset($_COOKIE["user"])){
+         //  //set the coockie
+         //  $cookie_name = "user";
+         //  $cookie_value = "1";
+         //  setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+         //  $_COOKIE["logged_in"] = false;
+         //}
         }
+        else{
+          if(!$_SESSION['not_logged_in']){
+            $_SESSION['not_logged_in'] = array();
+          }
+          
+        }
+
         ?>
-      
     </a>
   </td>
   </tr>

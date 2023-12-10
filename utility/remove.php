@@ -3,8 +3,23 @@
 	session_start();
     require('../inc/db.php');
 
+
 	$id = $_POST['id'];
 	$ISBN = $_POST['ISBN'];
+
+	if(isset($_SESSION['not_logged_in']) and !isset($_SESSION['username'])){
+		//utente non loggato -> rimuovi elemento
+		if (($key = array_search($ISBN, $_SESSION['not_logged_in'])) !== false) {
+			unset($_SESSION['not_logged_in'][$key]);
+		}
+		header('location: ../carrello.php');
+		exit();
+	}
+
+	if(!isset($_SESSION['username'])){
+		header('location: ../carrello.php');
+		exit();
+	}
 
 	$query = $query = "SELECT * FROM ContenutoOrdini WHERE ISBN = ? and id = ? ";
     $stmt = $con->prepare($query);
