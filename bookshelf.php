@@ -155,6 +155,9 @@ echo '</div>';
            }
        };
        xhr.send(data);
+
+       var item = document.getElementById("item_nel_carrello");
+       item.textContent = parseInt(item.textContent)+1;
     }
 
 </script>

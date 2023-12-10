@@ -29,7 +29,7 @@ echo '
           while($row = mysqli_fetch_assoc($result)){
             $resultCount += $row['numero_item'];
           }
-          echo "(".$resultCount.")";
+          echo "<u id='item_nel_carrello'>(".$resultCount.")</u>";
 
           //gestione coockie
          //if(!isset($_COOKIE["user"])){
@@ -43,10 +43,9 @@ echo '
         else{
           if(!$_SESSION['not_logged_in']){
             $_SESSION['not_logged_in'] = array();
-          }
-          
+          };
+          echo "(<u id='item_nel_carrello'>".sizeof($_SESSION['not_logged_in'])."</u>)";
         }
-
         ?>
     </a>
   </td>
