@@ -22,7 +22,8 @@ require('inc/db.php');
 
 </head>
 <body>
-<?php include 'html/topnav.php';?>
+
+<?php include 'html/topnav.php'; ?>
 <div id="intestazione">
     <h1> BOOKWORM </h1>
 </div>
@@ -52,6 +53,7 @@ require('inc/db.php');
 
     </div>
 <?php
+ 
 
 $query = "SELECT * FROM books";
 $result=mysqli_query($con,$query);

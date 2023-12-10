@@ -24,7 +24,9 @@ require('utility/sessionManager.php');
 	}
     ?>
 >
-<?php include 'html/topnav.php';?>
+<?php 
+	include 'html/topnav.php';
+?>
 <div class="mainpic">
 		<h1 id="title">BOOK WORM</h1>
 		<h3 id="subtitle">Your favourite bookshop</h3>
