@@ -8,6 +8,7 @@ require('inc/db.php');
 
     <title> Bookshelf </title>
     <link href="CSS/bookshelf_style.css" rel="stylesheet" type="text/css">
+	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
     <script src="JS/modal.js" ></script>
     <link rel="icon" href="immagini/icon.png" sizes="32x32">
 
@@ -23,7 +24,16 @@ require('inc/db.php');
 
 </head>
 <body>
-<?php include 'html/topnav.php';?>
+<?php 
+    include 'html/topnav.php';
+    if(isset($_SESSION["username"])){
+		include "html/modal_user.php";
+	}else{
+		include 'html/modal_login.php';
+		include 'html/modal_register.php';
+	}
+
+?>
 <div id="intestazione">
     <h1> BOOKWORM </h1>
 </div>
@@ -151,6 +161,5 @@ echo '</div>';
 
 </script>
 
-<?php include 'html/modal.php';?>
 <!-- TODO: Non è stata impostata una immagine di default se non è presente o non carica una dei link nel db per le copertine dei libri-->
 </body>
