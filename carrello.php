@@ -15,18 +15,7 @@ if(!isset($_SESSION['username'])){
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
 	</head>
 <body>
-	<nav class="topnav">
-	 <table>
-  		<tr>
-    	<td><a href="index.php">Home</a></td>
-
-		<?php /* Verifica se l'utente è loggato e nel caso mostra il bottone con il nome */
-		echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</strong></a></td>';
-		?>
-
-  		</tr>
-	 </table>
-	</nav>
+<?php include 'html/topnav.php';?>
 	<div id="center_div">
 		<h1> Libri nel tuo Carrello </h1>
 		<hr>

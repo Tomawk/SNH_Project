@@ -16,7 +16,23 @@ echo '
     echo '<td><a onclick="openmodal2()"><strong>'.' '. $_SESSION["username"] . '</strong></a></td>';
 }
 ?>
-	<td><a href="carrello.php"><i class="fa-solid fa-cart-shopping"></i> Shop Now</a></td>
+	<td>
+    <a href="carrello.php"><i class="fa-solid fa-cart-shopping"></i> 
+      Shop Now 
+        <?php 
+          $query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
+            where c.username = '".$_SESSION['username']."'"."  and o.stato_ordine is null;";
+    
+          $result=mysqli_query($con,$query);
+          $resultCount = 0;
+          while($row = mysqli_fetch_assoc($result)){
+            $resultCount += $row['numero_item'];
+          }
+          echo "(".$resultCount.")";
+        ?>
+      
+    </a>
+  </td>
   </tr>
 </table>
 </nav>
