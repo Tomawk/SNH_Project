@@ -1,5 +1,6 @@
 <?php
 require("../inc/db.php");
+
 function generate_tokens(): array
 {
     $selector = bin2hex(random_bytes(16));
@@ -18,17 +19,13 @@ function parse_token(string $token): ?array
     return null;
 }
 
-function insert_user_token(int $user_id, string $selector, string $hashed_validator, string $expiry): bool
+function insert_user_token(int $user_id, string $selector, string $hashed_validator, string $expiry,$con): bool
 {
     $sql = 'INSERT INTO user_tokens(user_id, selector, hashed_validator, expiry)
-            VALUES(:user_id, :selector, :hashed_validator, :expiry)';
+            VALUES(?,?,?,?)';
 
-    $statement = $con()->prepare($sql);
-    $statement->bindValue(':user_id', $user_id);
-    $statement->bindValue(':selector', $selector);
-    $statement->bindValue(':hashed_validator', $hashed_validator);
-    $statement->bindValue(':expiry', $expiry);
-
+    $statement = $con->prepare($sql);
+    $statement->bind_param("isss",$user_id,$selector,$hashed_validator,$expiry);
     return $statement->execute();
 }
 
@@ -58,7 +55,7 @@ function delete_user_token(int $user_id): bool
     return $statement->execute();
 }
 
-function find_user_by_token(string $token)
+function find_user_by_token(string $token,$con)
 {
     $tokens = parse_token($token);
 
@@ -73,7 +70,7 @@ function find_user_by_token(string $token)
                 expiry > now()
             LIMIT 1';
 
-    $statement = db()->prepare($sql);
+    $statement = $con->prepare($sql);
     $statement->bindValue(':selector', $tokens[0]);
     $statement->execute();
 
@@ -89,7 +86,7 @@ function is_user_logged_in(): bool
 
     if ($token && token_is_valid($token)) {
 
-        $user = find_user_by_token($token);
+        $user = find_user_by_token($token,$con);
 
         if ($user) {
             return log_user_in($user);
@@ -141,12 +138,14 @@ function logout(): void
     }
 }
 
-function remember_me(int $username, int $day = 30)
+function remember_me(int $username,$con)
+//function remember_me(int $day = 30)
 {
+    $day = 30;
     [$selector, $validator, $token] = generate_tokens();
 
     // remove all existing token associated with the user id
-    delete_user_token($user_id);
+    //delete_user_token($user_id);
 
     // set expiration date
     $expired_seconds = time() + 60 * 60 * 24 * $day;
@@ -155,7 +154,7 @@ function remember_me(int $username, int $day = 30)
     $hash_validator = password_hash($validator, PASSWORD_DEFAULT);
     $expiry = date('Y-m-d H:i:s', $expired_seconds);
 
-    if (insert_user_token($username, $selector, $hash_validator, $expiry)) {
+    if (insert_user_token($username, $selector, $hash_validator, $expiry,$con)) {
         setcookie('remember_me', $token, $expired_seconds);
     }
 }
@@ -165,5 +164,12 @@ function ini_auth_token($selector){
         return false;
     return password_verify($validator, $tokens['hashed_validator']);
     }
+function getuserId($user,$con):int{
+    $prepared = $con -> prepare("SELECT id from users where username = ?");;
+    $prepared->bind_param("s",$user);
+    $prepared->execute();
+    $result=$prepared->get_result()->fetch_array(MYSQLI_NUM)[0];
+  return $result;
+}
 
 ?>

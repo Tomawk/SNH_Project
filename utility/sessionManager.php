@@ -34,6 +34,7 @@ function regenerateSession($username,$remember_selected,$reload = false)
     $_SESSION["username"]=$username;
     $_SESSION["rememberme"]=$remember_selected;
 
+    return true;
     // Don't want this one to expire
     //unset($_SESSION['OBSOLETE']);
     //unset($_SESSION['EXPIRES']);

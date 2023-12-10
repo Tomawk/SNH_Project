@@ -9,28 +9,22 @@ session_start();
 if (isset($_POST['username'])){
         // removes backslashes
 
-  $username = stripslashes($_REQUEST['username']);
+      $username = stripslashes($_REQUEST['username']);
+      //escapes special characters in a string
+      $username = mysqli_real_escape_string($con,$username);
+      $password = stripslashes($_REQUEST['password']);
+      $password = mysqli_real_escape_string($con,$password);
+      //Checking is user existing in the database or not
+      //$query = "SELECT * FROM `users` WHERE username='$username' and password='".md5($password)."'";
+      //$result = mysqli_query($con,$query) or die(mysql_error());
+      //$rows = mysqli_num_rows($result);
 
-
-        //escapes special characters in a string
-
-
-  $username = mysqli_real_escape_string($con,$username);
-
-  $password = stripslashes($_REQUEST['password']);
-
-  $password = mysqli_real_escape_string($con,$password);
-
-
-  //Checking is user existing in the database or not
-
-  
-   $query = "SELECT * FROM `users` WHERE username='$username' and password='".md5($password)."'";
-
-   $result = mysqli_query($con,$query) or die(mysql_error());
-   
-   $rows = mysqli_num_rows($result);
- 
+      //solution with prepared statement:
+      $prepared = $con->prepare("SELECT* FROM users WHERE username= ? and password = ? ");
+      $hashed_password = md5($password);
+      $prepared->bind_param("ss",$username,$hashed_password);
+      $prepared->execute();
+      $rows=mysqli_num_rows($prepared->get_result());
  
  
       if($rows==1){
@@ -38,7 +32,8 @@ if (isset($_POST['username'])){
             $rememberme_selected = isset($_POST["rememberme"]) ? true : false;
             if(regenerateSession($username,$rememberme_selected)){
                   if($_SESSION["rememberme"]==true)
-                        remember_me($_SESSION["username"]);
+                        remember_me(getuserId($_SESSION["username"],$con),$con);
+                        //remember_me();
                   unset($_SESSION["rememberme"]);
             }
       }else
