@@ -12,11 +12,16 @@ if(!isset($_SESSION['username'])){
 	<head>
 	<title> Carrello </title>
 	<link href="CSS/stilecarrello.css" rel="stylesheet" type="text/css">
+    <script src="JS/modal.js" ></script>
     <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
 	</head>
 <body>
-<?php include 'html/topnav.php';?>
+<?php 
+	include 'html/topnav.php';
+	include "html/modal_user.php";
+?>
+
 	<div id="center_div">
 		<h1> Libri nel tuo Carrello </h1>
 		<hr>
@@ -117,40 +122,5 @@ if(!isset($_SESSION['username'])){
 	?>
 </div>
 
-	<!-- MODAL UTENTE -->
-
-	<div id="id03" class="modal">
-  
-  <div class="modal-content animate">
-    <div class="imgcontainer">
-      <span onclick="closemodal2()" class="close" title="Close Modal">&times;</span> <!-- Span chiusura modal -->
-      <img src="immagini/user.png" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container-modal">
-      <p><strong><?php echo $_SESSION["username"]; ?></strong></p>
-		<br>
-		<br>
-
-	  <button type="button" onclick="location.href = 'info.php';" class="modalbutton">Le mie informazioni</button>
-      <button type="button" onclick="location.href = 'storico.php';" class="modalbutton">Storico Ordini</button>
-      <button type="button" onclick="location.href = 'utility/logout.php';" class="modalbutton">Logout</button>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-    </div>
-  </div>
- </div>
-
-<script> 
-	var modal3= document.getElementById('id03')
-	function openmodal2(){
-		modal3.style.display = "block";
-	}
-
-	function closemodal2(){
-		modal3.style.display = "none";
-	}
-</script>
 </body>
 </html>
