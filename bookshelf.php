@@ -51,6 +51,7 @@ require('inc/db.php');
 
     </div>
 <?php
+ 
 
 $query = "SELECT * FROM books";
 $result=mysqli_query($con,$query);
