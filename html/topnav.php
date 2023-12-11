@@ -44,7 +44,7 @@ echo '
           if(!isset($_SESSION['not_logged_in'])){
             $_SESSION['not_logged_in'] = array();
           };
-          echo "(<u id='item_nel_carrello'>".sizeof($_SESSION['not_logged_in'])."</u>)";
+          echo "<u id='item_nel_carrello'>(".sizeof($_SESSION['not_logged_in']).")</u>";
         }
         ?>
     </a>
