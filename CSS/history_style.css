@@ -167,16 +167,17 @@ section hr{
 }
 
 #empty_history{
-    position: absolute;
-    top: 12vw;
+    position: relative;
+    width: 40%;
     left: 30%;
 }
 
 #a_empty{
     font-size: 2vw;
-    position: absolute;
-    bottom: 4vw;
-    left: 32%;
+    position: relative;
+    top: 5vw;
+    left: -3vw;
+    width: 100%;
     color: #007AFF;
     text-decoration: none;
 }
