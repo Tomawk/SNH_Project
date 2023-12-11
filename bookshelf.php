@@ -1,6 +1,8 @@
 <?php
 session_start();
 require('inc/db.php');
+require('utility/sessionManager.php');
+checkSession($con);
 ?>
 <!DOCTYPE html>
 <html lang="it">

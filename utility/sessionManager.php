@@ -1,4 +1,39 @@
 <?php
+function token_is_valid(string $token,$con): bool { 
+    [$selector, $validator] = parse_token2($token);
+    $tokens = find_user_token_by_selector($selector,$con);
+    if (!$tokens) 
+        return false;
+    return password_verify($validator, $tokens);
+    }
+function parse_token2(string $token): ?array
+{
+    $parts = explode(':', $token);
+
+    if ($parts && count($parts) == 2) {
+        return [$parts[0], $parts[1]];
+    }
+    return null;
+}
+
+function find_user_token_by_selector(string $selector,$con)
+{
+
+    //$sql = 'SELECT id, selector, hashed_validator, user_id, expiry
+    $sql = 'SELECT hashed_validator
+                FROM user_tokens
+                WHERE selector = ? AND
+                    expiry >= now()
+                LIMIT 1';
+
+    $statement = $con->prepare($sql);
+    $statement->bind_param('s', $selector);
+    $statement->execute();
+    //$statement->bind_result($id,$selector,$hashed_validator,$user_id,$expiry);
+    //$result=$statement->fetch();
+    $result=$statement->get_result()->fetch_array(MYSQLI_NUM)[0];
+    return $result;
+}
 
 function find_user_by_token(string $token,$con)
 {
@@ -81,6 +116,8 @@ function checkSession($con)
             return false;
         $token = $_COOKIE["remember_me"];
         //header("location:"+$token);
+        if(!token_is_valid($token,$con))
+            return false;
         $user=find_user_by_token($token,$con);
         if($user != null){
             $_SESSION["username"] = $user;

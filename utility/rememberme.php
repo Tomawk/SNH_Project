@@ -160,13 +160,7 @@ function remember_me(int $username,$con)
         setcookie('remember_me', $token, $expired_seconds,"/","localhost");
     }
 }
-function token_is_valid(string $token,$con): bool { 
-    [$selector, $validator] = parse_token($token);
-    $tokens = find_user_token_by_selector($selector,$con);
-    if (!$tokens) 
-        return false;
-    return password_verify($validator, $tokens['hashed_validator']);
-    }
+
 function getuserId($user,$con):int{
     $prepared = $con -> prepare("SELECT id from users where username = ?");;
     $prepared->bind_param("s",$user);
