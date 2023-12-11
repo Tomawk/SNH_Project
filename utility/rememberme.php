@@ -29,6 +29,7 @@ function insert_user_token(int $user_id, string $selector, string $hashed_valida
     return $statement->execute();
 }
 
+/*
 function find_user_token_by_selector(string $selector,$con)
 {
 
@@ -47,6 +48,7 @@ function find_user_token_by_selector(string $selector,$con)
     return $statement->fetch();
 }
 
+*/
 function delete_user_token(string $user_id,$con): bool
 {
     $sql = 'DELETE FROM "user_tokens" WHERE user_id = (select id from users as us where us.username = ? )';
@@ -157,7 +159,7 @@ function remember_me(int $username,$con)
     $expiry = date('Y-m-d H:i:s', $expired_seconds);
 
     if (insert_user_token($username, $selector, $hash_validator, $expiry,$con)) {
-        setcookie('remember_me', $token, $expired_seconds,"/","localhost");
+        setcookie('remember_me', $token, $expired_seconds,"/","localhost",true,true);
     }
 }
 

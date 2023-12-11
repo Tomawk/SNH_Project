@@ -31,8 +31,10 @@ function find_user_token_by_selector(string $selector,$con)
     $statement->execute();
     //$statement->bind_result($id,$selector,$hashed_validator,$user_id,$expiry);
     //$result=$statement->fetch();
-    $result=$statement->get_result()->fetch_array(MYSQLI_NUM)[0];
-    return $result;
+    $temp=$statement->get_result()->fetch_array(MYSQLI_NUM);
+    if($temp != null)
+        return $temp[0];
+    return null;
 }
 
 function find_user_by_token(string $token,$con)
