@@ -1,7 +1,8 @@
 <?php
 require("rememberme.php");
+require("../inc/db.php");
 session_start();
-if(is_user_logged_in()){
+if(is_user_logged_in($con)){
         delete_user_token($_SESSION['user_id']);
         unset($_SESSION['username'], $_SESSION['user_id`']);
 }

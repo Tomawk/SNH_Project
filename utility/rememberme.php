@@ -29,21 +29,22 @@ function insert_user_token(int $user_id, string $selector, string $hashed_valida
     return $statement->execute();
 }
 
-function find_user_token_by_selector(string $selector)
+function find_user_token_by_selector(string $selector,$con)
 {
 
     $sql = 'SELECT id, selector, hashed_validator, user_id, expiry
                 FROM user_tokens
-                WHERE selector = :selector AND
+                WHERE selector = ? AND
                     expiry >= now()
                 LIMIT 1';
 
-    $statement = db()->prepare($sql);
-    $statement->bindValue(':selector', $selector);
+    $statement = $con->prepare($sql);
+    //$statement->bindValue(':selector', $selector);
+    $statement->bind_param("s",$selector);
 
     $statement->execute();
 
-    return $statement->fetch(PDO::FETCH_ASSOC);
+    return $statement->fetch();
 }
 
 function delete_user_token(int $user_id): bool
@@ -78,13 +79,13 @@ function find_user_by_token(string $token,$con)
 }
 
 //<--------------------------------
-function is_user_logged_in(): bool
+function is_user_logged_in($con): bool
 {
 
     // check the remember_me in cookie
     $token = filter_input(INPUT_COOKIE, 'remember_me', FILTER_SANITIZE_STRING);
 
-    if ($token && token_is_valid($token)) {
+    if ($token && token_is_valid($token,$con)) {
 
         $user = find_user_by_token($token,$con);
 
@@ -114,9 +115,9 @@ function log_user_in(array $user): bool
 }
 
 
-function logout(): void
+function logout($con): void
 {
-    if (is_user_logged_in()) {
+    if (is_user_logged_in($con)) {
 
         // delete the user token
         delete_user_token($_SESSION['user_id']);
@@ -158,8 +159,9 @@ function remember_me(int $username,$con)
         setcookie('remember_me', $token, $expired_seconds);
     }
 }
-function ini_auth_token($selector){
-    $tokens = find_user_token_by_selector($selector);
+function token_is_valid(string $token,$con): bool { 
+    [$selector, $validator] = parse_token($token);
+    $tokens = find_user_token_by_selector($selector,$con);
     if (!$tokens) 
         return false;
     return password_verify($validator, $tokens['hashed_validator']);
