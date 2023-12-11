@@ -13,7 +13,7 @@ echo '
     <td> <a onclick="openmodal1()">Registrati</a></td>';
 
 }else{
-    echo '<td><a onclick="openmodal3()"><strong>'.' '. $_SESSION["username"] . '</strong></a></td>';
+    echo '<td><a id="username" onclick="openmodal3()"><strong>'.' '. $_SESSION["username"] . '</strong></a></td>';
 }
 ?>
 	<td>
