@@ -25,6 +25,7 @@ require('utility/sessionManager.php');
     ?>
 >
 <?php 
+	checkSession($con);
 	include 'html/topnav.php';
 ?>
 <div class="mainpic">
@@ -65,6 +66,7 @@ require('utility/sessionManager.php');
 <div id="alertbox">
 </div>
 <?php 
+	//if(isset($_SESSION["username"])){
 	if(isset($_SESSION["username"])){
 		include "html/modal_user.php";
 	}else{

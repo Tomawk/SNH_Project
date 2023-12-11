@@ -47,15 +47,16 @@ function find_user_token_by_selector(string $selector,$con)
     return $statement->fetch();
 }
 
-function delete_user_token(int $user_id): bool
+function delete_user_token(string $user_id,$con): bool
 {
-    $sql = 'DELETE FROM user_tokens WHERE user_id = :user_id';
-    $statement = db()->prepare($sql);
-    $statement->bindValue(':user_id', $user_id);
+    $sql = 'DELETE FROM "user_tokens" WHERE user_id = (select id from users as us where us.username = ? )';
+    $sql = 'DELETE FROM `user_tokens` WHERE user_id = (select id from users as us where us.username = ?)';
+    $statement = $con->prepare($sql);
+    $statement->bind_param("s", $user_id);
 
     return $statement->execute();
 }
-
+/*
 function find_user_by_token(string $token,$con)
 {
     $tokens = parse_token($token);
@@ -75,9 +76,9 @@ function find_user_by_token(string $token,$con)
     $statement->bindValue(':selector', $tokens[0]);
     $statement->execute();
 
-    return $statement->fetch(PDO::FETCH_ASSOC);
+    return $statement->fetch();
 }
-
+*/
 //<--------------------------------
 function is_user_logged_in($con): bool
 {
@@ -156,7 +157,7 @@ function remember_me(int $username,$con)
     $expiry = date('Y-m-d H:i:s', $expired_seconds);
 
     if (insert_user_token($username, $selector, $hash_validator, $expiry,$con)) {
-        setcookie('remember_me', $token, $expired_seconds);
+        setcookie('remember_me', $token, $expired_seconds,"/","localhost");
     }
 }
 function token_is_valid(string $token,$con): bool { 

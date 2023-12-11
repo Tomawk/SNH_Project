@@ -1,4 +1,37 @@
 <?php
+
+function find_user_by_token(string $token,$con)
+{
+     $parts = explode(':', $token);
+
+    if ($parts && count($parts) == 2) {
+        $tokens =  [$parts[0], $parts[1]];
+    }else
+        return null;
+
+    if (!$tokens) {
+        return null;
+    }
+
+    $sql = 'SELECT username
+            FROM users
+            INNER JOIN user_tokens ON user_tokens.user_id = users.id
+            WHERE selector = ? AND
+                expiry > now()
+            LIMIT 1';
+
+    $statement = $con->prepare($sql);
+    $statement->bind_param('s', $tokens[0]);
+    $statement->execute();
+    //$result = $statement->get_result();
+    //if(mysqli_num_row($result) != 1)
+        //return null;
+    //else
+    $statement->bind_result($username);
+    $statement->fetch();
+    return ($username);
+}
+
 function regenerateSession($username,$remember_selected,$reload = false)
 {
     /*
@@ -40,36 +73,20 @@ function regenerateSession($username,$remember_selected,$reload = false)
     //unset($_SESSION['EXPIRES']);
 }
 
-/*
-function checkSession()
+function checkSession($con)
 {
-    try{
-        if(isset($_SESSION['OBSOLETE']) && ($_SESSION['EXPIRES'] < time()))
-            //throw new Exception('Attempt to use expired session.');
+        if(isset($_SESSION["username"]) )
+            return true;
+        if(!isset($_COOKIE["remember_me"]))
             return false;
-
-        #if(!is_numeric($_SESSION['user_id']))
-            #throw new Exception('No session started.');
-
-        if(isset($_SESSION['IPaddress']) && $_SESSION['IPaddress'] != $_SERVER['REMOTE_ADDR'])
-            throw new Exception('IP Address mixmatch (possible session hijacking attempt).');
-
-        if(isset($_SESSION['userAgent']) && $_SESSION['userAgent'] != $_SERVER['HTTP_USER_AGENT'])
-            throw new Exception('Useragent mixmatch (possible session hijacking attempt).');
-
-        #if(!$this->loadUser($_SESSION['user_id']))
-            #throw new Exception('Attempted to log in user that does not exist with ID: ' . $_SESSION['user_id']);
-
-        if(!isset($_SESSION['OBSOLETE']) && mt_rand(1, 100) == 1)
-        {
-            $this->regenerateSession();
+        $token = $_COOKIE["remember_me"];
+        //header("location:"+$token);
+        $user=find_user_by_token($token,$con);
+        if($user != null){
+            $_SESSION["username"] = $user;
+            return true;
         }
-
-        return true;
-
-    }catch(Exception $e){
-        return false;
-    }
+        else    
+            return false;
 }
-*/
 ?>
