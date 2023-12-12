@@ -123,6 +123,7 @@ function checkSession($con)
         $user=find_user_by_token($token,$con);
         if($user != null){
             $_SESSION["username"] = $user;
+            $_SESSION["state"] = 0;
             return true;
         }
         else    
