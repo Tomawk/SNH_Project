@@ -74,10 +74,7 @@
   <div class="container">
     <h1>Enter Address and Credit Card Info</h1>
     <form action="#">
-      <label for="fullname">Full Name:</label>
-      <input type="text" id="fullname" name="fullname" required>
-
-      <label for="address">Address:</label>
+       <label for="address">Address:</label>
       <input type="text" id="address" name="address" required>
 
       <label for="city">City:</label>
