@@ -39,6 +39,7 @@ echo '
          //  setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
          //  $_COOKIE["logged_in"] = false;
          //}
+        
         }
         else{
           if(!isset($_SESSION['not_logged_in'])){
