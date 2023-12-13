@@ -29,7 +29,7 @@ if(!isset($_SESSION['username'])){
 		<?php 
 
 		$totale_finale = 0; /* Contatore prezzo totale carrello */
-
+		$id_ordine = 0;
 		if(isset($_SESSION['not_logged_in'])){
 			sort($_SESSION['not_logged_in']);
 			
@@ -141,7 +141,7 @@ if(!isset($_SESSION['username'])){
 		$totale_finale = 0;
 		for($i = 0; $i<$resultCount; $i++){
 
-			
+			$id_ordine = $rows_ordini[$i]['id'];
 			$totale_finale += floatval($rows_ordini[$i]['price'])*floatval($rows_ordini[$i]['numero_item']); /* Incremento il totale */
 
 			echo '
@@ -200,8 +200,9 @@ if(!isset($_SESSION['username'])){
 	<hr style="width: 100%">
 	<footer> 
 		<a href="bookshelf.php"> Continua ad ordinare </a>
-		<form action="utility/pay.php" id="pay_form">
-		<input type="submit" id="order_complete" value="Check Out" name="checkout">
+		<form action="address_card.php" id="pay_form" method="post">
+			<input type="text" value="'.$id_ordine.'" name="checkout" hidden>
+			<input type="submit" id="order_complete" value="Check Out">
 		</form>
 	</footer>';
 	}
@@ -241,14 +242,6 @@ if(!isset($_SESSION['username'])){
 
 	function closemodal2(){
 		modal3.style.display = "none";
-	}
-
-	function remove_item(i){
-		<?php 
-			if (($key = array_search(i, )) !== false) {
-    			unset($array[$key]);
-			}
- 		?>
 	}
 </script>
 </body>
