@@ -32,7 +32,37 @@ if(!isset($_SESSION['username'])){
         <h2>Order Summary</h2>
                 <div class='line'></div>
 
-  
+ <?php
+$query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
+				where c.username = '".$_SESSION['username']."'"."  and o.stato_ordine is null;";
+
+   		$result=mysqli_query($con,$query);
+    	$resultCount=mysqli_num_rows($result);
+
+    	if($resultCount == 0) { /* Se il carrello è vuoto */
+    		echo '<h2 id="h2_empty"> Ops! Il tuo Carrello &egrave; vuoto.. </h2>
+    			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
+				  <a href="bookshelf.php" id="a_empty"> Inizia a ordinare adesso! </a>';
+				exit();
+
+    	}
+		
+
+    	$rows_ordini = array();
+		while($row = mysqli_fetch_assoc($result)){
+        	$rows_ordini[] = $row;
+   		}
+
+
+		//se il mio carello non è vuoto e prelievo i libri contenuti
+		$totale_finale = 0;
+		for($i = 0; $i<$resultCount; $i++){
+
+			
+			$totale_finale += floatval($rows_ordini[$i]['price'])*floatval($rows_ordini[$i]['numero_item']); /* Incremento il totale */
+
+			echo '';}
+ ?>  
         <table class='order-table'>
           <tbody>
             <tr>
