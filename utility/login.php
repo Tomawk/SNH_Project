@@ -51,7 +51,7 @@ if (isset($_POST['username'])){
             
 
       }else
-            $_SESSION['error'] = "Username o Password errati. Riprova.";
+            $_SESSION['error'] = "Username or Password wrong. Retry.";
       
       //header("location: ../index.php");
 }else{

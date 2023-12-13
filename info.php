@@ -25,6 +25,7 @@
 <html lang="eng">
 	<head>
 	<title>User information</title>
+	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
 	<link href="CSS/info_style.css" rel="stylesheet" type="text/css">
 	<link rel="icon" href="immagini/key_icon.png" sizes="32x32">
 
@@ -40,7 +41,7 @@
 		<div id="image">
 			<img src="immagini/user.png" alt="avatar">
 		</div>
-		<p id= "username"><strong><?php echo $_SESSION['username']?></strong></p>
+		<p id= "user_name"><strong><?php echo $_SESSION['username']?></strong></p>
 		<p id="storico"><strong>User from: </strong><?php echo $date ?></p>
 		<p id= "name"><strong>Name: </strong><?php echo $nome ?></p>
 		<p id= "cognome"><strong>Surname: </strong><?php echo $cognome ?></p>
