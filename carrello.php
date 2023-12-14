@@ -201,7 +201,8 @@ if(!isset($_SESSION['username'])){
 	</div>
 	<hr style="width: 100%">
 	<footer> 
-		<form action="move.php" id="pay_form" method="post">
+		<a href="bookshelf.php"> Continua ad ordinare </a>
+		<form action="address_card.php" id="pay_form" method="post">
 			<input type="text" value="'.$id_ordine.'" name="checkout" hidden>
 			<input type="submit" id="order_complete" value="Check Out">
 		</form>
