@@ -9,10 +9,11 @@ require('utility/sessionManager.php');
   <title> Bookworm Home </title>
 	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
+    <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
+
     <!-- Font Awesome Import -->
     <script src="JS/mainscript.js"> </script>
     <script src="JS/modal.js" ></script>
-    <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 	</head>
 <body 
   <?php 
