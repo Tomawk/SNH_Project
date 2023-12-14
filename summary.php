@@ -31,18 +31,25 @@ if(!isset($_SESSION['username'])){
       <div class='order-info-content' >
         <h2>Order Summary</h2>
                 <div class='line'></div>
-
- <?php
-$query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
-				where c.username = '".$_SESSION['username']."'"."  and o.stato_ordine is null;";
-
-   		$result=mysqli_query($con,$query);
+ 
+       
+<?php
+        if(isset($_POST["order id"]))
+            header("location: ..".$_POST["order id"]);
+        exit();
+        $query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
+				where c.username = ? and o.stato_ordine is null;";
+   		//$result=mysqli_query($con,$query);
+		$statement = $con->prepare($query);
+		$statement->bind_param("s",$_SESSION["username"]);
+		$statement->execute();
+		$result =  $statement->get_result();
     	$resultCount=mysqli_num_rows($result);
 
     	if($resultCount == 0) { /* Se il carrello è vuoto */
-    		echo '<h2 id="h2_empty"> Ops! Il tuo Carrello &egrave; vuoto.. </h2>
+    		echo '<h2 id="h2_empty"> Ops! System error!  &egrave; vuoto.. </h2>
     			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
-				  <a href="bookshelf.php" id="a_empty"> Inizia a ordinare adesso! </a>';
+				  <a href="bookshelf.php" id="a_empty"> Contact an administrator! </a>';
 				exit();
 
     	}
@@ -61,46 +68,16 @@ $query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` 
 			
 			$totale_finale += floatval($rows_ordini[$i]['price'])*floatval($rows_ordini[$i]['numero_item']); /* Incremento il totale */
 
-			echo '';}
- ?>  
-        <table class='order-table'>
-          <tbody>
-            <tr>
-              <td><img src='https://dl.dropboxusercontent.com/s/qbj9tsbvthqq72c/Vintage-20L-Backpack-by-Fj%C3%A4llr%C3%A4ven.jpg' class='full-width'></img>
-              </td>
-              <td>
-                <br> <span class='thin'>Fjällräven</span>
-                <br>Vintage Backpack<br> <span class='thin small'> Color: Olive, Size: 20L</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class='price'>$235.95</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div class='line'></div>
-        <table class='order-table'>
-          <tbody>
-            <tr>
-              <td><img src='https://dl.dropboxusercontent.com/s/nbr4koso8dpoggs/6136C1p5FjL._SL1500_.jpg' class='full-width'></img>
-              </td>
-              <td>
-                <br> <span class='thin'>Monobento</span>
-                <br>Double Lunchbox<br> <span class='thin small'> Color: Pink, Size: Medium</span>
-              </td>
+			echo '';
+        }
+   $_SESSION["totale"] = $totale_finale;
 
-            </tr>
-            <tr>
-              <td>
-                <div class='price'>$25.95</div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
+	if ($resultCount > 0){
+		echo '';
+    }
+?>
 </div>
+
         <div class='total'>
 <div class='line'></div>
           <span style='float:left;'>

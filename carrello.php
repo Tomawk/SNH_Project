@@ -29,7 +29,7 @@ if(!isset($_SESSION['username'])){
 		<?php 
 
 		$totale_finale = 0; /* Contatore prezzo totale carrello */
-		$id_ordine = 0;
+
 		if(isset($_SESSION['not_logged_in'])){
 			sort($_SESSION['not_logged_in']);
 			
@@ -116,10 +116,14 @@ if(!isset($_SESSION['username'])){
 		else{
 		
 		
-		$query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
-				where c.username = '".$_SESSION['username']."'"."  and o.stato_ordine is null;";
 
-   		$result=mysqli_query($con,$query);
+		$query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
+				where c.username = ? and o.stato_ordine is null;";
+   		//$result=mysqli_query($con,$query);
+		$statement = $con->prepare($query);
+		$statement->bind_param("s",$_SESSION["username"]);
+		$statement->execute();
+		$result =  $statement->get_result();
     	$resultCount=mysqli_num_rows($result);
 
     	if($resultCount == 0) { /* Se il carrello è vuoto */
@@ -141,7 +145,7 @@ if(!isset($_SESSION['username'])){
 		$totale_finale = 0;
 		for($i = 0; $i<$resultCount; $i++){
 
-			$id_ordine = $rows_ordini[$i]['id'];
+			
 			$totale_finale += floatval($rows_ordini[$i]['price'])*floatval($rows_ordini[$i]['numero_item']); /* Incremento il totale */
 
 			echo '
@@ -200,49 +204,12 @@ if(!isset($_SESSION['username'])){
 	<hr style="width: 100%">
 	<footer> 
 		<a href="bookshelf.php"> Continua ad ordinare </a>
-		<form action="address_card.php" id="pay_form" method="post">
-			<input type="text" value="'.$id_ordine.'" name="checkout" hidden>
-			<input type="submit" id="order_complete" value="Check Out">
+		<form action="utility/pay.php" id="pay_form">
+		<input type="submit" id="order_complete" value="Check Out" name="checkout">
 		</form>
 	</footer>';
 	}
 	?>
 </div>
-
-	<!-- MODAL UTENTE -->
-
-	<div id="id03" class="modal">
-  
-  <div class="modal-content animate">
-    <div class="imgcontainer">
-      <span onclick="closemodal2()" class="close" title="Close Modal">&times;</span> <!-- Span chiusura modal -->
-      <img src="immagini/user.png" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container-modal">
-      <p><strong><?php echo $_SESSION["username"]; ?></strong></p>
-		<br>
-		<br>
-
-	  <button type="button" onclick="location.href = 'info.php';" class="modalbutton">Le mie informazioni</button>
-      <button type="button" onclick="location.href = 'storico.php';" class="modalbutton">Storico Ordini</button>
-      <button type="button" onclick="location.href = 'utility/logout.php';" class="modalbutton">Logout</button>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-    </div>
-  </div>
- </div>
-
-<script> 
-	var modal3= document.getElementById('id03')
-	function openmodal2(){
-		modal3.style.display = "block";
-	}
-
-	function closemodal2(){
-		modal3.style.display = "none";
-	}
-</script>
 </body>
 </html>
