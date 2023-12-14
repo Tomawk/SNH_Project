@@ -69,7 +69,7 @@ function find_user_by_token(string $token,$con)
     return ($username);
 }
 
-function regenerateSession($username,$remember_selected,$reload = false)
+function regenerateSession($username,$remember_selected,$reload = false,$state)
 {
     /*
     // This token is used by forms to prevent cross site forgery attempts
@@ -103,6 +103,7 @@ function regenerateSession($username,$remember_selected,$reload = false)
 
     $_SESSION["username"]=$username;
     $_SESSION["rememberme"]=$remember_selected;
+    $_SESSION["state"]=$state;
 
     return true;
     // Don't want this one to expire
@@ -121,9 +122,10 @@ function checkSession($con)
         if(!token_is_valid($token,$con))
             return false;
         $user=find_user_by_token($token,$con);
+        $state = $_SESSION["state"];
         if($user != null){
             $_SESSION["username"] = $user;
-            $_SESSION["state"] = 0;
+            $_SESSION["state"] = $state;
             return true;
         }
         else    

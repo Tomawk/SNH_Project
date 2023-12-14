@@ -8,6 +8,11 @@ if(!isset($_SESSION['username'])){
     $_SESSION["error"]= "Username or Password wrong. Retry.";
     header('location: index.php');
 } 
+if($_SESSION["state"]!="summary")
+{
+  header("location: ".$_SESSION["state"].".php") ;
+  exit();
+}
 ?>
 <!DOCTYPE HTML>
 <html lang="it">
@@ -34,9 +39,6 @@ if(!isset($_SESSION['username'])){
  
        
 <?php
-        if(!isset($_SESSION["id_ordine"]) || $_SESSION["state"]!=)
-            header("location: ..".$_POST["order id"]);
-        exit();
         $query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
 				where c.username = ? and o.stato_ordine is null;";
    		//$result=mysqli_query($con,$query);

@@ -41,7 +41,8 @@ if (isset($_POST['username'])){
             unset($_SESSION['not_logged_in']);
             //to prevent session fixation attack
             $rememberme_selected = isset($_POST["rememberme"]) ? true : false;
-            if(regenerateSession($username,$rememberme_selected)){
+            $state = $_SESSION["state"];
+            if(regenerateSession($username,$rememberme_selected,$state)){
                   if($_SESSION["rememberme"]==true)
                         remember_me(getuserId($_SESSION["username"],$con),$con);
                         //remember_me();
