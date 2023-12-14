@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Address and Credit Card Info</title>
-  <link href="CSS/address_card.css" rel="stylesheet" type="text/css">
     <script src="JS/modal.js" ></script>
+   
 	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
-	<link href="CSS/address_card.css" rel="stylesheet" type="text/css">
+  <link href="CSS/address_card.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
 
@@ -39,7 +39,7 @@
     <label for="order id">Order id: </label><?php echo $id_ordine ?>
     <br>
     <br>
-    <form action="#">
+    <form action="summary.php" method="post">
        <label for="address">Address:</label>
       <input type="text" id="address" name="address" placeholder="via Diotisalvi" required>
 
@@ -72,7 +72,7 @@
       </div>
 
       <div id="button">
-        <input type="button" value="Back" onclick="location.href = 'carrello.php';">
+        <input type="button" value="Back" onclick="location.href = 'carrello.php';" id="back_button">
         <input type="submit" id="sub_btn" value="Submit">
       </div>
     </form>
