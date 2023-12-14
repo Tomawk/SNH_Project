@@ -204,8 +204,8 @@ if(!isset($_SESSION['username'])){
 	<hr style="width: 100%">
 	<footer> 
 		<a href="bookshelf.php"> Continua ad ordinare </a>
-		<form action="utility/pay.php" id="pay_form">
-		<input type="submit" id="order_complete" value="Check Out" name="checkout">
+		<form action="address_card.php" id="pay_form" method="post">
+			<input type="submit" id="order_complete" value="Check Out" name="checkout">
 		</form>
 	</footer>';
 	}
