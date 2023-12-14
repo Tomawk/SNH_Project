@@ -34,7 +34,7 @@ if(!isset($_SESSION['username'])){
  
        
 <?php
-        if(isset($_POST["order id"]))
+        if(!isset($_SESSION["id_ordine"]) || $_SESSION["state"]!=)
             header("location: ..".$_POST["order id"]);
         exit();
         $query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
