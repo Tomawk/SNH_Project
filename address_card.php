@@ -20,7 +20,7 @@
   require('utility/sessionManager.php');
   checkSession($con);
   include 'html/topnav.php';
-  
+
   if($_SESSION['state'] != 'address_card'){
     echo '<h2 id="h2_empty"> Ops! System error!  </h2>
       			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
@@ -31,7 +31,9 @@
     //include "html/footer.php";
     exit();
   }
+
   $_SESSION['state'] = 'summary'; 
+
   ?>
 
   
