@@ -18,17 +18,13 @@
   <div class="change-password-form">
     <h2>Cambio password</h2>
     <form action="utility/elaborate_change_password.php" method="post" id="my_form">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
-      </div>
       <div class="form-group">
         <label for="oldPassword">Vecchia Password</label>
         <input type="password" id="old_password" name="old_password" required>
       </div>
       <div class="form-group">
         <label for="newPassword">Nuova Password</label>
-        <input type="password" id="new_password" name="new_password" onkeypress="controlla_sicurezza_password()" required>
+        <input type="password" id="new_password" name="new_password" oninput="controlla_sicurezza_password()" required>
         <p id="password_strength"></p>
       </div>
       

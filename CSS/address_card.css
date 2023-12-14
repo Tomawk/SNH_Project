@@ -22,10 +22,7 @@ body {
     margin-bottom: 30px;
   }
 
-  input[type="text"],
-  input[type="number"],
-  input[type="tel"],
-  select {
+  input[type="text"], input[type="number"], input[type="tel"], select {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -34,8 +31,8 @@ body {
     box-sizing: border-box;
   }
 
-  input[type="submit"] {
-    width: 100%;
+  input[type="submit"], input[type='button'] {
+    width: 45%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -71,4 +68,9 @@ body {
       border-radius: 5px;
       box-sizing: border-box;
   
+  }
+
+  #button{
+    display: flex;
+    justify-content: space-between;
   }

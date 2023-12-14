@@ -12,7 +12,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Address and Credit Card Info</title>
+<title>Address and Credit Card Info</title>
   <link href="CSS/address_card.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -53,7 +53,10 @@
         </div>
       </div>
 
-      <input type="submit" value="Submit">
+      <div id="button">
+        <input type="button" value="Back" onclick="location.href = 'carrello.php';">
+        <input type="submit" value="Submit">
+      </div>
     </form>
   </div>
 </body>

@@ -25,17 +25,16 @@
   </style>
 </head>
 <body>
-  
 
     <?php
     session_start();
     require('../inc/db.php');
 
-    if(!isset($_POST["username"]) || !isset($_POST["old_password"])  || !isset($_POST["new_password"]) ){
+    if(!isset($_POST["old_password"])  || !isset($_POST["new_password"]) ){
         echo "some field are missing";
     }
 
-    $username = $_POST["username"];
+    $username = $_SESSION['username'];
     $old_password = $_POST["old_password"];
     $new_password = $_POST["new_password"];
 
@@ -56,7 +55,7 @@
         echo"<div class='message-container' style='background: green'>";
         echo"<h1>Operation result</h1>";
         echo "<p>Password correttamente cambiata</p>";
-        echo "<p>torna alla main page</p>";
+        echo "<a href='../index.php'>Go back to the main page</a>"
     }else{
         echo"<div class='message-container' style='background: #de6666'>";
         echo"<h1>Esito operazione</h1>";
