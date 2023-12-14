@@ -20,23 +20,27 @@
   require('utility/sessionManager.php');
   checkSession($con);
   include 'html/topnav.php';
-  if(!isset($_POST["checkout"])){
-  echo '<h2 id="h2_empty"> Ops! System error!  </h2>
-    			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
-				  <a href="bookshelf.php" id="a_empty"> Contact an administrator! </a>
-          </body>
-          ';
-  //include "html/footer.php";
 
-  exit();
-}
-  $id_ordine = $_POST['checkout'];
+  if($_SESSION['state'] != 'address_card'){
+    echo '<h2 id="h2_empty"> Ops! System error!  </h2>
+      			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
+	  			  <a href="bookshelf.php" id="a_empty"> Contact an administrator! </a>
+            </body>
+            ';
+
+    //include "html/footer.php";
+    exit();
+  }
+
+  $_SESSION['state'] = 'summary'; 
+
   ?>
 
+  
 
   <div class="container">
     <h1>Enter Address and Credit Card Info</h1>
-    <label for="order id">Order id: </label><?php echo $id_ordine ?>
+    <label for="order id">Order id: </label><?php echo $_SESSION['id_ordine'] ?>
     <br>
     <br>
     <form action="summary.php" method="post">

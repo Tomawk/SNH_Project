@@ -20,6 +20,7 @@ if(!isset($_SESSION['username'])){
 <?php 
 	include 'html/topnav.php';
 	include "html/modal_user.php";
+	$_SESSION['state'] = 'address_card';
 ?>
 
 	<div id="center_div">
@@ -140,10 +141,9 @@ if(!isset($_SESSION['username'])){
 
 		//se il mio carello non è vuoto e prelievo i libri contenuti
 		$totale_finale = 0;
-		$id_ordine = 0;
 		for($i = 0; $i<$resultCount; $i++){
 
-			$id_ordine = $rows_ordini[$i]['id'];
+			$_SESSION['id_ordine'] = $rows_ordini[$i]['id'];
 			$totale_finale += floatval($rows_ordini[$i]['price'])*floatval($rows_ordini[$i]['numero_item']); /* Incremento il totale */
 
 			echo '
@@ -203,7 +203,6 @@ if(!isset($_SESSION['username'])){
 	<footer> 
 		<a href="bookshelf.php"> Continua ad ordinare </a>
 		<form action="address_card.php" id="pay_form" method="post">
-			<input type="text" value="'.$id_ordine.'" name="checkout" hidden>
 			<input type="submit" id="order_complete" value="Check Out">
 		</form>
 	</footer>';
