@@ -16,20 +16,20 @@
 <body>
   <?php include 'html/topnav.php';?>
   <div class="change-password-form">
-    <h2>Cambio password</h2>
+    <h2>Change password</h2>
     <form action="utility/elaborate_change_password.php" method="post" id="my_form">
       <div class="form-group">
-        <label for="oldPassword">Vecchia Password</label>
+        <label for="oldPassword">Old Password</label>
         <input type="password" id="old_password" name="old_password" required>
       </div>
       <div class="form-group">
-        <label for="newPassword">Nuova Password</label>
+        <label for="newPassword">New Password</label>
         <input type="password" id="new_password" name="new_password" oninput="controlla_sicurezza_password()" required>
         <p id="password_strength"></p>
       </div>
       
       <div class="form-group">
-        <input type="submit" value="Cambia Password" id="submit_button">
+        <input type="submit" value="Change value" id="submit_button">
         <p id="password_strength_validation"></p>
       </div>
     </form>
