@@ -40,6 +40,7 @@ body {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: inherit;
   }
 
   input[type="submit"]:hover {

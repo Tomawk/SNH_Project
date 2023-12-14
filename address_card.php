@@ -1,12 +1,3 @@
-<?php
-  $id_ordine = $_POST['checkout'];
-  session_start();
-  require('inc/db.php');
-  require('utility/sessionManager.php');
-  checkSession($con);
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Address and Credit Card Info</title>
   <link href="CSS/address_card.css" rel="stylesheet" type="text/css">
+    <script src="JS/modal.js" ></script>
+	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
+	<link href="CSS/address_card.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
+	<link rel="icon" href="immagini/icon.png" sizes="32x32">
+
 </head>
 <body>
+
+<?php
+  session_start();
+  require('inc/db.php');
+  require('utility/sessionManager.php');
+  checkSession($con);
+  include 'html/topnav.php';
+  if(!isset($_POST["checkout"])){
+  echo '<h2 id="h2_empty"> Ops! System error!  </h2>
+    			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
+				  <a href="bookshelf.php" id="a_empty"> Contact an administrator! </a>
+          </body>
+          ';
+  //include "html/footer.php";
+
+  exit();
+}
+  $id_ordine = $_POST['checkout'];
+  ?>
+
+
   <div class="container">
     <h1>Enter Address and Credit Card Info</h1>
     <label for="order id">Order id: </label><?php echo $id_ordine ?>
@@ -55,7 +73,7 @@
 
       <div id="button">
         <input type="button" value="Back" onclick="location.href = 'carrello.php';">
-        <input type="submit" value="Submit">
+        <input type="submit" id="sub_btn" value="Submit">
       </div>
     </form>
   </div>
