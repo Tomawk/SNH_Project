@@ -115,8 +115,7 @@ if(!isset($_SESSION['username'])){
 		}
 		else{
 		
-		
-
+	
 		$query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
 				where c.username = ? and o.stato_ordine is null;";
    		//$result=mysqli_query($con,$query);
@@ -131,10 +130,8 @@ if(!isset($_SESSION['username'])){
     			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
 				  <a href="bookshelf.php" id="a_empty"> Inizia a ordinare adesso! </a>';
 				exit();
-
     	}
 		
-
     	$rows_ordini = array();
 		while($row = mysqli_fetch_assoc($result)){
         	$rows_ordini[] = $row;
@@ -143,9 +140,10 @@ if(!isset($_SESSION['username'])){
 
 		//se il mio carello non è vuoto e prelievo i libri contenuti
 		$totale_finale = 0;
+		$id_ordine = 0;
 		for($i = 0; $i<$resultCount; $i++){
 
-			
+			$id_ordine = $rows_ordini[$i]['id'];
 			$totale_finale += floatval($rows_ordini[$i]['price'])*floatval($rows_ordini[$i]['numero_item']); /* Incremento il totale */
 
 			echo '
@@ -203,9 +201,9 @@ if(!isset($_SESSION['username'])){
 	</div>
 	<hr style="width: 100%">
 	<footer> 
-		<a href="bookshelf.php"> Continua ad ordinare </a>
-		<form action="address_card.php" id="pay_form" method="post">
-			<input type="submit" id="order_complete" value="Check Out" name="checkout">
+		<form action="move.php" id="pay_form" method="post">
+			<input type="text" value="'.$id_ordine.'" name="checkout" hidden>
+			<input type="submit" id="order_complete" value="Check Out">
 		</form>
 	</footer>';
 	}
