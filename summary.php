@@ -18,12 +18,12 @@ if($_SESSION["state"]!="summary")
 <html lang="it">
 	<head>
 	<title> Summary </title>
-	<link href="CSS/summary.css" rel="stylesheet" type="text/css">
     <script src="JS/modal.js" ></script>
     <script src="JS/summary.js" ></script>
 	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
+	<link href="CSS/summary.css" rel="stylesheet" type="text/css">
 	</head>
 <body>
 <?php 
@@ -34,9 +34,7 @@ if($_SESSION["state"]!="summary")
   <div class='window'>
     <div class='order-info'>
       <div class='order-info-content' >
-        <h2>Order Summary</h2>
-                <div class='line'></div>
- 
+         
        
 <?php
         $query = "SELECT b.*, o.stato_ordine, o.id,c.numero_item FROM `ContenutoOrdini` as c join `ordini` as o on c.id = o.id join books b on b.ISBN = c.ISBN 
@@ -56,6 +54,8 @@ if($_SESSION["state"]!="summary")
 
     	}
 		
+      echo "<h2>"."Order Summary for #".$_SESSION["id_ordine"]."</h2>
+                <div class='line'></div>";
 
     	$rows_ordini = array();
 		while($row = mysqli_fetch_assoc($result)){
@@ -74,8 +74,28 @@ if($_SESSION["state"]!="summary")
         }
    $_SESSION["totale"] = $totale_finale;
 
-	if ($resultCount > 0){
-		echo '';
+	for ($i = 0; $i < $resultCount ; $i++){
+		echo "<div class='line'></div>
+        <table class='order-table'>
+          <tbody>
+            <tr>
+              <td><img src='".$rows_ordini[$i]['image_url']."' class='image'></img>".
+                  "</td>
+              <td>
+                <br> <span class='thin'>".$rows_ordini[$i]['title']."</span>
+                <br>".$rows_ordini[$i]['author']."<br> <span class='thin small'>".
+                $rows_ordini[$i]['numero_item']." items</span>
+              </td>
+
+            </tr>
+            <tr>
+              <td>
+                <div class='price'>$".$rows_ordini[$i]['price']."</div>".
+              "</td>
+            </tr>
+          </tbody>
+        </table>"
+    ;
     }
 ?>
 </div>
@@ -83,14 +103,14 @@ if($_SESSION["state"]!="summary")
         <div class='total'>
 <div class='line'></div>
           <span style='float:left;'>
-            <div class='thin dense'>VAT 19%</div>
             <div class='thin dense'>Delivery</div>
             TOTAL
           </span>
           <span style='float:right; text-align:right;'>
-            <div class='thin dense'>$68.75</div>
-            <div class='thin dense'>$4.95</div>
-            $435.55
+            <div class='thin dense'>$0.00</div>
+            <?php
+            echo $totale_finale;
+            ?>
           </span>
         </div>
 </div>

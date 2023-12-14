@@ -135,6 +135,9 @@ ul li:hover {
   padding-bottom:12px;
 }
 
+.image{
+  width: 6vw;
+}
 .full-width {
   width:100%;
 }
