@@ -27,7 +27,6 @@
 	  			  <a href="bookshelf.php" id="a_empty"> Contact an administrator! </a>
             </body>
             ';
-
     //include "html/footer.php";
     exit();
   }

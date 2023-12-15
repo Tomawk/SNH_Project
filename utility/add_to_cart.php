@@ -28,11 +28,3 @@
 
     insert_book($ISBN,$username,$con);
 ?>
-
-
-address
-city
-country
-cardnumber
-expiration  //this one for card exiperation
-cvv

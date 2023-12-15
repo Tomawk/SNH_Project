@@ -129,7 +129,7 @@ if($_SESSION["state"]!="summary")
 
             <table class='half-input-table'>
                 <button class='back-btn'>Back</button>
-                <button class='pay-btn'>Buy Now!</button>
+                <button class='pay-btn' onclick="location.href='utility/pay.php'">Buy Now!</button>
             </table>
 
           </div>
