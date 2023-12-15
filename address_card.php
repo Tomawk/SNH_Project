@@ -15,6 +15,7 @@
 <body>
 
 <?php
+
   session_start();
   require('inc/db.php');
   require('utility/sessionManager.php');
@@ -30,19 +31,15 @@
     //include "html/footer.php";
     exit();
   }
-
-  $_SESSION['state'] = 'summary'; 
-
-  ?>
-
-  
+  $_SESSION['state'] = 'summary';
+?>
 
   <div class="container">
     <h1>Enter Address and Credit Card Info</h1>
     <label for="order id">Order id: </label><?php echo $_SESSION['id_ordine'] ?>
     <br>
     <br>
-    <form action="summary.php" method="post">
+    <form action="summary.php" method="post" id="form_id">
        <label for="address">Address:</label>
       <input type="text" id="address" name="address" placeholder="via Diotisalvi" required>
 
@@ -61,28 +58,38 @@
       </select>
 
       <label for="cardnumber">Card Number:</label>
-      <input placeholder="Insert your credit card number" type="text" id="cardnumber" name="cardnumber" required oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" maxlength="16" >
+      <input placeholder="Insert your credit card number" type="text" id="cardnumber" name="cardnumber" required oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" size="16" >
 
       <div class="card-info">
         <div>
           <label for="expiration">Expiration Date:</label>
-          <input type="date" id="expiration" name="expiration" placeholder="MM/YY" required >
+          <input type="date" id="expiration" name="expiration" placeholder="MM/YY" required min="<?php echo date("Y-m-d"); ?>">
         </div>
         <div>
           <label for="cvv">CVV:</label>
-          <input type="text" id="cvv" name="cvv" placeholder="000" required oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" maxlength="3">
+          <input type="text" id="cvv" name="cvv" placeholder="000" required oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" size="3">
         </div>
       </div>
 
       <div id="button">
         <input type="button" value="Back" onclick="location.href = 'carrello.php';" id="back_button">
-        <input type="submit" id="sub_btn" value="Submit">
+        <input type="submit" id="sub_btn" value="Submit" >
       </div>
     </form>
   </div>
 </body>
 
-</body>
+
+<script>
+  document.getElementById("sub_btn").addEventListener("click", function(event){
+	      event.preventDefault();
+	      var date = new Date(document.getElementById("expiration").value);
+        var actualDate = new Date();
+	      if(date < actualDate) {
+        		alert("invalid date");
+	      }else{
+          document.getElementById("form_id").submit();
+        }
+    });
+</script>
 </html>
-
-

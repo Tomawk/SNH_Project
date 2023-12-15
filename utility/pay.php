@@ -14,6 +14,7 @@
       height: 100vh;
       background-color: #f4f4f4;
     }
+
     .message-container {
       text-align: center;
       padding: 20px;
@@ -21,6 +22,11 @@
       border-radius: 5px;
       background-color: #fff;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      background: green;
+      width: 32%;
+      height: 40%;
+      /* text-align: right; */
+      padding-top: 8%;
     }
   </style>
 </head>
@@ -29,19 +35,28 @@
     <?php
     session_start();
     require('../inc/db.php');
-    
+
+    if($_SESSION["state"]!="pay")
+    {
+      header("location: ".$_SESSION["state"].".php") ;
+      exit();
+    }
+    else{
+        $_SESSION["state"]!="address_card";
+    }
+
+
     $id_ordine = $_SESSION["id_ordine"];
     $totale = $_SESSION["totale"];
 
 
     $sql = "UPDATE `ordini` 
-        SET `totale` = ? ,`stato_ordine` = 'NULL' 
+        SET `totale` = ? ,`stato_ordine` = 'shipped' 
         WHERE `ordini`.`id` = ? ";
 
     $stmt = $con->prepare($sql);
     $stmt->bind_param("ii",$totale,$id_ordine);
     $stmt->execute();
-
 
     if ($stmt !== false) {
         //user present
