@@ -13,6 +13,9 @@ if($_SESSION["state"]!="summary")
   header("location: ".$_SESSION["state"].".php") ;
   exit();
 }
+else{
+  $_SESSION["state"] ="pay";
+}
 if(!isset($_POST["address"])||!isset($_POST["city"])|| 
           !isset($_POST["country"]) || !isset($_POST["cardnumber"])||
           !isset($_POST["expiration"])||!isset($_POST["cvv"]))

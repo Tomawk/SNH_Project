@@ -81,15 +81,6 @@
 
 
 <script>
-  document.getElementById("sub_btn").addEventListener("click", function(event){
-	      event.preventDefault();
-	      var date = new Date(document.getElementById("expiration").value);
-        var actualDate = new Date();
-	      if(date < actualDate) {
-        		alert("invalid date");
-	      }else{
-          document.getElementById("form_id").submit();
-        }
-    });
+  
 </script>
 </html>
