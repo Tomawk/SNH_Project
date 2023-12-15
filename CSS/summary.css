@@ -213,6 +213,7 @@ ul li:hover {
   width:100%;
   margin-left:auto;
   margin-right:auto;
+  word-wrap: anywhere;
 }
 .credit-info {
   background:#4488dd;

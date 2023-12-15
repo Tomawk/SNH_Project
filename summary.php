@@ -13,6 +13,14 @@ if($_SESSION["state"]!="summary")
   header("location: ".$_SESSION["state"].".php") ;
   exit();
 }
+if(!isset($_POST["address"])||!isset($_POST["city"])|| 
+          !isset($_POST["country"]) || !isset($_POST["cardnumber"])||
+          !isset($_POST["expiration"])||!isset($_POST["cvv"]))
+          {
+            $_SESSION["state"]="address_card";
+            header("location: address_card.php");
+            exit();
+          }
 ?>
 <!DOCTYPE HTML>
 <html lang="it">
@@ -119,16 +127,14 @@ if($_SESSION["state"]!="summary")
             <h2>Your credit card:</h2>
                 <div class='line'></div>
             Card Number
-            <input class='input-field'></input>
-            Card Holder
-            <input class='input-field'></input>
+            <p class='input-field'><?php echo $_POST["cardnumber"];?></p>
             <h2>Your address:</h2>
                 <div class='line'></div>
             Address
-            <input class='input-field'></input>
+            <p class='input-field'><?php echo $_POST["address"].",".$_POST["city"];?></p>
 
             <table class='half-input-table'>
-                <button class='back-btn'>Back</button>
+                <button class='back-btn' onclick="location.href='carrello.php'">Cancel</button>
                 <button class='pay-btn' onclick="location.href='utility/pay.php'">Buy Now!</button>
             </table>
 

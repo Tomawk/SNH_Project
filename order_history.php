@@ -36,7 +36,7 @@ if(!isset($_SESSION['username'])){
     <h1> Order History </h1>
     <hr>
     <?php
-    $stmt = mysqli_prepare($con,"SELECT id FROM contenutoordini WHERE username = ? ORDER BY id");
+    $stmt = mysqli_prepare($con,"SELECT id FROM contenutoordini WHERE username = ? ORDER BY id DESC");
     $stmt->bind_param("s", $_SESSION['username']);
     $stmt->execute();
     $result = $stmt->get_result();
