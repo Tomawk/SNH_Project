@@ -21,6 +21,13 @@ if(!isset($_POST["address"])||!isset($_POST["city"])||
             header("location: address_card.php");
             exit();
           }
+if($_POST["address"]==""||$_POST["city"]==""||$_POST["country"]==""||$_POST["cardnumber"]==""||$_POST["expiration"]==""||$_POST["cvv"]=="")
+{
+            $_SESSION["state"]="address_card";
+            header("location: address_card.php");
+            exit();
+          }
+
 $_SESSION["payment_info"]=array(
   "address"=> $_POST["address"],
   "city"=>$_POST["city"],

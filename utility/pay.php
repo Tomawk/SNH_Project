@@ -51,11 +51,12 @@
 
 
     $sql = "UPDATE `ordini` 
-        SET `totale` = ? ,`stato_ordine` = 'shipped' 
+        SET `totale` = ? ,`stato_ordine` = 'shipped', 
+        'indirizzo' = ?,'citta'=?,'paese'=? 
         WHERE `ordini`.`id` = ? ";
 
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("ii",$totale,$id_ordine);
+    $stmt->bind_param("iisss",$totale,$id_ordine,$_SESSION["payment_info"]["indirizzo"],$_SESSION["payment_info"]["citta"],$_SESSION["payment_info"]["paese"]);
     $stmt->execute();
 
     if ($stmt !== false) {
