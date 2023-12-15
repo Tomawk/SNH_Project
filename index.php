@@ -38,7 +38,7 @@ require('utility/sessionManager.php');
 	 <h2 id="title1">Search in our bookshelf for your favourite book!</h2>
 	 <img src="immagini/greyline.png" alt="greyline" id="linea">
 	 <h4 id="subtitle1"> We pride ourselves on offering a diverse range of titles, from international bestsellers to emerging gems, ensuring a satisfying literary experience for every reader. With fast shipping and curated selections</h4>
-	 <a href="creation.php">Explore now! > </a>
+	 <a href="bookshelf.php">Explore now! > </a>
     </div>
     <div class="rightimage">
 	</div>

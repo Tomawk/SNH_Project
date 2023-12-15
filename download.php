@@ -3,7 +3,7 @@ function send_book($file){
     # $file contains the name of the book
     #$file = 'pdf.pdf';
     # directory in which book is in
-    $pathUnder = './books/';
+    $pathUnder = '../books/';
     #i check if the file exist, then i prepare the header of the response
     #then i send the file with readfile()
     if (file_exists($pathUnder.$file)) {
@@ -37,5 +37,4 @@ function send_book($file){
         exit;
     }
     */
-}
 ?>
