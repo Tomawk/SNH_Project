@@ -55,7 +55,7 @@
         echo"<div class='message-container' style='background: green'>";
         echo"<h1>Operation result</h1>";
         echo "<p>Password correttamente cambiata</p>";
-        echo "<a href='../index.php'>Go back to the main page</a>"
+        echo "<a href='../index.php'>Go back to the main page</a>";
     }else{
         echo"<div class='message-container' style='background: #de6666'>";
         echo"<h1>Esito operazione</h1>";
