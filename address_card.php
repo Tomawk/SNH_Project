@@ -10,12 +10,11 @@
   <link href="CSS/address_card.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
-
+  <script src="JS/address_card.js" ></script>
 </head>
 <body>
 
 <?php
-
   session_start();
   require('inc/db.php');
   require('utility/sessionManager.php');
@@ -28,7 +27,6 @@
 	  			  <a href="bookshelf.php" id="a_empty"> Contact an administrator! </a>
             </body>
             ';
-    //include "html/footer.php";
     exit();
   }
   $_SESSION['state'] = 'summary';
@@ -58,7 +56,7 @@
       </select>
 
       <label for="cardnumber">Card Number:</label>
-      <input placeholder="Insert your credit card number" type="text" id="cardnumber" name="cardnumber" required oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" size="16" >
+      <input placeholder="Insert your credit card number" type="text" id="cardnumber" name="cardnumber" required oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" maxlength="16" >
 
       <div class="card-info">
         <div>
@@ -67,20 +65,16 @@
         </div>
         <div>
           <label for="cvv">CVV:</label>
-          <input type="text" id="cvv" name="cvv" placeholder="000" required oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" size="3">
+          <input type="text" id="cvv" name="cvv" placeholder="000" required oninput="this.value=this.value.replace(/(?![0-9])./gmi,'')" maxlength="3">
         </div>
       </div>
 
       <div id="button">
         <input type="button" value="Back" onclick="location.href = 'carrello.php';" id="back_button">
-        <input type="submit" id="sub_btn" value="Submit" >
+        <input type="submit" id="sub_btn" value="Submit" onclick="handleParameter()" >
       </div>
     </form>
   </div>
 </body>
 
-
-<script>
-  
-</script>
 </html>

@@ -1,6 +1,7 @@
 <?php
     session_start();
     require('../inc/db.php');
+    require('../forMail/mail.php');
 
     // Connect to your database (replace these values with your actual database credentials)
     function randomPassword() {
@@ -15,11 +16,16 @@
     }
     // Check connection
     if ($con->connect_error) {
+        echo 0;
         die("Connection failed: " . $con->connect_error);
+       return;
     }
-    if(!isset($_POST['username'])){
-        echo "usaname not present";
+    if(!isset($_POST['username']) or !isset($_POST['email'])){
+        //"usaname or email not present";
+        echo 0;
+        return;
     }else{
+        
         $sql = "SELECT * FROM users Where username = ? ";
         $stmt = $con->prepare($sql);
         $stmt->bind_param("s",$_POST['username']);
@@ -30,29 +36,27 @@
             $row = $result->fetch_assoc();
             //send an email with che password
 
+            if($row['email'] != $_POST['email']){
+                echo 0;
+                return;
+            }
+
             //create new password
             $password = randomPassword();
             
-            //echo "the password is this -> ".$password."\n";
-            //save the new password into the db
             $sql = "UPDATE users SET password = ? WHERE id = ? ";
+
             $stmt = $con->prepare($sql);
             $stmt->bind_param("si",hash('md5', $password),$row["id"]);
             $stmt->execute();
+
             //send the email
-            $to      = $row['email'];
-            $subject = 'Password recovery';
-            $message = $password;
-            $headers = 'From: INSERIRE QUI LA PROPRIA EMAIL'       . "\r\n" .
-                    'Reply-To: ciao.com' . "\r\n" .
-                    'X-Mailer: PHP/' . phpversion();
+            sendMail($password,$row['email']);
 
-            echo mail($to, $subject, $message, $headers);
-
-            echo " | mail sent";
+            echo 1;
             //echo "password sent";
         }else{
-            echo "no user with that username";
+            echo 0;
         }
 }
 

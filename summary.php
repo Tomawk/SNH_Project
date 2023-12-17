@@ -43,7 +43,7 @@ $_SESSION["payment_info"]=array(
 	<title> Summary </title>
     <script src="JS/modal.js" ></script>
     <script src="JS/summary.js" ></script>
-	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
+	  <link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
 	<link href="CSS/summary.css" rel="stylesheet" type="text/css">
