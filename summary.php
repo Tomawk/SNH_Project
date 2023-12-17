@@ -14,15 +14,18 @@ if($_SESSION["state"]=="carrello"){
   exit();
 }
 
-if($_SESSION["state"]=="address_card"){
+else if($_SESSION["state"]=="address_card"){
   $_SESSION["state"] ="summary";
 }
 
-if($_SESSION["state"]=="summary"){
+else if($_SESSION["state"]=="summary"){
   //nothing
 }
 
-if($_SESSION["state"]=="outside"){
+else if($_SESSION["state"]=="outside"){
+  header("location: carrello.php") ;
+  exit();
+}else{
   header("location: carrello.php") ;
   exit();
 }

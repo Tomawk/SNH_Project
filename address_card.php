@@ -42,15 +42,20 @@
             ';
     exit();
   }
-  if($_SESSION['state'] == 'carrello'){
+  else if($_SESSION['state'] == 'carrello'){
     $_SESSION['state'] = 'address_card';
   }
 
-  if($_SESSION['state'] == 'summary'){
+  else if($_SESSION['state'] == 'summary'){
     //nothing
   }
 
-  if(!isset($_SESSION['state'])){
+  else if(!isset($_SESSION['state'])){
+    header("location: index.php");
+    exit();
+  }
+  else{
+    $_SESSION['state'] = "outside";
     header("location: index.php");
     exit();
   }
