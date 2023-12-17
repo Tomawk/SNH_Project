@@ -52,13 +52,14 @@
 
     $sql = "UPDATE `ordini` 
         SET `totale` = ? ,`stato_ordine` = 'shipped', 
-        'indirizzo' = ?,'citta'=?,'paese'=? 
+        `indirizzo` = ?,`citta`=?,`paese`=?      
         WHERE `ordini`.`id` = ? ";
 
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("iisss",$totale,$id_ordine,$_SESSION["payment_info"]["indirizzo"],$_SESSION["payment_info"]["citta"],$_SESSION["payment_info"]["paese"]);
+    $stmt->bind_param("dsssi",$totale,$_SESSION["payment_info"]["address"],$_SESSION["payment_info"]["city"],$_SESSION["payment_info"]["country"],$id_ordine);
     $stmt->execute();
 
+    unset($_SESSION["payment_info"]);
     if ($stmt !== false) {
         //user present
         echo"<div class='message-container' style='background: green'>";
