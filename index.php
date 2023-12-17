@@ -28,6 +28,7 @@ require('utility/sessionManager.php');
 <?php 
 	checkSession($con);
 	include 'html/topnav.php';
+	$_SESSION["state"] ="outside";
 ?>
 <div class="mainpic">
 		<h1 id="title">BOOK WORM</h1>

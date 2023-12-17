@@ -20,7 +20,7 @@ if(!isset($_SESSION['username'])){
 <?php 
 	include 'html/topnav.php';
 	include "html/modal_user.php";
-	$_SESSION['state'] = 'address_card';
+	$_SESSION['state'] = 'carrello';
 ?>
 
 	<div id="center_div">
@@ -39,7 +39,7 @@ if(!isset($_SESSION['username'])){
 			if($resultCount == 0){
 				echo '<h2 id="h2_empty"> Ops! Il tuo Carrello &egrave; vuoto.. </h2>
     			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
-    			  <a href="bookshelf.php" id="a_empty"> Inizia a ordinare adesso! </a>';
+    			  <a href="bookshelf.php" id="a_empty"> Go to the bookshelf now!</a>';
 				exit();
 			}
 
@@ -129,7 +129,7 @@ if(!isset($_SESSION['username'])){
     	if($resultCount == 0) { /* Se il carrello è vuoto */
     		echo '<h2 id="h2_empty"> Ops! Il tuo Carrello &egrave; vuoto.. </h2>
     			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
-				  <a href="bookshelf.php" id="a_empty"> Inizia a ordinare adesso! </a>';
+				  <a href="bookshelf.php" id="a_empty"> Go to the bookshelf now!</a>';
 				exit();
     	}
 		
@@ -181,7 +181,6 @@ if(!isset($_SESSION['username'])){
 
 			</section>
 
-
 			<br>
 			<hr>
 			';
@@ -201,10 +200,23 @@ if(!isset($_SESSION['username'])){
 	</div>
 	<hr style="width: 100%">
 	<footer> 
-		<a href="bookshelf.php"> Continua ad ordinare </a>
-		<form action="address_card.php" id="pay_form" method="post">
-			<input type="submit" id="order_complete" value="Check Out">
-		</form>
+		<a href="bookshelf.php"> Continua ad ordinare </a>';
+		if(isset($_SESSION['not_logged_in'])){
+			echo'
+				<div id="pay_form">
+					<input type="submit" id="order_complete" value="Login">
+				</div>
+			';
+		}
+		else{
+			echo '
+				<form action="address_card.php" id="pay_form" method="post">
+					<input type="submit" id="order_complete" value="Check Out">
+				</form>
+			';
+		}
+		echo'
+		
 	</footer>';
 	}
 	?>

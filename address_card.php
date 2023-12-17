@@ -21,15 +21,27 @@
   checkSession($con);
   include 'html/topnav.php';
 
-  if($_SESSION['state'] != 'address_card'){
+  if($_SESSION['state'] == 'outside' || !$_SESSION['id_ordine']){
     echo '<h2 id="h2_empty"> Ops! System error!  </h2>
       			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
-	  			  <a href="bookshelf.php" id="a_empty"> Contact an administrator! </a>
+	  			  <a href="carrello.php" id="a_empty"> Something went wrong restart from the checkout </a>
             </body>
             ';
     exit();
   }
-  $_SESSION['state'] = 'summary';
+  if($_SESSION['state'] == 'carrello'){
+    $_SESSION['state'] = 'address_card';
+  }
+
+  if($_SESSION['state'] == 'summary'){
+    //nothing
+  }
+
+  if(!isset($_SESSION['state'])){
+    header("location: index.php");
+    exit();
+  }
+
 ?>
 
   <div class="container">

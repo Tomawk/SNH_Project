@@ -23,7 +23,7 @@
     un'unica spedizione.
     <br><br>Cosa stai aspettando?
     </p>
-    <button id="starter" onclick="ChiudiModal()"> Inizia Adesso </button>
+    <button id="starter" onclick="ChiudiModal()"> Start now </button>
   </div>
 </div>
 <nav class="topnav">

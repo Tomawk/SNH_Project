@@ -36,13 +36,13 @@
     session_start();
     require('../inc/db.php');
 
-    if($_SESSION["state"]!="pay")
+    if($_SESSION["state"]!="summary")
     {
       header("location: ".$_SESSION["state"].".php") ;
       exit();
     }
     else{
-        $_SESSION["state"]!="address_card";
+        $_SESSION["state"]!="outside";
     }
 
 

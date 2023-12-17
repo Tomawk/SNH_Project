@@ -3,10 +3,8 @@
     require('../inc/db.php');
     require("insert_function.php");
 
-
     $ISBN = $_POST["ISBN"];
     $username = $_POST["username"];
-
 
     if(isset($_SESSION['not_logged_in']) and !isset($_SESSION["username"])){
         //l'utente non è loggato -> salvo le info del carrello in una variabile di sessione

@@ -8,14 +8,25 @@ if(!isset($_SESSION['username'])){
     $_SESSION["error"]= "Username or Password wrong. Retry.";
     header('location: index.php');
 } 
-if($_SESSION["state"]!="summary")
-{
-  header("location: ".$_SESSION["state"].".php") ;
+
+if($_SESSION["state"]=="carrello"){
+  header("location: carrello.php") ;
   exit();
 }
-else{
-  $_SESSION["state"] ="pay";
+
+if($_SESSION["state"]=="address_card"){
+  $_SESSION["state"] ="summary";
 }
+
+if($_SESSION["state"]=="summary"){
+  //nothing
+}
+
+if($_SESSION["state"]=="outside"){
+  header("location: carrello.php") ;
+  exit();
+}
+
 if(!isset($_POST["address"])||!isset($_POST["city"])|| 
           !isset($_POST["country"]) || !isset($_POST["cardnumber"])||
           !isset($_POST["expiration"])||!isset($_POST["cvv"]))
