@@ -1,0 +1,31 @@
+.topnav{
+    position: fixed;
+    top: 0;
+    width: 98.8%;
+    height: 4.09vw;
+    z-index: 300;
+    background-color: black;
+    overflow: hidden;
+}
+
+.topnav table{
+    margin:auto;
+}
+
+.topnav td a{
+    position:relative;
+    top: 0.95vw;
+    color: #f2f2f2;
+    text-align: center;
+    font-family: 'Franklin Gothic Book', sans-serif;
+    padding: 1.2vw 1.1vw;
+    text-decoration: none;
+    font-size: 1.5VW;
+    height: 4vw;
+}
+
+.topnav td a:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}

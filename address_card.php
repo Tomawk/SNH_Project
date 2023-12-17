@@ -5,12 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Address and Credit Card Info</title>
     <script src="JS/modal.js" ></script>
-   
-	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
-  <link href="CSS/address_card.css" rel="stylesheet" type="text/css">
+
+    <!-- Stylesheets -->
+    <link href="CSS/topnav.css" rel="stylesheet" type="text/css">
+    <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
+    <link href="CSS/modals.css" rel="stylesheet" type="text/css">
+    <link href="CSS/address_card.css" rel="stylesheet" type="text/css">
+
     <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
-  <script src="JS/address_card.js" ></script>
+
+    <script src="JS/address_card.js" ></script>
+
+    <!-- Modal js include -->
+    <script src="JS/modal.js" ></script>
 </head>
 <body>
 
@@ -20,6 +28,11 @@
   require('utility/sessionManager.php');
   checkSession($con);
   include 'html/topnav.php';
+  include 'html/aside.php';
+
+  if(isset($_SESSION["username"])){
+      include "html/modal_user.php";
+  }
 
   if($_SESSION['state'] != 'address_card'){
     echo '<h2 id="h2_empty"> Ops! System error!  </h2>
@@ -32,7 +45,7 @@
   $_SESSION['state'] = 'summary';
 ?>
 
-  <div class="container">
+  <div class="new_container">
     <h1>Enter Address and Credit Card Info</h1>
     <label for="order id">Order id: </label><?php echo $_SESSION['id_ordine'] ?>
     <br>

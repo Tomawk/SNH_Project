@@ -1,0 +1,215 @@
+
+body{
+    background-color: #e6e6e6;
+    overflow-x: hidden;
+}
+#center_div {
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:  80vw;
+    min-height: 38vw;
+    font-family: Raleway, sans-serif;
+    margin-left:-40vw; /* -1/2 width */
+    margin-top: -17vw; /* -1/2 height */
+    border: 2px solid #a6a6a6;
+    background-color: white;
+}
+
+#center_div h1{
+    font-size: 2vw;
+    font-weight: bold;
+    position: relative;
+    left: 2vw;
+}
+
+#center_div hr{
+    width: 95%;
+    text-align: center;
+    border-top: 1px solid #a6a6a6;;
+}
+
+#center_div section{
+    width: 95%;
+    height: 7vw;
+    position: relative;
+    left: 2.5%;
+    top: 0.5vw;
+}
+
+
+.image{
+    width: 6vw;
+    height: 80%;
+    position: relative;
+    top: 0.5vw;
+    left: 0.5vw;
+}
+
+.image img{
+    width: 93%;
+    position: relative;
+    left: 0.3vw;
+    height: 7vw;
+}
+
+.testo{
+    position: absolute;
+    top: 8%;
+    left: 10%;
+    height: 80%;
+    width: 88.5%;
+
+}
+
+.testo h2{
+    position: absolute;
+    top: 0;
+    left: 5%;
+    font-size: 1.2vw;
+    font-weight: bold;
+}
+
+.testo .price{
+    position: absolute;
+    top: 0;
+    right: 5%;
+    font-size: 1.2vw;
+    font-weight: bold;
+}
+
+
+.testo .description_p{
+    position: absolute;
+    top: 2vw;
+    left: 5%;
+    font-size: 0.8vw;
+    font-style: italic;
+    width: 23vw;
+    height: 4vw;
+}
+
+.testo .description_b{
+    position: absolute;
+    top: 0.3vw;
+    right: 30%;
+    font-size: 0.8vw;
+    font-style: italic;
+    width: 13vw;
+    height: 6vw;
+
+}
+
+
+#total{
+    width: 95%;
+    height: 10vw;
+    position: relative;
+    left: 2.5%;
+}
+
+#total p{
+    font-size: 1vw;
+    position: relative;
+    left: 77%;
+    top:1vw;
+}
+
+#total h2{
+    font-size: 1.5vw;
+    position: relative;
+    left: 79.5%;
+    top: 1vw;
+    font-weight: bold;
+}
+
+#center_div footer{
+    width: 95%;
+    height: 4vw;
+    position: relative;
+    left: 2.5%;
+}
+
+#center_div footer a{
+    font-family: Raleway, sans-serif;
+    position: relative;
+    top: 0.8vw;
+    left: 1.5vw;
+    color: #007AFF;
+    font-size: 1.2vw;
+    text-decoration: none;
+    cursor:pointer;
+    z-index: 5;
+}
+
+#center_div footer a:visited{
+    color: #007AFF;
+}
+
+#pay_form{
+    position: relative;
+    top: -1.2vw;
+}
+
+#order_complete{
+    position: relative;
+    left: 82%;
+    border-radius: 5px;
+    font-size: 1.2vw;
+    color: white;
+    background-color: #007AFF;
+    font-weight: lighter;
+    border: 1px solid #CCC;
+    padding: 0.7vw 1.5vw;
+    border: none;
+
+}
+
+#order_complete:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+/* Carrello vuoto */
+
+#empty_cart{
+    position: relative;
+    left: 38%;
+    top: -2vw;
+    width: 20%;
+}
+
+#h2_empty{
+    font-size: 3vw;
+    text-align: center;
+}
+
+#a_empty{
+    font-size: 2vw;
+    color: #007AFF;
+    text-decoration: none;
+    text-align: center;
+    font-family: Raleway, sans-serif;
+    position: relative;
+    left: 18%;
+}
+
+#a_empty:visited{
+    color: #007AFF;
+}
+
+.remove_form{
+    position: absolute;
+    right: 2%;
+    top: 60%;
+    width: 5vw;
+    height: 1.5vw;
+}
+
+.remove_btn{
+    color: #007AFF;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 1vw;
+}

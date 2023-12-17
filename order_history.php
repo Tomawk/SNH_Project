@@ -11,7 +11,14 @@ if(!isset($_SESSION['username'])){
 <html lang="eng">
 <head>
     <title>Order History</title>
+
+
     <link href="CSS/history_style.css" rel="stylesheet" type="text/css">
+    <link href="CSS/modals.css" rel="stylesheet" type="text/css">
+    <link href="CSS/topnav.css" rel="stylesheet" type="text/css">
+    <link href="CSS/rightnav.css" rel="stylesheet" type="text/css"
+
+
     <link rel="icon" href="immagini/icon.png" sizes="32x32">
 
     <!-- Font Awesome Import -->

@@ -4,18 +4,26 @@ require('inc/db.php');
 require('utility/sessionManager.php');
 ?>
 <!DOCTYPE html>
-<html lang="it">
+<html lang="eng">
 	<head>
   <title> Bookworm Home </title>
-	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
+	<link href="CSS/index_style.css" rel="stylesheet" type="text/css">
+    <link href="CSS/modals.css" rel="stylesheet" type="text/css">
+    <link href="CSS/topnav.css" rel="stylesheet" type="text/css">
+    <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
+
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
-    <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 
     <!-- Font Awesome Import -->
-    <script src="JS/mainscript.js"> </script>
-    <script src="JS/modal.js" ></script>
+    <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
+
+        <!-- Modal js include -->
+        <script src="JS/modal.js" ></script>
+
+        <!-- Validation register/login js include -->
+        <script src="JS/mainscript.js"> </script>
 	</head>
-<body 
+<body
   <?php 
     if(isset($_SESSION["error"])){
       echo 'onload ="openmodal()"';
@@ -25,9 +33,10 @@ require('utility/sessionManager.php');
 	}
     ?>
 >
-<?php 
+<?php
 	checkSession($con);
 	include 'html/topnav.php';
+    include 'html/aside.php';
 ?>
 <div class="mainpic">
 		<h1 id="title">BOOK WORM</h1>

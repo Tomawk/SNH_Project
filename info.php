@@ -25,8 +25,10 @@
 <html lang="eng">
 	<head>
 	<title>User information</title>
-	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
 	<link href="CSS/info_style.css" rel="stylesheet" type="text/css">
+    <link href="CSS/modals.css" rel="stylesheet" type="text/css">
+    <link href="CSS/topnav.css" rel="stylesheet" type="text/css">
+    <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
 	<link rel="icon" href="immagini/key_icon.png" sizes="32x32">
 
     <!-- Font Awesome Import -->
@@ -37,6 +39,8 @@
 	</head>
 <body>
 <?php include 'html/topnav.php';?>
+<?php include 'html/aside.php';?>
+
 	<div id="center_div">
 		<div id="image">
 			<img src="immagini/user.png" alt="avatar">
@@ -51,7 +55,9 @@
 		<p id= "cap"><strong>Postal Code: </strong><?php echo $cap ?></p>
 		<p><a id="change_pwd" href="password_change.php">Change password</a></p>
 <?php
-include "html/modal_user.php";
+if(isset($_SESSION["username"])){
+    include "html/modal_user.php";
+}
 ?>
 </body>
 </html>

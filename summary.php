@@ -38,22 +38,33 @@ $_SESSION["payment_info"]=array(
 );
 ?>
 <!DOCTYPE HTML>
-<html lang="it">
+<html lang="eng">
 	<head>
 	<title> Summary </title>
-    <script src="JS/modal.js" ></script>
-    <script src="JS/summary.js" ></script>
-	  <link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
+
+    <link href="CSS/summary_style.css" rel="stylesheet" type="text/css">
+    <link href="CSS/modals.css" rel="stylesheet" type="text/css">
+    <link href="CSS/topnav.css" rel="stylesheet" type="text/css">
+    <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
+
+
+
     <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
-	<link href="CSS/summary.css" rel="stylesheet" type="text/css">
+
+    <script src="JS/modal.js" ></script>
+    <script src="JS/summary.js" ></script>
+
 	</head>
 <body>
+
 <?php 
 	include 'html/topnav.php';
+    include 'html/aside.php';
 	include "html/modal_user.php";
 ?>
-<div class='container'>
+
+<div class='new_container'>
   <div class='window'>
     <div class='order-info'>
       <div class='order-info-content' >
@@ -77,7 +88,7 @@ $_SESSION["payment_info"]=array(
 
     	}
 		
-      echo "<h2>"."Order Summary for #".$_SESSION["id_ordine"]."</h2>
+      echo "<h2 class='summary_h2'>"."Order Summary for #".$_SESSION["id_ordine"]."</h2>
                 <div class='line'></div>";
 
     	$rows_ordini = array();
@@ -139,11 +150,11 @@ $_SESSION["payment_info"]=array(
 </div>
         <div class='credit-info'>
           <div class='credit-info-content'>
-            <h2>Your credit card:</h2>
+            <h2 class="summary_h2">Your credit card:</h2>
                 <div class='line'></div>
             Card Number
             <p class='input-field'><?php echo $_POST["cardnumber"];?></p>
-            <h2>Your address:</h2>
+            <h2 class="summary_h2">Your address:</h2>
                 <div class='line'></div>
             Address
             <p class='input-field'><?php echo $_POST["address"].",".$_POST["city"];?></p>
@@ -158,6 +169,3 @@ $_SESSION["payment_info"]=array(
         </div>
       </div>
 </div>
-<?php
-    include "html/footer.php";
-?>

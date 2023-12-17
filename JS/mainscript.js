@@ -1,19 +1,3 @@
-/* setta la data corrente nella date form */
-
-	var date = new Date();
-
-	var day = date.getDate();
-	var month = date.getMonth() + 1;
-	var year = date.getFullYear();
-
-	if (month < 10) month = "0" + month;
-	if (day < 10) day = "0" + day;
-
-	var today = year + "-" + month + "-" + day; 
-    document.getElementById("theDate").defaultValue = today;
-    document.getElementById("theDate").min = today;
-
-
 /* funzione scroll verso l'alto */
 
 	function scrollup(){

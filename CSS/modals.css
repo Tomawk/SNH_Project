@@ -1,0 +1,429 @@
+
+/* INFO MODAL */
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #ff1a1a;
+    border: none;
+    cursor: pointer;
+}
+
+.cancelbtn:hover {
+    opacity: 0.8;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    width: 100%;
+    height: 30%;
+    position: relative;
+}
+
+img.avatar {
+    width: 22%;
+    position: relative;
+    top: 1em;
+
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+    font-family: Raleway, sans-serif;
+}
+
+/* The Modal (background) */
+
+.inputmodal {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Style of modal buttons */
+.modalbutton {
+    background-color: black;
+    color: #f2f2f2;
+    padding: 1vw 1.2vw;
+    margin: 0.5vw 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1vw;
+}
+
+.modalbutton:hover {
+    opacity: 0.8;
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 300; /* Sit on top */
+    padding-top: 7vw; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 50%;
+    height: 75%;
+    font-family: Raleway, sans-serif;
+    vertical-align: middle;
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 20px;
+    top: 0.1em;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)}
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+/* MODAL 2 */
+
+/* Full-width input fields */
+.modal1_input, #modal1_email, #modal1_nome, #modal1_surname, #modal1_password, #modal1_repeat, #modal1_cap {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: Raleway, sans-serif;
+}
+
+/* Add a background color when the inputs get focus */
+.modal1_input:focus, #modal1_email:focus{
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for all buttons */
+#modal1button_cancel {
+    background-color: #ff1a1a;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 1;
+}
+
+#modal1button_signup {
+    background-color: black;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 1;
+}
+
+#modal1button_signup:hover, #modal1button_cancel:hover {
+    opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbutn {
+    padding: 14px 20px;
+    background-color: #ff1a1a;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbutn, .signupbtn {
+    float: left;
+    width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 16px;
+    font-size: 1.2vw;
+}
+
+.container p{
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+/* The Modal (background) */
+.modal1 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 300; /* Sit on top */
+    padding-top: 8vw; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+@-moz-document url-prefix() {
+
+    .modal-content1 {
+        padding: 1vw 1vw;
+        background-color: #fefefe;
+        margin: auto;
+        border: 1px solid #888;
+        width: 60%;
+        height: 70vw;
+        font-family: Raleway, sans-serif;
+        vertical-align: middle;
+        position: relative;
+        top: -6vw;
+    }
+
+}
+/* Modal Content/Box */
+
+@media screen and (-webkit-min-device-pixel-ratio:0){
+
+    .modal-content1 {
+        padding: 1vw 1vw;
+        background-color: #fefefe;
+        margin: auto;
+        border: 1px solid #888;
+        width: 60%;
+        min-height: 70vw;
+        font-family: Raleway, sans-serif;
+        vertical-align: middle;
+        position: relative;
+        top: -6vw;
+        font-size: 1.2vw;
+    }
+}
+
+/* Style the horizontal ruler */
+#hrmodal1 {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+/* The Close Button (x) */
+.close1 {
+    position: absolute;
+    right: 19vw;
+    top: 1.8vw;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    z-index: 300;
+}
+
+.close1:hover,
+.close1:focus {
+    color: #f44336;
+    cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 500px) {
+    .cancelbutn, .signupbtn {
+        width: 100%;
+    }
+}
+
+#errore_login{
+    color: black;
+    font-weight: bold;
+    border: 1px solid red;
+    background-color: #ff3333;
+    width: 50%;
+    padding: 0.1vw 1vw;
+    font-size: 1.2vw;
+}
+
+.error_register{
+    color: red;
+    font-size: 0.9vw;
+    display: none;
+}
+
+.err_reservation{
+    color: red;
+    font-size: 0.9vw;
+    font-family:  Raleway, sans-serif ;
+    position: absolute;
+    top: 178vw;
+}
+
+#nameErr{
+    left: 41%;
+}
+
+#numbErr{
+    left: 73%;
+}
+
+#dateErr{
+    left: 12%;
+}
+
+/* VALIDATION PHP REGISTER FORM */
+
+.err_register{
+    color: red;
+    font-size: 0.8vw;
+    font-family:  Raleway, sans-serif ;
+    position: absolute;
+    left: 7vw;
+
+}
+
+/* Mozilla Error */
+
+@-moz-document url-prefix() {
+
+    #emailErr{
+        top: 9.5vw;
+
+    }
+
+    #nomeErr{
+        top: 15vw;
+    }
+
+    #surnameErr{
+        top: 20.2vw;
+    }
+
+    #usernameErr{
+        top: 25.3vw;
+        left: 7.5vw;
+    }
+
+    #pswErr{
+        top: 30.5vw;
+        left: 7.5vw;
+    }
+
+    #psw_repeatErr{
+        top: 35.8vw;
+        left: 10.5vw;
+    }
+
+    #cittaErr{
+        top: 40.8vw;
+    }
+
+    #indirizzoErr{
+        top: 50.5vw;
+    }
+
+    #capErr{
+        top: 51vw;
+    }
+
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0){
+
+    #emailErr{
+        top: 11vw;
+
+    }
+
+    #nomeErr{
+        top: 16vw;
+    }
+
+    #surnameErr{
+        top: 21.2vw;
+    }
+
+    #usernameErr{
+        top: 26.3vw;
+        left: 7.5vw;
+    }
+
+    #pswErr{
+        top: 31.7vw;
+        left: 7.5vw;
+    }
+
+    #psw_repeatErr{
+        top: 36.3vw;
+        left: 10.5vw;
+    }
+
+    #cittaErr{
+        top: 41.8vw;
+    }
+
+    #indirizzoErr{
+        top: 50.5vw;
+    }
+
+    #capErr{
+        top: 52vw;
+    }
+}

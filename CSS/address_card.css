@@ -9,12 +9,14 @@ body {
     height: 100vh;
   }
 
-  .container {
+  .new_container {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     padding: 40px;
-    width: 400px;
+    position: relative;
+      top: 2vw;
+    width: 30%;
   }
 
   h1 {

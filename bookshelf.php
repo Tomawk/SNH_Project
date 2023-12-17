@@ -5,14 +5,14 @@ require('utility/sessionManager.php');
 checkSession($con);
 ?>
 <!DOCTYPE html>
-<html lang="it">
+<html lang="eng">
 <head>
 
     <title> Bookshelf </title>
     <link href="CSS/bookshelf_style.css" rel="stylesheet" type="text/css">
-	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
-    <script src="JS/modal.js" ></script>
-    <script src="JS/bookshelf.js" ></script>
+    <link href="CSS/modals.css" rel="stylesheet" type="text/css">
+    <link href="CSS/topnav.css" rel="stylesheet" type="text/css">
+    <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
     <link rel="icon" href="immagini/icon.png" sizes="32x32">
 
     <!-- Font Awesome Import -->
@@ -25,10 +25,29 @@ checkSession($con);
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
+    <!-- Modal js include -->
+    <script src="JS/modal.js" ></script>
+
+    <!-- Validation register/login js include -->
+    <script src="JS/mainscript.js"> </script>
+
+    <!-- Bookshelf function include -->
+    <script src="JS/bookshelf.js"> </script>
+
 </head>
-<body>
+<body
+    <?php
+    if(isset($_SESSION["error"])){
+        echo 'onload ="openmodal()"';
+    }
+    if(isset($_SESSION["signup_error"])){
+        echo 'onload ="openmodal1()"';
+    }
+    ?>
+>
 <?php 
     include 'html/topnav.php';
+
     if(isset($_SESSION["username"])){
 		include "html/modal_user.php";
 	}else{
@@ -54,7 +73,6 @@ checkSession($con);
 
     </div>
 <?php
- 
 
 $query = "SELECT * FROM books";
 $result=mysqli_query($con,$query);

@@ -53,12 +53,21 @@ if (isset($_POST['username'])){
 
       }else
             $_SESSION['error'] = "Username or Password wrong. Retry.";
-      
+
       //header("location: ../index.php");
 }else{
       $_SESSION['error'] = "Generic error,contact admin.";
       //header("location: ../index.php");
 }
-header("location: ../index.php");
+
+if(isset($_SERVER['HTTP_REFERER'])) {
+    header('Location: ' . $_SERVER['HTTP_REFERER']); // SAFE (?)
+}
+else
+{
+    header("location: ../index.php");
+}
+
+
 
 ?>
