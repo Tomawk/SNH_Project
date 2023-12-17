@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2023 at 04:23 PM
+-- Generation Time: Dec 17, 2023 at 04:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,6 +29,7 @@ USE `bookworm`;
 -- Table structure for table `books`
 --
 
+DROP TABLE IF EXISTS `books`;
 CREATE TABLE `books` (
   `ISBN` varchar(45) NOT NULL,
   `title` varchar(45) NOT NULL,
@@ -63,6 +64,7 @@ INSERT INTO `books` (`ISBN`, `title`, `author`, `publication_year`, `publisher`,
 -- Table structure for table `contenutoordini`
 --
 
+DROP TABLE IF EXISTS `contenutoordini`;
 CREATE TABLE `contenutoordini` (
   `ISBN` varchar(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `username` varchar(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
@@ -98,6 +100,7 @@ INSERT INTO `contenutoordini` (`ISBN`, `username`, `id`, `numero_item`) VALUES
 -- Table structure for table `ordini`
 --
 
+DROP TABLE IF EXISTS `ordini`;
 CREATE TABLE `ordini` (
   `id` int(11) NOT NULL,
   `data` date NOT NULL,
@@ -126,6 +129,7 @@ INSERT INTO `ordini` (`id`, `data`, `totale`, `stato_ordine`, `indirizzo`, `citt
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -155,6 +159,7 @@ INSERT INTO `users` (`id`, `email`, `nome`, `cognome`, `username`, `password`, `
 -- Table structure for table `user_tokens`
 --
 
+DROP TABLE IF EXISTS `user_tokens`;
 CREATE TABLE `user_tokens` (
   `id` int(11) NOT NULL,
   `selector` varchar(255) NOT NULL,
