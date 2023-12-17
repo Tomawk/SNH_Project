@@ -8,60 +8,23 @@ if(!isset($_SESSION['username'])){
 
 ?>
 <!DOCTYPE HTML>
-<html lang="eng">
+<html lang="it">
 	<head>
-	<title>Cart page</title>
-	<link href="CSS/cart_style.css" rel="stylesheet" type="text/css">
-    <link href="CSS/modals.css" rel="stylesheet" type="text/css">
-    <link href="CSS/topnav.css" rel="stylesheet" type="text/css">
-    <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
-
-    <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
-
-	<link rel="icon" href="immagini/icon.png" sizes="32x32">
-
-    <!-- Google font include -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-    <!-- Modal js include -->
+	<title> Carrello </title>
+	<link href="CSS/stilecarrello.css" rel="stylesheet" type="text/css">
     <script src="JS/modal.js" ></script>
-
-    <!-- Validation register/login js include -->
-    <script src="JS/mainscript.js"> </script>
-
-
+    <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
+	<link rel="icon" href="immagini/icon.png" sizes="32x32">
 	</head>
-<body
-        <?php
-        if(isset($_SESSION["error"])){
-            echo 'onload ="openmodal()"';
-        }
-        if(isset($_SESSION["signup_error"])){
-            echo 'onload ="openmodal1()"';
-        }
-        ?>
->
-<?php
-
-include 'html/topnav.php';
-include 'html/aside.php';
-
-if(isset($_SESSION["username"])){
-    include "html/modal_user.php";
-}else{
-    include 'html/modal_login.php';
-    include 'html/modal_register.php';
-}
-
-$_SESSION['state'] = 'address_card';
+<body>
+<?php 
+	include 'html/topnav.php';
+	include "html/modal_user.php";
+	$_SESSION['state'] = 'carrello';
 ?>
 
 	<div id="center_div">
-		<h1> Books in your cart  </h1>
+		<h1> Libri nel tuo Carrello </h1>
 		<hr>
 
 		<?php 
@@ -74,9 +37,9 @@ $_SESSION['state'] = 'address_card';
 			$resultCount=sizeof($_SESSION['not_logged_in']);
 
 			if($resultCount == 0){
-				echo '<h2 id="h2_empty"> Oops! Your cart is empty.. </h2>
+				echo '<h2 id="h2_empty"> Ops! Il tuo Carrello &egrave; vuoto.. </h2>
     			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
-    			  <a href="bookshelf.php" id="a_empty"> Start ordering now! </a>';
+    			  <a href="bookshelf.php" id="a_empty"> Go to the bookshelf now!</a>';
 				exit();
 			}
 
@@ -164,9 +127,9 @@ $_SESSION['state'] = 'address_card';
     	$resultCount=mysqli_num_rows($result);
 
     	if($resultCount == 0) { /* Se il carrello è vuoto */
-            echo '<h2 id="h2_empty"> Oops! Your cart is empty.. </h2>
+    		echo '<h2 id="h2_empty"> Ops! Il tuo Carrello &egrave; vuoto.. </h2>
     			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
-    			  <a href="bookshelf.php" id="a_empty"> Start ordering now! </a>';
+				  <a href="bookshelf.php" id="a_empty"> Go to the bookshelf now!</a>';
 				exit();
     	}
 		
@@ -218,7 +181,6 @@ $_SESSION['state'] = 'address_card';
 
 			</section>
 
-
 			<br>
 			<hr>
 			';
@@ -238,14 +200,26 @@ $_SESSION['state'] = 'address_card';
 	</div>
 	<hr style="width: 100%">
 	<footer> 
-		<a href="bookshelf.php"> Continua ad ordinare </a>
-		<form action="address_card.php" id="pay_form" method="post">
-			<input type="submit" id="order_complete" value="Check Out">
-		</form>
+		<a href="bookshelf.php"> Continua ad ordinare </a>';
+		if(isset($_SESSION['not_logged_in'])){
+			echo'
+				<div id="pay_form">
+					<input type="submit" id="order_complete" value="Login">
+				</div>
+			';
+		}
+		else{
+			echo '
+				<form action="address_card.php" id="pay_form" method="post">
+					<input type="submit" id="order_complete" value="Check Out">
+				</form>
+			';
+		}
+		echo'
+		
 	</footer>';
 	}
 	?>
 </div>
-
 </body>
 </html>
