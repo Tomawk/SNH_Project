@@ -12,6 +12,12 @@ if (isset($_COOKIE['remember_me'])) {
         }
 session_unset();
 session_destroy();
-header("Location: ../index.php");
+if(isset($_SERVER['HTTP_REFERER'])) {
+    header('Location: ' . $_SERVER['HTTP_REFERER']); // SAFE (?)
+}
+else
+{
+    header("location: ../index.php");
+}
 exit();
 ?>

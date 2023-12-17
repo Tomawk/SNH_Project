@@ -15,6 +15,15 @@ if(isset($_SESSION["username"]))
 //*+++++++++++++++++++++++++++++
 //*+++++++++++++++++++++++++++++
 
+    function redirect(){
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']); // SAFE (?)
+        }
+        else
+        {
+            header("location: ../index.php");
+        }
+    }
 
 
     function test_input($data) {
@@ -239,11 +248,11 @@ if(isset($_SESSION["username"]))
 
         $_SESSION['username'] = $username;
 
-        header("location: ../index.php");
+        redirect();
 
     } else {
         $_SESSION["signup_error"] = "error";
-        header('location: ../index.php');
+        redirect();
     }
 
 ?>
