@@ -5,6 +5,16 @@ require('rememberme.php');
 require("insert_function.php");
 
 session_start();
+
+function redirect(){
+    if(isset($_SERVER['HTTP_REFERER'])) {
+        header('Location: ' . $_SERVER['HTTP_REFERER']); // SAFE (?)
+    }
+    else
+    {
+        header("location: ../index.php");
+    }
+}
 // If form submitted, insert values into the database.
 if (isset($_POST['username'])){
         // removes backslashes
@@ -19,10 +29,31 @@ if (isset($_POST['username'])){
       //$result = mysqli_query($con,$query) or die(mysql_error());
       //$rows = mysqli_num_rows($result);
 
+      $stmt = $con->prepare("SELECT* FROM users WHERE username= ?");
+      $stmt->bind_param("s",$username);
+      $stmt->execute();
+      $result = $stmt->get_result(); //only one row
+      $resultCount=mysqli_num_rows($result);
+
+
+
+      if($resultCount == 1){
+            //get salt
+          $row = mysqli_fetch_assoc($result);
+          $salt = $row['salt'];
+      }else{
+          $_SESSION['error'] = "Username or Password wrong. Retry.";
+          redirect();
+      }
+
+
       //solution with prepared statement:
       $prepared = $con->prepare("SELECT* FROM users WHERE username= ? and password = ? ");
-      $hashed_password = md5($password);
-      $prepared->bind_param("ss",$username,$hashed_password);
+
+      $hashed_psw = hash('sha256',$password);
+      $final_psw = hash('sha256', $salt . $hashed_psw); //hashed psw with hash
+
+      $prepared->bind_param("ss",$username,$final_psw);
       $prepared->execute();
       $rows=mysqli_num_rows($prepared->get_result());
  
@@ -54,20 +85,12 @@ if (isset($_POST['username'])){
 
       }else
             $_SESSION['error'] = "Username or Password wrong. Retry.";
-
-      //header("location: ../index.php");
 }else{
-      $_SESSION['error'] = "Generic error,contact admin.";
-      //header("location: ../index.php");
+      $_SESSION['error'] = "Generic error,contact admin.";;
 }
+redirect();
 
-if(isset($_SERVER['HTTP_REFERER'])) {
-    header('Location: ' . $_SERVER['HTTP_REFERER']); // SAFE (?)
-}
-else
-{
-    header("location: ../index.php");
-}
+
 
 
 

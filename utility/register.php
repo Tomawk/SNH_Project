@@ -24,6 +24,21 @@ if(isset($_SESSION["username"]))
      return $data;
     }
 
+    function hash_psw($clear_psw){
+        $psw_hash = hash('sha256', $clear_psw);
+        return $psw_hash;
+    }
+
+
+    function create_salt() // a good salt is long as the hash lenght
+    {
+        $text = date('U');
+        $salt = hash('sha256', $text);
+        return $salt;
+    }
+
+
+
         // removes backslashes
     $error = NULL;
 
@@ -122,20 +137,20 @@ if(isset($_SESSION["username"]))
         $pswErr = "Devi inserire una password.";
     }
         else{
-            $psw = $_POST['psw'];
-            if (strlen($psw) <= '7') {
+            $psw_clear = $_POST['psw'];
+            if (strlen($psw_clear) <= '7') {
             $pswErr = "La tua password deve contenere almeno 8 caratteri.";
             $error = 1;
             }
-            elseif (!preg_match("#[0-9]+#",$psw)) {
+            elseif (!preg_match("#[0-9]+#",$psw_clear)) {
                 $pswErr = "La tua password deve contenere almeno un numero";
                 $error = 1;
             }
-            elseif(!preg_match("#[A-Z]+#",$psw)) {
+            elseif(!preg_match("#[A-Z]+#",$psw_clear)) {
                 $pswErr = "La tua password deve contenere almeno un carattere maiuscolo";
                 $error = 1;
             }
-            elseif(!preg_match("#[a-z]+#",$psw)) {
+            elseif(!preg_match("#[a-z]+#",$psw_clear)) {
                 $pswErr = "La tua password deve contenere almeno un carattere minuscolo";
                 $error = 1;
             }
@@ -152,7 +167,7 @@ if(isset($_SESSION["username"]))
         }
         else{
             $psw_repeat = test_input($_POST['psw-repeat']);
-            if($psw != $psw_repeat){
+            if($psw_clear != $psw_repeat){
                 $psw_repeatErr = "Le due password non coincidono.";
                 $error = 1;
             } 
@@ -211,16 +226,21 @@ if(isset($_SESSION["username"]))
 
     if($error == NULL){
 
-    $query = "INSERT into `users` (email, nome, cognome, username, password, citta, indirizzo, cap, trn_date)
-    VALUES ('$email', '$nome', '$surname', '$username', '".md5($psw)."', '$citta', '$indirizzo', '$cap', '$trn_date')";
+        $hashed_psw = hash_psw($psw_clear);
+        $salt = create_salt();
 
-    $result = mysqli_query($con,$query);
+        $psw = hash('sha256', $salt . $hashed_psw); //hashed psw with hash
+
+        $query = "INSERT into `users` (email, nome, cognome, username, password,salt , citta, indirizzo, cap, trn_date)
+        VALUES ('$email', '$nome', '$surname', '$username', '$psw', '$salt', '$citta', '$indirizzo', '$cap', '$trn_date')";
+
+        $result = mysqli_query($con,$query);
 
 
-    $_SESSION['username'] = $username;
+        $_SESSION['username'] = $username;
 
-    header("location: ../index.php");
-        
+        header("location: ../index.php");
+
     } else {
         $_SESSION["signup_error"] = "error";
         header('location: ../index.php');
