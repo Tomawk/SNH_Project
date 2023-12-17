@@ -22,7 +22,7 @@
   checkSession($con);
   include 'html/topnav.php';
 
-  if($_SESSION['state'] != 'address_card'){
+  if($_SESSION['state'] != 'address_card' and false){
     echo '<h2 id="h2_empty"> Ops! System error!  </h2>
       			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
 	  			  <a href="bookshelf.php" id="a_empty"> Contact an administrator! </a>
@@ -73,7 +73,7 @@
 
       <div id="button">
         <input type="button" value="Back" onclick="location.href = 'carrello.php';" id="back_button">
-        <input type="submit" id="sub_btn" value="Submit" >
+        <input type="submit" id="sub_btn" value="Submit" onclick="handleParameter()" disabled >
       </div>
     </form>
   </div>
@@ -81,6 +81,15 @@
 
 
 <script>
+function handleParameter(){
+  event.preventDefault();
+  var address = document.getElementById("address").value;
+  var city = document.getElementById("city").value;
+  var country = document.getElementById("country").value;
+  var cardnumber = document.getElementById("cardnumber").value;
+  var expiration = document.getElementById("expiration").value;
+  var cvv = document.getElementById("cvv").value;
+}
   
 </script>
 </html>

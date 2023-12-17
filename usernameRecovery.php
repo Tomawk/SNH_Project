@@ -20,11 +20,9 @@
 <body>
   
   <div class="change-password-form">
-    <h2>Change Password</h2>
+    <h2>Account recovery</h2>
     <form>
       <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
         <label for="email">email</label>
         <input type="text" id="email" name="email" required>
       </div>
@@ -42,16 +40,15 @@
     function handleRecoverPassword(){
       event.preventDefault();
       var data = new FormData();
-        data.append('username', document.getElementById("username").value);
         data.append('email', document.getElementById("email").value);
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "utility/elaborate_forgotten_password.php", true);
+        xhr.open("POST", "utility/elaborateAccountRecovery.php", true);
         
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
               if(parseInt(xhr.responseText) == 1){
-                jQuery('#result').html("Password recovered");
+                jQuery('#result').html("Email sent");
                 jQuery("#result").css("color", "green");
               }else{
                 jQuery('#result').html("Recovery problem");

@@ -32,7 +32,8 @@
 
     <div class="container" style="background-color:#f1f1f1">
       <button type="button" onclick="closemodal()" class="cancelbtn">Cancel</button>
-      <span class="psw"><a href="recover_password.php">Password</a> dimenticata?</span>
+      <span class="psw"><a href="recover_password.php">Forgot Password? </a> <a href="usernameRecovery.php">Forgot username?</a></span>
+      <span class="psw"></span>
     </div>
   </form>
 </div>
