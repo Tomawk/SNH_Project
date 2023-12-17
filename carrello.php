@@ -8,23 +8,51 @@ if(!isset($_SESSION['username'])){
 
 ?>
 <!DOCTYPE HTML>
-<html lang="it">
+<html lang="eng">
 	<head>
-	<title> Carrello </title>
-	<link href="CSS/stilecarrello.css" rel="stylesheet" type="text/css">
-    <script src="JS/modal.js" ></script>
+	<title> Cart Page </title>
+	<link href="CSS/cart_style.css" rel="stylesheet" type="text/css">
+    <link href="CSS/modals.css" rel="stylesheet" type="text/css">
+    <link href="CSS/topnav.css" rel="stylesheet" type="text/css">
+    <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
+
     <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
+
 	<link rel="icon" href="immagini/icon.png" sizes="32x32">
+
+    <!-- Modal js include -->
+    <script src="JS/modal.js" ></script>
+
+    <!-- Validation register/login js include -->
+    <script src="JS/mainscript.js"> </script>
+
 	</head>
-<body>
+<body
+    <?php
+    if(isset($_SESSION["error"])){
+        echo 'onload ="openmodal()"';
+    }
+    if(isset($_SESSION["signup_error"])){
+        echo 'onload ="openmodal1()"';
+    }
+    ?>
+>
 <?php 
 	include 'html/topnav.php';
-	include "html/modal_user.php";
+    include 'html/aside.php';
+
+    if (isset($_SESSION["username"])) {
+        include "html/modal_user.php";
+    } else {
+        include 'html/modal_login.php';
+        include 'html/modal_register.php';
+    }
+
 	$_SESSION['state'] = 'carrello';
 ?>
 
 	<div id="center_div">
-		<h1> Libri nel tuo Carrello </h1>
+		<h1> Books in your cart </h1>
 		<hr>
 
 		<?php 
@@ -37,9 +65,9 @@ if(!isset($_SESSION['username'])){
 			$resultCount=sizeof($_SESSION['not_logged_in']);
 
 			if($resultCount == 0){
-				echo '<h2 id="h2_empty"> Ops! Il tuo Carrello &egrave; vuoto.. </h2>
+				echo '<h2 id="h2_empty"> Oops! Your cart is empty.. </h2>
     			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
-    			  <a href="bookshelf.php" id="a_empty"> Go to the bookshelf now!</a>';
+    			  <a href="bookshelf.php" id="a_empty"> Start ordering now!</a>';
 				exit();
 			}
 
@@ -127,9 +155,9 @@ if(!isset($_SESSION['username'])){
     	$resultCount=mysqli_num_rows($result);
 
     	if($resultCount == 0) { /* Se il carrello è vuoto */
-    		echo '<h2 id="h2_empty"> Ops! Il tuo Carrello &egrave; vuoto.. </h2>
+            echo '<h2 id="h2_empty"> Oops! Your cart is empty.. </h2>
     			  <img src="immagini/emptycart.png" alt="carrello vuoto" id="empty_cart">
-				  <a href="bookshelf.php" id="a_empty"> Go to the bookshelf now!</a>';
+    			  <a href="bookshelf.php" id="a_empty"> Start ordering now!</a>';
 				exit();
     	}
 		

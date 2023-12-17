@@ -17,11 +17,11 @@ require('utility/sessionManager.php');
     <!-- Font Awesome Import -->
     <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
 
-        <!-- Modal js include -->
-        <script src="JS/modal.js" ></script>
+    <!-- Modal js include -->
+    <script src="JS/modal.js" ></script>
 
-        <!-- Validation register/login js include -->
-        <script src="JS/mainscript.js"> </script>
+    <!-- Validation register/login js include -->
+    <script src="JS/mainscript.js"> </script>
 	</head>
 <body
   <?php 
@@ -37,6 +37,7 @@ require('utility/sessionManager.php');
 	checkSession($con);
 	include 'html/topnav.php';
     include 'html/aside.php';
+    $_SESSION["state"] ="outside";
 ?>
 <div class="mainpic">
 		<h1 id="title">BOOK WORM</h1>
