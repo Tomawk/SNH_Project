@@ -35,6 +35,7 @@
     <?php
     session_start();
     require('../inc/db.php');
+    require('log.php');
 
     if($_SESSION["state"]!="summary")
     {
@@ -48,6 +49,12 @@
 
     $id_ordine = $_SESSION["id_ordine"];
     $totale = $_SESSION["totale"];
+
+    if(isset($_SESSION["username"])){
+        $username = "";
+    }else{
+        $username = $_SESSION["username"];
+    }
 
 
     $sql = "UPDATE `ordini` 
@@ -66,11 +73,14 @@
         echo"<h1>Operation result</h1>";
         echo "<p>Payment went ok</p>";
         echo "<a href='../order_history.php'>Go to the history page</a>";
-
+        $log_msg = "SUCCESSFUL PAYMENT: username: ".$username." order_id: ".$id_ordine;
+        log_message($log_msg);
     }else{
         echo"<div class='message-container' style='background: #de6666'>";
-        echo"<h1>Esito operazione</h1>";
+        echo"<h1>Operation result</h1>";
         echo "<p>Something went wrong, retry</p>";
+        $log_msg = "FAILED PAYMENT: username: ".$username." order_id: ".$id_ordine;
+        log_message($log_msg);
     }
     ?>
  </div>
