@@ -8,13 +8,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-	<link href="CSS/stilemain.css" rel="stylesheet" type="text/css">
   <title>Change Password</title>
+
   <link href="CSS/stilePasswordChange.css" rel="stylesheet" type="text/css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+  <link href="CSS/topnav.css" rel="stylesheet" type="text/css">
+  <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
+  <link href="CSS/modals.css" rel="stylesheet" type="text/css">
+
+    <!-- Modal js include -->
+    <script src="JS/modal.js" ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
 </head>
 <body>
-  <?php include 'html/topnav.php';?>
+  <?php
+
+    include 'html/topnav.php';
+    include 'html/aside.php';
+
+    include "html/modal_user.php";
+  ?>
   <div class="change-password-form">
     <h2>Change password</h2>
     <form action="utility/elaborate_change_password.php" method="post" id="my_form">

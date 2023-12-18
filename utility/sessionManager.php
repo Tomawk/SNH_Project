@@ -90,6 +90,7 @@ function regenerateSession($username,$remember_selected,$reload = false,$state)
     $_SESSION['OBSOLETE'] = true;
     $_SESSION['EXPIRES'] = time() + 60;
     */
+
     // Create new session without destroying the old one
     session_regenerate_id(false);
 
@@ -121,6 +122,7 @@ function checkSession($con)
         //header("location:"+$token);
         if(!token_is_valid($token,$con))
             return false;
+
         $user=find_user_by_token($token,$con);
         $state = $_SESSION["state"];
         if($user != null){
