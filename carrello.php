@@ -8,7 +8,7 @@ if(!isset($_SESSION['username'])){
 
 ?>
 <!DOCTYPE HTML>
-<html lang="eng">
+<html lang="en">
 	<head>
 	<title> Cart Page </title>
 	<link href="CSS/cart_style.css" rel="stylesheet" type="text/css">
@@ -101,7 +101,7 @@ if(!isset($_SESSION['username'])){
 				<section>
 	
 					<div class="image"> 
-						<img src='.$rows_ordini['image_url'].' alt="pizza">
+						<img src='.$rows_ordini['image_url'].' alt="book_cover_image">
 					</div>
 	
 					<div class="testo">
@@ -111,15 +111,15 @@ if(!isset($_SESSION['username'])){
 						<form action="utility/remove.php" class="remove_form" method="post">
 						
 							<input type="text" name="ISBN" value="' .$_SESSION['not_logged_in'][$i].'" hidden>
-							<input type="submit" value="Rimuovi" class="remove_btn">
+							<input type="submit" value="Remove" class="remove_btn">
 						</form>
 	
 						<p class="description_p"> 
-							<strong>titolo:</strong> '.$rows_ordini['title'].' 
+							<strong>Title:</strong> '.$rows_ordini['title'].' 
 							<strong>Publisher:</strong> '.$rows_ordini['publisher'].' 
-							<strong>Auhtor:</strong> '.$rows_ordini['author'].'
+							<strong>Author:</strong> '.$rows_ordini['author'].'
 							<br>
-							<strong>Numero item :</strong> '.$numero_item.'
+							<strong>Item Quantity:</strong> '.$numero_item.'
 						</p>
 	
 						<p class="description_b"> 
@@ -178,7 +178,7 @@ if(!isset($_SESSION['username'])){
 			<section>
 
 				<div class="image"> 
-					<img src='.$rows_ordini[$i]['image_url'].' alt="pizza">
+					<img src='.$rows_ordini[$i]['image_url'].' alt="book_cover_image">
 				</div>
 
 				<div class="testo">
@@ -187,17 +187,17 @@ if(!isset($_SESSION['username'])){
 
 					<p class="price"> '.$rows_ordini[$i]['price']. '&euro; </p>
 					<form action="utility/remove.php" class="remove_form" method="post">
-						<input type="submit" value="Rimuovi" class="remove_btn">
+						<input type="submit" value="Remove" class="remove_btn">
 						<input type="text" name="id" value="' .$rows_ordini[$i]['id'].'" hidden>
 						<input type="text" name="ISBN" value="' .$rows_ordini[$i]['ISBN'].'" hidden>
 					</form>
 
 					<p class="description_p"> 
-						<strong>titolo:</strong> '.$rows_ordini[$i]['title'].' 
+						<strong>Title:</strong> '.$rows_ordini[$i]['title'].' 
 						<strong>Publisher:</strong> '.$rows_ordini[$i]['publisher'].' 
-						<strong>Auhtor:</strong> '.$rows_ordini[$i]['author'].'
+						<strong>Author:</strong> '.$rows_ordini[$i]['author'].'
 						<br>
-						<strong>Numero item :</strong> '.floatval($rows_ordini[$i]['numero_item']).'
+						<strong>Item Quantity:</strong> '.floatval($rows_ordini[$i]['numero_item']).'
 						
 					</p>
 
@@ -221,18 +221,18 @@ if(!isset($_SESSION['username'])){
 		echo '
 	<div id="total">
 
-		<p> Subtotale Carrello &emsp; '.$totale_finale.'&euro; </p>
-		<p style="color: red"> Spedizione Gratuita &emsp; 0.00&euro; </p>
-		<h2> Totale &emsp; '.$totale_finale. '&euro; </h2>
+		<p> Cart subtotal &emsp; '.$totale_finale.'&euro; </p>
+		<p style="color: red"> Free shipping &emsp; 0.00&euro; </p>
+		<h2> Total &emsp; '.$totale_finale. '&euro; </h2>
 
 	</div>
 	<hr style="width: 100%">
 	<footer> 
-		<a href="bookshelf.php"> Continua ad ordinare </a>';
+		<a href="bookshelf.php"> Keep buying </a>';
 		if(isset($_SESSION['not_logged_in'])){
 			echo'
 				<div id="pay_form">
-					<input type="submit" id="order_complete" value="Login">
+					<input type="submit" id="order_complete" value="Login" onclick="openmodal()">
 				</div>
 			';
 		}
