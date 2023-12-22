@@ -17,18 +17,16 @@ function redirect(){
     }
 }
 // If form submitted, insert values into the database.
-if (isset($_POST['username'])){
+if (isset($_POST['username']) && isset($_POST['password'])){
         // removes backslashes
 
-      $username = stripslashes($_REQUEST['username']);
+      $username = stripslashes($_POST['username']);
       //escapes special characters in a string
       $username = mysqli_real_escape_string($con,$username);
-      $password = stripslashes($_REQUEST['password']);
+      $password = stripslashes($_POST['password']);
       $password = mysqli_real_escape_string($con,$password);
+
       //Checking is user existing in the database or not
-      //$query = "SELECT * FROM `users` WHERE username='$username' and password='".md5($password)."'";
-      //$result = mysqli_query($con,$query) or die(mysql_error());
-      //$rows = mysqli_num_rows($result);
 
       $stmt = $con->prepare("SELECT* FROM users WHERE username= ?");
       $stmt->bind_param("s",$username);
@@ -92,7 +90,7 @@ if (isset($_POST['username'])){
           redirect();
       }
 }else{
-      $_SESSION['error'] = "Generic error,contact admin.";
+      $_SESSION['error'] = "Email or password are missing";
       //$log_msg = "FAILED LOGIN ATTEMPT: Username: ".$username;
       //log_message($log_msg);
 }

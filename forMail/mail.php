@@ -24,7 +24,7 @@ function sendMail($newpwd,$recipient){
    
     $mail->addAddress($recipient);
     
-    $mail->Subject = 'Password chainging';
+    $mail->Subject = 'Password changing';
     $mail->Body    = 'Your new password is: '.$newpwd;
     $mail->send();
 }

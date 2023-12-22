@@ -2,10 +2,6 @@
 require('../inc/db.php');
 // If form submitted, insert values into the database.
 session_start();
-if(isset($_SESSION["username"]))
-    {
-        header("location: ../index.php");
-    }
 
 //*+++++++++++++++++++++++++++++
 //*+++++++++++++++++++++++++++++
@@ -15,6 +11,8 @@ if(isset($_SESSION["username"]))
 //*+++++++++++++++++++++++++++++
 //*+++++++++++++++++++++++++++++
 
+
+    //REDIRECT FUNCTION
     function redirect(){
         if(isset($_SERVER['HTTP_REFERER'])) {
             header('Location: ' . $_SERVER['HTTP_REFERER']); // SAFE (?)
@@ -25,94 +23,99 @@ if(isset($_SESSION["username"]))
         }
     }
 
-
-    function test_input($data) {
-     $data = trim($data);
-     $data = stripslashes($data);
-     $data = htmlspecialchars($data);
+    //SANITIZE AND CLEAN INPUT DATA
+    function test_input($data,$con) {
+     $data = trim($data); //Remove whitespaces
+     $data = stripcslashes($data);
+     $data = htmlspecialchars($data); //Convert special characters to HTML entities
+     $data = mysqli_real_escape_string($con,$data); //SQL Injection prevention
      return $data;
     }
 
+    // FUNCTIONS TO HASH PASSWORDS //
     function hash_psw($clear_psw){
         $psw_hash = hash('sha256', $clear_psw);
         return $psw_hash;
     }
 
-
-    function create_salt() // a good salt is long as the hash lenght
+    function create_salt() // a good salt is long as the hash length
     {
         $text = date('U');
         $salt = hash('sha256', $text);
         return $salt;
     }
 
+    // SERVER SIDE VALIDATION
 
-
-        // removes backslashes
     $error = NULL;
 
-    if (empty($_POST["email"])) { /* Email */
-    $emailErr = "Inserisci una email";
-    $error = 1;
-    } else {
-    $email = test_input($_POST["email"]);
+    //EMAIL VALIDATION
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $emailErr = "Formato email non valido."; 
-      $error= 1;
-    }
-
-    $query_email = "SELECT * FROM users WHERE email ='".$email."'";
-    $result_email = mysqli_query($con,$query_email); 
-    $result_emailCount= mysqli_num_rows($result_email);
-
-    if ($result_emailCount  > 0){
-        $emailErr = "Questa email &egrave; gi&agrave; associata ad un altro account.";
+    if (empty($_POST["email"])) { /* Email empty */
+        $emailErr = "Insert an email";
         $error = 1;
-    }
+    } else {
+        $email = test_input($_POST["email"],$con);
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email format";
+            $error= 1;
+        }
+
+        $stmt = $con->prepare("SELECT* FROM users WHERE email= ?");
+        $stmt->bind_param("s",$email);
+        $stmt->execute();
+        $result_email = $stmt->get_result();
+        $result_emailCount=mysqli_num_rows($result_email);
+
+        if ($result_emailCount  > 0){
+            $emailErr = "Username or email is already in use."; //The error messages should not give any hints to users
+            $error = 1;
+        }
   }
 
     if(isset($emailErr)){
         $_SESSION['emailErr']= $emailErr;
     }
 
-
-    if (empty($_POST["nome"])) { /* Nome */
-        $nomeErr = "Devi inserire un nome.";
+    //NAME VALIDATION
+    if (empty($_POST["name"])) { /* Name empty */
+        $nameErr = "Insert a name.";
         $error = 1;
         }
         else{
 
-          $nome = test_input($_POST["nome"]);
+          $name = test_input($_POST["name"],$con);
 
-          if (!preg_match("/^[a-zA-Z ]*$/",$nome)) {
-            $nomeErr = "Il nome deve contenere solo lettere o spazi bianchi"; 
+          if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+            $nameErr = "Name can contain only alphabetic chars and whitespaces";
             $error = 1;
           }
-          elseif (strlen($nome) < 3) {
-          $nomeErr = "Inserisci un nome valido."; 
+          elseif (strlen($name) < 3) {
+          $nameErr = "Name is too short";
           $error = 1;
           }
         }
 
-     if(isset($nomeErr)){
-        $_SESSION['nomeErr']= $nomeErr;
+     if(isset($nameErr)){
+        $_SESSION['nameErr']= $nameErr;
     }
 
-    if (empty($_POST["surname"])) {  /* Cognome */
-        $surnameErr = "Devi inserire un cognome.";
+     //SURNAME
+    if (empty($_POST["surname"])) {  /* Surname empty */
+        $surnameErr = "Insert the surname.";
         $error = 1;
         }
         else{
 
-          $surname = test_input($_POST["surname"]);  
+          $surname = test_input($_POST["surname"],$con);
 
           if (!preg_match("/^[a-zA-Z ]*$/",$surname)) {
-            $surnameErr = "Il cognome deve contenere solo lettere o spazi bianchi"; 
+            $surnameErr = "Surname can contain only alphabetic chars and whitespaces";
             $error = 1;
           }
           elseif (strlen($surname) < 3) {
-          $surnameErr = "Inserisci un cognome valido."; 
+          $surnameErr = "Surname is too short";
           $error = 1;
           }
         }
@@ -121,17 +124,24 @@ if(isset($_SESSION["username"]))
         $_SESSION['surnameErr']= $surnameErr;
     }
 
+    //USERNAME VALIDATION
 
-    if (empty($_POST["uname"])) { /* Username */
-        $usernameErr = "Devi inserire un username";
+//************************* MANCA CONTROLLO SULL'USO DI SPECIAL CHAR E SIMILI *********************
+
+    if (empty($_POST["uname"])) { /* Username empty */
+        $usernameErr = "Insert an username";
         }
         else{
-          $username = test_input($_POST['uname']);
-          $query_user = "SELECT * FROM users WHERE username ='".$username."'";
-          $result_user = mysqli_query($con,$query_user); 
+          $username = test_input($_POST['uname'],$con);
+
+          $stmt_user = $con->prepare("SELECT* FROM users WHERE username= ?");
+          $stmt_user->bind_param("s",$username);
+          $stmt_user->execute();
+          $result_user = $stmt_user->get_result();
           $result_userCount=mysqli_num_rows($result_user);
+
           if($result_userCount > 0){
-            $usernameErr=  "Username gi&agrave; presente, inseriscine uno nuovo";
+            $usernameErr=  "Username or email is already in use."; //The error messages should not give any hints to users
             $error = 1;
           }
     }
@@ -141,26 +151,27 @@ if(isset($_SESSION["username"]))
         $_SESSION['usernameErr']= $usernameErr;
     }
 
-
-    if (empty($_POST["psw"])) { /* Password */
-        $pswErr = "Devi inserire una password.";
+    //PASSWORD VALIDATION
+//************************* MANCA CONTROLLO SULL'USO DI SPECIAL CHAR E SIMILI *********************
+    if (empty($_POST["psw"])) { /* Password empty*/
+        $pswErr = "Insert a password";
     }
         else{
             $psw_clear = $_POST['psw'];
             if (strlen($psw_clear) <= '7') {
-            $pswErr = "La tua password deve contenere almeno 8 caratteri.";
+            $pswErr = "Password should be at least 8 digit long";
             $error = 1;
             }
             elseif (!preg_match("#[0-9]+#",$psw_clear)) {
-                $pswErr = "La tua password deve contenere almeno un numero";
+                $pswErr = "Password should contain at least a number";
                 $error = 1;
             }
             elseif(!preg_match("#[A-Z]+#",$psw_clear)) {
-                $pswErr = "La tua password deve contenere almeno un carattere maiuscolo";
+                $pswErr = "Password should contain at least one uppercase char";
                 $error = 1;
             }
             elseif(!preg_match("#[a-z]+#",$psw_clear)) {
-                $pswErr = "La tua password deve contenere almeno un carattere minuscolo";
+                $pswErr = "Password should contain at least one lowercase char";
                 $error = 1;
             }
           
@@ -170,14 +181,15 @@ if(isset($_SESSION["username"]))
         $_SESSION['pswErr']= $pswErr;
     }
 
-    if (empty($_POST["psw-repeat"])) { /* Ripeti Password */
-        $psw_repeatErr = "Devi reinserire la password.";
+    //PASSWORD REPEAT VALIDATION
+    if (empty($_POST["psw-repeat"])) { /* Password repeat empty */
+        $psw_repeatErr = "Repeat your password.";
         $error = 1;
         }
         else{
-            $psw_repeat = test_input($_POST['psw-repeat']);
+            $psw_repeat = test_input($_POST['psw-repeat'],$con);
             if($psw_clear != $psw_repeat){
-                $psw_repeatErr = "Le due password non coincidono.";
+                $psw_repeatErr = "Password mismatch.";
                 $error = 1;
             } 
         }
@@ -186,43 +198,46 @@ if(isset($_SESSION["username"]))
         $_SESSION['psw_repeatErr']= $psw_repeatErr;
     }
 
-    if (empty($_POST["citta"])) { /* Citta */
-        $cittaErr = "Devi inserire una citt&agrave;";
+    //CITY VALIDATION
+    if (empty($_POST["city"])) { /* Citta */
+        $cityErr = "Insert a city";
         $error = 1;
         }
         else{
-          $citta = test_input($_POST['citta']);
-          if (!preg_match("/^[a-zA-Z ]*$/",$citta)) {
-            $cittaErr = "La citt&agrave; deve contenere solo lettere o spazi bianchi"; 
+          $city = test_input($_POST['city'],$con);
+          if (!preg_match("/^[a-zA-Z ]*$/",$city)) {
+            $cityErr = "City can contain only alphabetic chars and whitespaces";
             $error = 1;
           }
         }
 
-    if(isset($cittaErr)){
-        $_SESSION['cittaErr']= $cittaErr;
+    if(isset($cityErr)){
+        $_SESSION['cittaErr']= $cityErr;
     }
 
-    if (empty($_POST["indirizzo"])) { /* Indirizzo */
-        $indirizzoErr = "Devi inserire un indirizzo";
+    //ADDRESS VALIDATION
+//************************* MANCA CONTROLLO SULL'USO DI SPECIAL CHAR E SIMILI *********************
+    if (empty($_POST["address"])) { /* Address empty */
+        $addressErr = "Insert an address";
         $error = 1;
         }
         else{
-          $indirizzo = test_input($_POST['indirizzo']);
+          $address = test_input($_POST['address'],$con);
     }
 
-    if(isset($indirizzoErr)){
-        $_SESSION['indirizzoErr']= $indirizzoErr;
+    if(isset($addressErr)){
+        $_SESSION['addressErr']= $addressErr;
     }
 
 
     if (empty($_POST["cap"])) { /* CAP */
-        $capErr = "Devi inserire un CAP";
+        $capErr = "Insert the postal code";
         $error= 1;
         }
         else{
-          $cap = test_input($_POST['cap']);
+          $cap = test_input($_POST['cap'],$con);
           if (!preg_match("/^\d{5}$/",$cap)) {
-            $capErr = "CAP non valido.";
+            $capErr = "Invalid postal code";
             $error = 1;
           }
         }
@@ -240,11 +255,12 @@ if(isset($_SESSION["username"]))
 
         $psw = hash('sha256', $salt . $hashed_psw); //hashed psw with hash
 
-        $query = "INSERT into `users` (email, nome, cognome, username, password,salt , citta, indirizzo, cap, trn_date)
-        VALUES ('$email', '$nome', '$surname', '$username', '$psw', '$salt', '$citta', '$indirizzo', '$cap', '$trn_date')";
+        $stmt_final = $con->prepare("INSERT into users (email, nome, cognome, username, password, salt, citta, indirizzo, cap, trn_date)
+        VALUES (?,?,?,?,?,?,?,?,?,?)");
+        $stmt_final->bind_param("ssssssssss",$email, $name, $surname, $username, $psw, $salt, $city, $address, $cap, $trn_date);
+        $stmt_final->execute();
 
-        $result = mysqli_query($con,$query);
-
+        $result = $stmt_final->get_result();
 
         $_SESSION['username'] = $username;
 

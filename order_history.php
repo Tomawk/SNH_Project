@@ -3,7 +3,11 @@ session_start();
 require('inc/db.php');
 
 if(!isset($_SESSION['username'])){
-    header('location: 404.php');
+    header('location: index.php');
+    die();
+    //This prevents bots and savy users who know how to ignore browser headers from
+    // getting into the page and causing problems. It also allows the page to
+    //  stop executing the rest of the page and to save resources.
 }
 ?>
 

@@ -5,43 +5,43 @@
   <span onclick="closemodal1()" class="close1" title="Close Modal">&times;</span>
   <form class="modal-content1 animate" method="post" name="register" onsubmit="return validateFormRegister()" action="utility/register.php">
     <div class="container1">
-      <h1>Registrati</h1>
-      <p>Perfavore inserisci i dati nei seguenti riquadri per creare un account.</p>
+      <h1>Register</h1>
+      <p>Please insert data in the following fields to create an account</p>
       <hr id="hrmodal1">
       <label><b>Email</b></label>
-      <input type="text" placeholder="Inserisci Email" name="email" id="modal1_email" required>
-      <p class="error_register" id="error_email"> Email non supportata, inserisci una email valida. </p>
+      <input type="text" placeholder="Insert email" name="email" id="modal1_email" required>
+      <p class="error_register" id="error_email"> Not supported email, insert a valid email. </p>
 
-      <label><b>Nome</b></label>
-      <input type="text" placeholder="Inserisci Nome" name="nome" id="modal1_nome" required>
-      <p class="error_register" id="error_nome"> Nome non supportato, inserisci un nome valido. </p>
+      <label><b>Name</b></label>
+      <input type="text" placeholder="Insert name" name="name" id="modal1_nome" required>
+      <p class="error_register" id="error_nome"> Not supported name, insert a valid name. </p>
 
-      <label><b>Cognome</b></label>
-      <input type="text" placeholder="Inserisci Cognome" name="surname" id="modal1_surname" required>
-      <p class="error_register" id="error_surname"> Cognome non supportato, inserisci un cognome valido. </p>
+      <label><b>Surname</b></label>
+      <input type="text" placeholder="Insert surname" name="surname" id="modal1_surname" required>
+      <p class="error_register" id="error_surname"> Not supported surname, insert a valid surname. </p>
 
       <label><b>Username</b></label>
-      <input type="text" placeholder="Inserisci Username" name="uname" class="modal1_input" required>
+      <input type="text" placeholder="Insert username" name="uname" class="modal1_input" required>
 
       <label><b>Password</b></label>
-      <input type="password" placeholder="Inserisci Password" name="psw" id="modal1_password" required>
-      <p class="error_register" id="error_password"> Password non valida. Deve contenere almeno 8 caratteri, una lettera maiuscola, una lettera minuscola e un numero.</p>
+      <input type="password" placeholder="Insert password" name="psw" id="modal1_password" required>
+      <p class="error_register" id="error_password"> Invalid password. Password should at least contain 8 chars, an uppercase char, a lowercase char and a number.</p>
 
-      <label><b>Ripeti Password</b></label>
-      <input type="password" placeholder="Ripeti Password" name="psw-repeat" id="modal1_repeat" required>
-      <p class="error_register" id="error_repeat"> Le due password con coincidono. </p>
+      <label><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat password" name="psw-repeat" id="modal1_repeat" required>
+      <p class="error_register" id="error_repeat"> Password mismatch. </p>
 
-      <label><b>Citt&agrave;</b></label>
-      <input type="text" placeholder="Inserisci Citt&agrave;" name="citta" class="modal1_input" required>
+      <label><b>City</b></label>
+      <input type="text" placeholder="Insert city" name="city" class="modal1_input" required>
 
-      <label><b>Indirizzo</b></label>
-      <input type="text" placeholder="Inserisci Indirizzo" name="indirizzo" class="modal1_input" required>
+      <label><b>Address</b></label>
+      <input type="text" placeholder="Insert address" name="address" class="modal1_input" required>
 
-      <label><b>CAP</b></label>
-      <input type="text" placeholder="Inserisci CAP" name="cap" id="modal1_cap" required>
-      <p class="error_register" id="error_cap"> CAP non valido. Ricorda: Il CAP &egrave; formato da 5 cifre numeriche </p>
+      <label><b>Postal Code</b></label>
+      <input type="text" placeholder="Insert postal code" name="cap" id="modal1_cap" required>
+      <p class="error_register" id="error_cap"> Invalid Postal Code. Remember: the postal code is composed of 5 digits only. </p>
 
-      <p>Creando un account accetti i nostri <a href="#" style="color:dodgerblue">Termini e Condizioni</a>.</p>
+      <p>By creating an account, you are agreeing our <a href="#" style="color:dodgerblue">Terms and Conditions</a>.</p>
 
       <div class="clearfix">
         <button type="button" onclick="closemodal1()" class="cancelbutn" id="modal1button_cancel">Cancel</button>
@@ -54,9 +54,9 @@
         unset($_SESSION['emailErr']);
         }
 
-        if(isset($_SESSION['nomeErr'])){
-        echo '<p class="err_register" id="nomeErr">'.$_SESSION['nomeErr'].'</p>';
-        unset($_SESSION['nomeErr']);
+        if(isset($_SESSION['nameErr'])){
+        echo '<p class="err_register" id="nomeErr">'.$_SESSION['nameErr'].'</p>';
+        unset($_SESSION['nameErr']);
         }
 
         if(isset($_SESSION['surnameErr'])){
@@ -79,14 +79,14 @@
         unset($_SESSION['psw_repeatErr']);
         }
 
-        if(isset($_SESSION['cittaErr'])){
-        echo '<p class="err_register" id="cittaErr">'.$_SESSION['cittaErr'].'</p>';
-        unset($_SESSION['cittaErr']);
+        if(isset($_SESSION['cityErr'])){
+        echo '<p class="err_register" id="cittaErr">'.$_SESSION['cityErr'].'</p>';
+        unset($_SESSION['cityErr']);
         }
 
-        if(isset($_SESSION['indirizzoErr'])){
-        echo '<p class="err_register" id="indirizzoErr">'.$_SESSION['indirizzoErr'].'</p>';
-        unset($_SESSION['indirizzoErr']);
+        if(isset($_SESSION['addressErr'])){
+        echo '<p class="err_register" id="indirizzoErr">'.$_SESSION['addressErr'].'</p>';
+        unset($_SESSION['addressErr']);
         }
 
         if(isset($_SESSION['capErr'])){
