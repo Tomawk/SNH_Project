@@ -30,6 +30,8 @@
     session_start();
     require('../inc/db.php');
     require('hashing_psw.php');
+    require("log.php");
+
     if(!isset($_SESSION['username'])){
       echo "you have to log in first!";
       return;
@@ -43,6 +45,37 @@
     $username = $_SESSION['username'];
     $old_password = $_POST["old_password"];
     $new_password = $_POST["new_password"];
+
+    //sanitize + clean inputs
+
+    $old_password = trim($old_password); //Remove whitespaces
+    $old_password = stripcslashes($old_password);
+    $old_password = htmlspecialchars($old_password); //Convert special characters to HTML entities
+    $old_password = mysqli_real_escape_string($con,$old_password); //SQL Injection prevention
+
+    $new_password = trim($new_password); //Remove whitespaces
+    $new_password = stripcslashes($new_password);
+    $new_password = htmlspecialchars($new_password); //Convert special characters to HTML entities
+    $new_password = mysqli_real_escape_string($con,$new_password); //SQL Injection prevention
+
+    // Validation server-side of $new_password
+
+    if (strlen($new_password) <= '7') {
+        echo "New Password should be at least 8 digit long";
+        return;
+    }
+    elseif (!preg_match("#[0-9]+#",$new_password)) {
+        echo "New Password should contain at least a number";
+        return;
+    }
+    elseif(!preg_match("#[A-Z]+#",$new_password)) {
+        echo "New Password should contain at least one uppercase char";
+        return;
+    }
+    elseif(!preg_match("#[a-z]+#",$new_password)) {
+        echo "New Password should contain at least one lowercase char";
+        return;
+    }
 
     $sql_username = "SELECT * FROM users where username = ?";
     $stmt_username = $con->prepare($sql_username);
@@ -90,16 +123,25 @@
             echo"<h1>Operation result</h1>";
             echo "<p>Password correctly changed</p>";
             echo "<a href='../index.php'>Go back to the main page</a>";
+            // LOG SUCCESSFUL CHANGE PSW
+            $log_msg = "PASSWORD CHANGE CORRECTLY: username: ".$username;
+            log_message($log_msg);
         }else{
             echo"<div class='message-container' style='background: #de6666'>";
             echo"<h1>Operation result</h1>";
             echo "<p>Username not exist or incorrect password, retry.</p>";
+            // LOG CHANGE PSW FAILED
+            $log_msg = "PASSWORD CHANGE FAILED: username: ".$username;
+            log_message($log_msg);
         }
 
     }else{
         echo"<div class='message-container' style='background: #de6666'>";
         echo"<h1>Operation result</h1>";
         echo "<p>Username not exist or incorrect password, retry.</p>";
+        // LOG CHANGE PSW FAILED
+        $log_msg = "PASSWORD CHANGE FOR NON-EXISTENT USERNAME: username: ".$username;
+        log_message($log_msg);
     }
 
 

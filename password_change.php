@@ -18,6 +18,7 @@
     <!-- Modal js include -->
     <script src="JS/modal.js" ></script>
     <script src="JS/password_chage.js" ></script>
+    <script src="JS/mainscript.js"> </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
 </head>
@@ -36,7 +37,7 @@
   ?>
   <div class="change-password-form">
     <h2>Change password</h2>
-    <form action="utility/elaborate_change_password.php" method="post" id="my_form">
+    <form onsubmit="return validateFormChangePsw()"  action="utility/elaborate_change_password.php" method="post" id="my_form" name="change_psw">
       <div class="form-group">
         <label for="oldPassword">Old Password</label>
         <input type="password" id="old_password" name="old_password" required>
@@ -44,6 +45,7 @@
       <div class="form-group">
         <label for="newPassword">New Password</label>
         <input type="password" id="new_password" name="new_password" oninput="controlla_sicurezza_password()" required>
+        <p class="error_register" id="error_password"> Invalid new password. Password should at least contain 8 chars, an uppercase char, a lowercase char and a number.</p>
         <p id="password_strength"></p>
       </div>
       

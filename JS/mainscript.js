@@ -4,49 +4,6 @@
 		window.scrollTo(0,0);
 	}
 
-	function scrollpromozioni(){
-		window.scrollTo(0,1020);
-	}
-
-	function scrollprenotazione(){
-		window.scrollTo(0,2200);
-	}
-
-	function scrollcontatti(){
-		window.scrollTo(0,2590);
-	}
-
-
-	function closeAlert(){
-		var node = document.getElementById('alertbox');
-		while (node.hasChildNodes()) {
-    	node.removeChild(node.firstChild);
-		}
-		var alert_x = document.getElementById("alertbox");
-		alert_x.style.display = "none";
-	}
-
-
-	var element = document.getElementById('firstname');
-	var element_date = document.getElementById('theDate')
-
-	element.addEventListener('webkitAnimationEnd', function(){ 
-   	 this.style.webkitAnimationName = '';
-	}, false);
-
-	element.addEventListener('animationend', function(){ 
-   	 this.style.animationName = '';
-	}, false);
-
-	element_date.addEventListener('webkitAnimationEnd', function(){ 
-   	 this.style.webkitAnimationName = '';
-	}, false);
-
-	element_date.addEventListener('animationend', function(){ 
-   	 this.style.animationName = '';
-	}, false);
-
-
 	function validateEmail(email) { /* Funzione per validare email */
   	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   	return re.test(email);
@@ -231,4 +188,28 @@
 	if(errore_ == false) return false;
 		else return true;
 	}
+
+
+function validateFormChangePsw(){
+
+	var errore_ = true;
+
+	var _password = document.forms["change_psw"]["new_password"].value; /* Nuova Password inserita */
+
+	if(!validatePassword(_password)){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
+		document.getElementById("new_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
+		document.getElementById("new_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
+		document.getElementById("new_password").focus();
+		document.getElementById("error_password").style.display='block';
+		event.preventDefault();
+		errore_=false;
+	}
+	else {
+		document.getElementById("error_password").style.display='none';
+		document.getElementById("new_password").style.backgroundColor='white';
+	}
+
+	if(errore_ == false) return false;
+	else return true;
+}
 
