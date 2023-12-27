@@ -26,11 +26,6 @@
 		alert_x.style.display = "none";
 	}
 
-	function validatedate(date) { /* Funzione per validare email */
-  	var regex_date = /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/;
-  	return regex_date.test(date);
-	}
-
 
 	var element = document.getElementById('firstname');
 	var element_date = document.getElementById('theDate')
@@ -51,49 +46,6 @@
    	 this.style.animationName = '';
 	}, false);
 
-	function validateForm(){
-	var _name = document.forms["myForm"]["firstname"].value; /* nome inserito */
-	var _date = document.forms["myForm"]["theDate"].value;
-	var withoutSpace = _name.replace(/ /g,""); /* rimuovo gli spazi bianchi */
-	var _length = withoutSpace.length; /* conta i caratteri */
-	var alert_x = document.getElementById("alertbox"); /* variabile supporto alertbox */
-	if(!validatedate(_date)) {
-		closeAlert(); /* svuota l'alert box */
-		alert_x.style.display = "block"; /* fa apparire l'alert */
-		alert_x.style.backgroundColor = "#ff9741";
-		document.getElementById('alertbox').innerHTML += 'Warning: La data inserita non &egrave; nel formato corretto (yyyy-mm-dd)'; /* scrive nell'alert */
-		document.getElementById("theDate").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
-		document.getElementById("theDate").style.animation = "shake .5s"; /*animazione keyframe shake sull'input*/
-		document.getElementById("theDate").style.backgroundColor = "#f44336"; /* setta colore input a red */
-		return false;
-	}
-	else if (today > _date){
-		closeAlert(); /* svuota l'alert box */
-		alert_x.style.display = "block"; /* fa apparire l'alert */
-		alert_x.style.backgroundColor = "#ff9741";
-		document.getElementById('alertbox').innerHTML += 'Warning: Non puoi inserire una data gi&agrave; passata'; /* scrive nell'alert */
-		document.getElementById("theDate").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
-		document.getElementById("theDate").style.animation = "shake .5s"; /*animazione keyframe shake sull'input*/
-		document.getElementById("theDate").style.backgroundColor = "#f44336"; /* setta colore input a red */
-		return false;
-	}
-	else if ( _length < 3 || _length > 10) {
-		document.getElementById("theDate").style.backgroundColor = "white";
-		closeAlert(); /* svuota l'alert box */
-		alert_x.style.display = "block"; /* fa apparire l'alert */
-		alert_x.style.backgroundColor = "#ff9741"; 
-		document.getElementById('alertbox').innerHTML += 'Warning: Impossibile inserire un nome con meno di 3 caratteri o con pi&ugrave; di 10!'; /* scrive nell'alert */
-		document.getElementById("firstname").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
-		document.getElementById("firstname").style.animation = "shake .5s"; /*animazione keyframe shake sull'input*/
-		document.getElementById("firstname").style.backgroundColor = "#f44336"; /* setta colore input a red */
-		return false;
-	}
-		else {
-		 return true;
-		}
-
-	}
-
 
 	function validateEmail(email) { /* Funzione per validare email */
   	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -101,9 +53,9 @@
 	}
 
 
-	function validateNameInput(nomeinput){
-		var reex = /^[a-zA-Z0-9]{2,10}$/;
-		return reex.test(nomeinput);
+	function validateNameInput(nameinput){
+		var reex = /^[a-zA-Z]{2,10}$/;
+		return reex.test(nameinput);
 	}
 
 	function validatePassword(password){
@@ -187,9 +139,9 @@
 			document.getElementById("modal1_email").style.backgroundColor='white';
 		}
 
-	var _nomeform = document.forms["register"]["nome"].value; /* Nome inserito */
+	var _nameform = document.forms["register"]["name"].value; /* Nome inserito */
 
-	if(!validateNameInput(_nomeform)){ /* Controlla nome dai 4 ai 10 caratteri composto solo da caratteri alfanumerici */
+	if(!validateNameInput(_nameform)){ /* Controlla nome dai 2 ai 10 caratteri composto solo da caratteri alfanumerici */
 		document.getElementById("modal1_nome").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
 		document.getElementById("modal1_nome").style.backgroundColor = "#f44336"; /* setta colore input a red */
 		document.getElementById("modal1_nome").focus();
@@ -202,9 +154,9 @@
 			document.getElementById("modal1_nome").style.backgroundColor='white';
 		}
 
-	var _cognome = document.forms["register"]["surname"].value; /* Cognome inserito */
+	var _surname = document.forms["register"]["surname"].value; /* Cognome inserito */
 
-	if(!validateNameInput(_cognome)){ /* Controlla cognome dai 4 ai 10 caratteri composto solo da caratteri alfanumerici */
+	if(!validateNameInput(_surname)){ /* Controlla cognome dai 2 ai 10 caratteri composto solo da caratteri alfanumerici */
 		document.getElementById("modal1_surname").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
 		document.getElementById("modal1_surname").style.backgroundColor = "#f44336"; /* setta colore input a red */
 		document.getElementById("modal1_surname").focus();
@@ -219,7 +171,7 @@
 
 	var _password = document.forms["register"]["psw"].value; /* Password inserita */
 
-	if(!validatePassword(_password)){ /* Controlla password, almeno 8 caratteri di cui una lettera, un numero e un carattere speciale*/
+	if(!validatePassword(_password)){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
 		document.getElementById("modal1_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
 		document.getElementById("modal1_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
 		document.getElementById("modal1_password").focus();
@@ -261,6 +213,20 @@
 			document.getElementById("error_cap").style.display='none';
 			document.getElementById("modal1_cap").style.backgroundColor='white';
 		}
+
+	var _city = document.forms["register"]["city"].value; /* city inserita */
+
+	if(!validateNameInput(_city)){
+		document.getElementById("modal1_city").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
+		document.getElementById("modal1_city").style.backgroundColor = "#f44336"; /* setta colore input a red */
+		document.getElementById("modal1_city").focus();
+		document.getElementById("error_city").style.display='block';
+		event.preventDefault();
+		errore_=false;
+	} else{
+		document.getElementById("error_city").style.display='none';
+		document.getElementById("modal1_city").style.backgroundColor='white';
+	}
 
 	if(errore_ == false) return false;
 		else return true;

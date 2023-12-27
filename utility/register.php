@@ -79,9 +79,13 @@ session_start();
             $nameErr = "Name can contain only alphabetic chars and whitespaces";
             $error = 1;
           }
-          elseif (strlen($name) < 3) {
-          $nameErr = "Name is too short";
-          $error = 1;
+          elseif (strlen($name) < 2) {
+              $nameErr = "Name is too short";
+              $error = 1;
+          }
+          elseif (strlen($name) > 10) {
+              $nameErr = "Name is too Long";
+              $error = 1;
           }
         }
 
@@ -102,9 +106,13 @@ session_start();
             $surnameErr = "Surname can contain only alphabetic chars and whitespaces";
             $error = 1;
           }
-          elseif (strlen($surname) < 3) {
-          $surnameErr = "Surname is too short";
-          $error = 1;
+          elseif (strlen($surname) < 2) {
+              $nameErr = "Surname is too short";
+              $error = 1;
+          }
+          elseif (strlen($surname) > 10) {
+              $nameErr = "Surname is too Long";
+              $error = 1;
           }
         }
 

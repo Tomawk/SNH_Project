@@ -21,7 +21,7 @@
       <p class="error_register" id="error_surname"> Not supported surname, insert a valid surname. </p>
 
       <label><b>Username</b></label>
-      <input type="text" placeholder="Insert username" name="uname" class="modal1_input" required>
+      <input type="text" placeholder="Insert username" name="uname" id="modal1_uname" required>
 
       <label><b>Password</b></label>
       <input type="password" placeholder="Insert password" name="psw" id="modal1_password" required>
@@ -32,10 +32,11 @@
       <p class="error_register" id="error_repeat"> Password mismatch. </p>
 
       <label><b>City</b></label>
-      <input type="text" placeholder="Insert city" name="city" class="modal1_input" required>
+      <input type="text" placeholder="Insert city" name="city" id="modal1_city" required>
+      <p class="error_register" id="error_city"> Invalid City. Only letters and whitespaces allowed.</p>
 
       <label><b>Address</b></label>
-      <input type="text" placeholder="Insert address" name="address" class="modal1_input" required>
+      <input type="text" placeholder="Insert address" name="address" id="modal1_address" required>
 
       <label><b>Postal Code</b></label>
       <input type="text" placeholder="Insert postal code" name="cap" id="modal1_cap" required>

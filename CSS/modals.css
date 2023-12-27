@@ -137,7 +137,7 @@ span.psw {
 /* MODAL 2 */
 
 /* Full-width input fields */
-.modal1_input, #modal1_email, #modal1_nome, #modal1_surname, #modal1_password, #modal1_repeat, #modal1_cap {
+#modal1_uname, #modal1_city, #modal1_address, #modal1_email, #modal1_nome, #modal1_surname, #modal1_password, #modal1_repeat, #modal1_cap {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -148,7 +148,7 @@ span.psw {
 }
 
 /* Add a background color when the inputs get focus */
-.modal1_input:focus, #modal1_email:focus{
+#modal1_uname:focus, #modal1_city:focus, #modal1_address:focus, #modal1_email:focus{
     background-color: #ddd;
     outline: none;
 }
