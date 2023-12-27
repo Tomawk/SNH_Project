@@ -29,6 +29,7 @@
     <?php
     session_start();
     require('../inc/db.php');
+    require('hashing_psw.php');
     if(!isset($_SESSION['username'])){
       echo "you have to log in first!";
       return;
@@ -43,29 +44,66 @@
     $old_password = $_POST["old_password"];
     $new_password = $_POST["new_password"];
 
-    $sql = "SELECT * FROM users where username = ? and password = ? ";
-    $stmt = $con->prepare($sql);
-    $stmt->bind_param("ss",$username,hash('md5', $old_password));
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $sql_username = "SELECT * FROM users where username = ?";
+    $stmt_username = $con->prepare($sql_username);
+    $stmt_username->bind_param("s",$username);
+    $stmt_username->execute();
+    $result_username = $stmt_username->get_result();
+    $result_usernameCount=mysqli_num_rows($result_username);
 
-    if ($result->num_rows > 0) {
+    if($result_usernameCount == 1){
         //user present
-        $sql = "UPDATE `users` SET `password` = ? WHERE `users`.`id` = ?";
-        $stmt = $con->prepare($sql);
-        $row = $result->fetch_assoc();
-        $stmt->bind_param("si",hash('md5',$new_password), $row["id"]);
-        $stmt->execute();
 
-        echo"<div class='message-container' style='background: green'>";
-        echo"<h1>Operation result</h1>";
-        echo "<p>Password correctly changed</p>";
-        echo "<a href='../index.php'>Go back to the main page</a>";
+        //retrieve salt
+
+        $row = mysqli_fetch_assoc($result_username);
+        $salt = $row['salt'];
+
+        $old_hashed_psw = hash('sha256',$old_password);
+        $old_final_psw = hash('sha256', $salt . $old_hashed_psw); //hashed psw with hash
+
+        $sql = "SELECT * FROM users where username = ? and password = ? ";
+
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("ss",$username,$old_final_psw);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            //old password matches
+
+            // create new salt
+            $new_salt = create_salt();
+
+            // hash the new pasw
+            $hashed_psw = hash_psw($new_password);
+            $psw_final = hash('sha256', $new_salt . $hashed_psw); //hashed psw with hash
+
+
+            $sql = "UPDATE `users` SET `password` = ?,`salt` = ?  WHERE `users`.`id` = ?";
+            $stmt = $con->prepare($sql);
+            $row = $result->fetch_assoc();
+            $stmt->bind_param("ssi",$psw_final,$new_salt, $row["id"]);
+            $stmt->execute();
+
+            echo"<div class='message-container' style='background: green'>";
+            echo"<h1>Operation result</h1>";
+            echo "<p>Password correctly changed</p>";
+            echo "<a href='../index.php'>Go back to the main page</a>";
+        }else{
+            echo"<div class='message-container' style='background: #de6666'>";
+            echo"<h1>Operation result</h1>";
+            echo "<p>Username not exist or incorrect password, retry.</p>";
+        }
+
     }else{
         echo"<div class='message-container' style='background: #de6666'>";
-        echo"<h1>Esito operazione</h1>";
-        echo "<p>Username non esistente o password errata, riprova</p>";
+        echo"<h1>Operation result</h1>";
+        echo "<p>Username not exist or incorrect password, retry.</p>";
     }
+
+
+
 
     ?>
  </div>

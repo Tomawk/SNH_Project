@@ -11,7 +11,7 @@
     }
     
     if(!isset($_POST['email']) || !isset($_POST['username'])){
-        //"usaname or email not present";
+        //"username or email not present";
         echo 0;
         return;
     }else{

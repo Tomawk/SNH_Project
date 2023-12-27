@@ -1,5 +1,6 @@
 <?php
 require('../inc/db.php');
+require("hashing_psw.php");
 // If form submitted, insert values into the database.
 session_start();
 
@@ -30,19 +31,6 @@ session_start();
      $data = htmlspecialchars($data); //Convert special characters to HTML entities
      $data = mysqli_real_escape_string($con,$data); //SQL Injection prevention
      return $data;
-    }
-
-    // FUNCTIONS TO HASH PASSWORDS //
-    function hash_psw($clear_psw){
-        $psw_hash = hash('sha256', $clear_psw);
-        return $psw_hash;
-    }
-
-    function create_salt() // a good salt is long as the hash length
-    {
-        $text = date('U');
-        $salt = hash('sha256', $text);
-        return $salt;
     }
 
     // SERVER SIDE VALIDATION

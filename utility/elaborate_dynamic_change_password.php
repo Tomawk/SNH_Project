@@ -29,6 +29,7 @@
     <?php
     session_start();
     require('../inc/db.php');
+    require('hashing_psw.php');
 
     if(!isset($_POST["new_password"])  || !isset($_POST["confirm_password"])  || !isset($_POST["link"])){
         echo "some field are missing";
@@ -46,10 +47,17 @@
 
     if (($result->num_rows > 0) and ($new_password == $confirm_password)) {
         //user present and password correct
-        $sql = "UPDATE `users` SET `password` = ? WHERE `users`.`id` = ?";
+
+        // creating a new salt and hashing the password
+        $hashed_psw = hash_psw($new_password);
+        $salt = create_salt();
+        $psw_final = hash('sha256', $salt . $hashed_psw); //hashed psw with hash
+
+        $sql = "UPDATE `users` SET `password` = ?, `salt` = ? WHERE `users`.`id` = ?";
         $stmt = $con->prepare($sql);
         $row = $result->fetch_assoc();
-        $stmt->bind_param("si",hash('md5',$new_password), $row["id"]);
+
+        $stmt->bind_param("ssi",$psw_final,$salt,$row["id"]);
         $stmt->execute();
 
         echo"<div class='message-container' style='background: green'>";
@@ -58,8 +66,8 @@
         echo "<a href='../index.php'>Go back to the main page</a>";
     }else{
         echo"<div class='message-container' style='background: #de6666'>";
-        echo"<h1>Esito operazione</h1>";
-        echo "<p>Username non esistente o password errata, riprova</p>";
+        echo"<h1>Operation result</h1>";
+        echo "<p>Username not exist or incorrect password, retry.</p>";
     }
     ?>
  </div>
