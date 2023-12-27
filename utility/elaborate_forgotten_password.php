@@ -51,7 +51,7 @@
             $stmt->execute();
 
             //send the email
-            sendMail($password,$row['email']);
+            sendMail($password,$row['email'],"Your new password is: ",'Password changing');
 
             echo 1;
             //echo "password sent";

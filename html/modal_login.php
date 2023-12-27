@@ -32,11 +32,17 @@
 
     <div class="container" style="background-color:#f1f1f1">
       <button type="button" onclick="closemodal()" class="cancelbtn">Cancel</button>
-      <span class="psw"><a href="recover_password.php">Forgot Password? </a> <a href="usernameRecovery.php">Forgot username?</a></span>
+      <span class="psw"><a href="request_recover_password.php">Forgot Password? </a> <a href="usernameRecovery.php">Forgot username?</a></span>
       <span class="psw"></span>
     </div>
   </form>
+
+
+
 </div>
+
 
 <!-- FINE MODAL LOGIN-->
 <script src="JS/modal.js" ></script>
+
+</script>

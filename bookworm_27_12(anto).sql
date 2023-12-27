@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 17, 2023 at 04:28 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Creato il: Dic 27, 2023 alle 08:57
+-- Versione del server: 10.4.28-MariaDB
+-- Versione PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `bookworm`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `books`
+-- Struttura della tabella `books`
 --
 
 DROP TABLE IF EXISTS `books`;
@@ -42,7 +42,7 @@ CREATE TABLE `books` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `books`
+-- Dump dei dati per la tabella `books`
 --
 
 INSERT INTO `books` (`ISBN`, `title`, `author`, `publication_year`, `publisher`, `image_url`, `genre`, `price`) VALUES
@@ -61,7 +61,7 @@ INSERT INTO `books` (`ISBN`, `title`, `author`, `publication_year`, `publisher`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contenutoordini`
+-- Struttura della tabella `contenutoordini`
 --
 
 DROP TABLE IF EXISTS `contenutoordini`;
@@ -73,7 +73,7 @@ CREATE TABLE `contenutoordini` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `contenutoordini`
+-- Dump dei dati per la tabella `contenutoordini`
 --
 
 INSERT INTO `contenutoordini` (`ISBN`, `username`, `id`, `numero_item`) VALUES
@@ -84,6 +84,7 @@ INSERT INTO `contenutoordini` (`ISBN`, `username`, `id`, `numero_item`) VALUES
 ('0002005018', 'asd', 19, 1),
 ('0060973129', 'asd', 16, 12),
 ('0060973129', 'asd', 21, 1),
+('0060973129', 'pol', 22, 1),
 ('0195153448', 'asd', 16, 11),
 ('0195153448', 'asd', 17, 1),
 ('0374157065', 'asd', 16, 4),
@@ -97,7 +98,7 @@ INSERT INTO `contenutoordini` (`ISBN`, `username`, `id`, `numero_item`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ordini`
+-- Struttura della tabella `ordini`
 --
 
 DROP TABLE IF EXISTS `ordini`;
@@ -112,7 +113,7 @@ CREATE TABLE `ordini` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `ordini`
+-- Dump dei dati per la tabella `ordini`
 --
 
 INSERT INTO `ordini` (`id`, `data`, `totale`, `stato_ordine`, `indirizzo`, `citta`, `paese`) VALUES
@@ -121,12 +122,13 @@ INSERT INTO `ordini` (`id`, `data`, `totale`, `stato_ordine`, `indirizzo`, `citt
 (18, '2023-12-15', 11, 'NULL', NULL, NULL, NULL),
 (19, '2023-12-15', 11, 'NULL', NULL, NULL, NULL),
 (20, '2023-12-15', 14, 'NULL', NULL, NULL, NULL),
-(21, '2023-12-15', 18, 'shipped', 'asd', 'asd', 'ITA');
+(21, '2023-12-15', 18, 'shipped', 'asd', 'asd', 'ITA'),
+(22, '2023-12-17', 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struttura della tabella `users`
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -136,27 +138,31 @@ CREATE TABLE `users` (
   `nome` varchar(50) NOT NULL,
   `cognome` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(300) NOT NULL,
+  `salt` varchar(300) NOT NULL,
   `citta` varchar(50) NOT NULL,
   `indirizzo` varchar(50) NOT NULL,
   `cap` varchar(50) NOT NULL,
-  `trn_date` date NOT NULL
+  `trn_date` date NOT NULL,
+  `link` varchar(100) DEFAULT NULL,
+  `timestamp` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `users`
+-- Dump dei dati per la tabella `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `nome`, `cognome`, `username`, `password`, `citta`, `indirizzo`, `cap`, `trn_date`) VALUES
-(1, 'gaso98@gmail.com', 'Tommaso', 'Gi', 'User1', 'e587466319da83fe4bdf4ceae9746357', 'Livono', 'Viale A It', '12456', '2023-12-06'),
-(2, 'asd@asd.com', 'asd', 'asd', 'asd', '7815696ecbf1c96e6894b779456d330e', 'asd', 'asd', '12345', '2023-12-07'),
-(3, 'bau@bau.com', 'bau', 'bau', 'bau', 'ff3a6178371203a3b010f6d99df3f8c0', 'bau', 'bau', '12345', '2023-12-10'),
-(4, 'qwe@qweq.com', 'qwe', 'qwe', 'qwe', 'f388a1ddfab8eee2592069488de5370e', 'qwe', 'qwe', '12345', '2023-12-10');
+INSERT INTO `users` (`id`, `email`, `nome`, `cognome`, `username`, `password`, `salt`, `citta`, `indirizzo`, `cap`, `trn_date`, `link`, `timestamp`) VALUES
+(1, 'gaso98@gmail.com', 'Tommaso', 'Gi', 'User1', 'e587466319da83fe4bdf4ceae9746357', '', 'Livono', 'Viale A It', '12456', '2023-12-06', NULL, NULL),
+(2, 'antoninonigro00@gmail.com', 'asd', 'asd', 'asd', '00beb4499afb8a43ca10acd82b6d7bc9', '', 'asd', 'asd', '12345', '2023-12-07', '1736ea2d040a486c376fd27936fe55d9', '1703662260'),
+(3, 'bau@bau.com', 'bau', 'bau', 'bau', 'ff3a6178371203a3b010f6d99df3f8c0', '', 'bau', 'bau', '12345', '2023-12-10', NULL, NULL),
+(4, 'qwe@qweq.com', 'qwe', 'qwe', 'qwe', 'f388a1ddfab8eee2592069488de5370e', '', 'qwe', 'qwe', '12345', '2023-12-10', NULL, NULL),
+(10, 'pol@pol.it', 'pol', 'pol', 'pol', 'e1fb1890d08437d8669c58481095bc316145ed80392dba5066b60d05e154b2f0', '1c16bdf8d51fa7a786719d95309d74d600c73f92dd8afc09a72978bd5be17db4', 'pol', 'pol', '12345', '2023-12-17', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_tokens`
+-- Struttura della tabella `user_tokens`
 --
 
 DROP TABLE IF EXISTS `user_tokens`;
@@ -169,64 +175,64 @@ CREATE TABLE `user_tokens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user_tokens`
+-- Dump dei dati per la tabella `user_tokens`
 --
 
 INSERT INTO `user_tokens` (`id`, `selector`, `hashed_validator`, `user_id`, `expiry`) VALUES
 (47, 'da2837aee45334272e17d3322e3ed802', '$2y$10$KJoFeOnHJtbG34TCqiRGQu1YhcF2ukwkKEhJ9hdhFLgX6cOtAbw7.', 2, '2024-01-14 18:26:06');
 
 --
--- Indexes for dumped tables
+-- Indici per le tabelle scaricate
 --
 
 --
--- Indexes for table `books`
+-- Indici per le tabelle `books`
 --
 ALTER TABLE `books`
   ADD PRIMARY KEY (`ISBN`);
 
 --
--- Indexes for table `contenutoordini`
+-- Indici per le tabelle `contenutoordini`
 --
 ALTER TABLE `contenutoordini`
   ADD PRIMARY KEY (`ISBN`,`username`,`id`);
 
 --
--- Indexes for table `ordini`
+-- Indici per le tabelle `ordini`
 --
 ALTER TABLE `ordini`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indici per le tabelle `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_tokens`
+-- Indici per le tabelle `user_tokens`
 --
 ALTER TABLE `user_tokens`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
--- AUTO_INCREMENT for table `ordini`
+-- AUTO_INCREMENT per la tabella `ordini`
 --
 ALTER TABLE `ordini`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `user_tokens`
+-- AUTO_INCREMENT per la tabella `user_tokens`
 --
 ALTER TABLE `user_tokens`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;

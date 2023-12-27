@@ -18,10 +18,10 @@
     <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
     <link href="CSS/stilePasswordChange.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="JS/request_recover_password.js"></script>
 
     <!-- Modal js include -->
     <script src="JS/modal.js" ></script>
-    <script src="JS/recover_password.js" ></script>
 
     <!-- Validation register/login js include -->
     <script src="JS/mainscript.js"> </script>
@@ -47,8 +47,6 @@
 		include 'html/modal_login.php';
 		include 'html/modal_register.php';
 	}
-
-
 ?>
   
   <div class="change-password-form">
@@ -62,14 +60,13 @@
       </div>
     
       <div class="form-group">
-        <input type="submit" value="Change Password" onclick="handleRecoverPassword()">
+        <input type="submit" value="Send request" onclick="handleRecoverPassword()">
       </div>
       <div class="form-group">
         <p id="result"></p>
       </div>
     </form>
   </div>
-
 
 </body>
 </html>

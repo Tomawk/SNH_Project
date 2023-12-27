@@ -29,28 +29,23 @@
     <?php
     session_start();
     require('../inc/db.php');
-    if(!isset($_SESSION['username'])){
-      echo "you have to log in first!";
-      return;
-    }
 
-    if(!isset($_POST["old_password"])  || !isset($_POST["new_password"])  ||!isset($_SESSION['username']) ){
+    if(!isset($_POST["new_password"])  || !isset($_POST["confirm_password"])  || !isset($_POST["link"])){
         echo "some field are missing";
-        return;
     }
 
-    $username = $_SESSION['username'];
-    $old_password = $_POST["old_password"];
+    $link = $_POST['link'];
     $new_password = $_POST["new_password"];
+    $confirm_password = $_POST["confirm_password"];
 
-    $sql = "SELECT * FROM users where username = ? and password = ? ";
+    $sql = "SELECT * FROM users where link = ? ";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("ss",$username,hash('md5', $old_password));
+    $stmt->bind_param("s",$link);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        //user present
+    if (($result->num_rows > 0) and ($new_password == $confirm_password)) {
+        //user present and password correct
         $sql = "UPDATE `users` SET `password` = ? WHERE `users`.`id` = ?";
         $stmt = $con->prepare($sql);
         $row = $result->fetch_assoc();
@@ -66,7 +61,6 @@
         echo"<h1>Esito operazione</h1>";
         echo "<p>Username non esistente o password errata, riprova</p>";
     }
-
     ?>
  </div>
 </body>

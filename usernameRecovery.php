@@ -24,7 +24,8 @@
 
     <!-- Validation register/login js include -->
     <script src="JS/mainscript.js"> </script>
-
+    <script src="JS/usernameRecovery.js"> </script>
+    
 </head>
 <body
     <?php
@@ -56,7 +57,7 @@
       </div>
     
       <div class="form-group">
-        <input type="submit" value="Change Password" onclick="handleRecoverPassword()">
+        <input type="submit" value="Recover email" onclick="handleRecoverPassword()">
       </div>
       <div class="form-group">
         <p id="result"></p>
@@ -64,29 +65,6 @@
     </form>
   </div>
 
-  <script>
-    function handleRecoverPassword(){
-      event.preventDefault();
-      var data = new FormData();
-        data.append('email', document.getElementById("email").value);
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "utility/elaborateAccountRecovery.php", true);
-        
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-              if(parseInt(xhr.responseText) == 1){
-                jQuery('#result').html("Email sent");
-                jQuery("#result").css("color", "green");
-              }else{
-                jQuery('#result').html("Recovery problem");
-                jQuery("#result").css("color", "red");
-              }
-            }
-        };
-        xhr.send(data);
-    }
-  </script>
 </body>
 </html>
 

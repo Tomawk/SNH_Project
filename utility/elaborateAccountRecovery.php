@@ -26,7 +26,7 @@
             //send an email with che password
 
             //send the email
-            sendMailAccountRecovery($row['email'],$row['username']);
+            sendMail($row['username'],$row['email'],"Your usarename is: ","Account recovery");
 
             echo 1;
             //echo "password sent";
