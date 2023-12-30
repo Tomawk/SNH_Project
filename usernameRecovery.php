@@ -54,6 +54,7 @@
       <div class="form-group">
         <label for="email">email</label>
         <input type="text" id="email" name="email" required>
+        <p class="error_form" id="error_email_input"> Not supported email, insert a valid email. </p>
       </div>
     
       <div class="form-group">

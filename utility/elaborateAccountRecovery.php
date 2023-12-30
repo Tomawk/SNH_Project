@@ -10,29 +10,48 @@
        return;
     }
     if(!isset($_POST['email'])){
-        //"usaname or email not present";
+        //"username or email not present";
         echo 0;
         return;
     }else{
-        
-        $sql = "SELECT * FROM users Where email = ? ";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("s",$_POST['email']);
-        $stmt->execute();
-        $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            //send an email with che password
+        $email = $_POST['email'];
 
-            //send the email
-            sendMail($row['username'],$row['email'],"Your usarename is: ","Account recovery");
+        // CLEAR + SANITIZE
+        $email = trim($email); //Remove whitespaces
+        $email = stripcslashes($email);
+        $email = htmlspecialchars($email); //Convert special characters to HTML entities
+        $email = mysqli_real_escape_string($con,$email); //SQL Injection prevention
 
-            echo 1;
-            //echo "password sent";
-        }else{
+        // VALIDATION
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email format";
             echo 0;
+        } else {
+
+            //VALIDATION SUCCEED
+
+            $sql = "SELECT * FROM users Where email = ? ";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("s",$_POST['email']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                //send an email with che password
+
+                //send the email
+                sendMail($row['username'],$row['email'],"Your username is: ","Account recovery");
+
+                echo 1;
+            }else{
+                echo 0;
+            }
         }
+        
+
 }
 
 ?>
