@@ -17,6 +17,7 @@
     <link href="CSS/topnav.css" rel="stylesheet" type="text/css">
     <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
     <link href="CSS/stilePasswordChange.css" rel="stylesheet" type="text/css">
+
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="JS/request_recover_password.js"></script>
 
@@ -55,8 +56,10 @@
       <div class="form-group">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required>
-        <label for="email">email</label>
+        <p class="error_form" id="error_username_input"> Username is too long or too short. </p>
+        <label for="email">Email</label>
         <input type="text" id="email" name="email" required>
+        <p class="error_form" id="error_email_input"> Invalid email format </p>
       </div>
     
       <div class="form-group">

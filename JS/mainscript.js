@@ -126,6 +126,20 @@
 			document.getElementById("modal1_surname").style.backgroundColor='white';
 		}
 
+	var _uname = document.forms["register"]["uname"].value;
+
+	if (_uname.length < 2){
+		document.getElementById("modal1_uname").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
+		document.getElementById("modal1_uname").style.backgroundColor = "#f44336"; /* setta colore input a red */
+		document.getElementById("modal1_uname").focus();
+		document.getElementById("error_username").style.display='block';
+		event.preventDefault();
+		errore_=false;
+	} else{
+		document.getElementById("error_username").style.display='none';
+		document.getElementById("modal1_uname").style.backgroundColor='white';
+	}
+
 	var _password = document.forms["register"]["psw"].value; /* Password inserita */
 
 	if(!validatePassword(_password)){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
@@ -212,4 +226,6 @@ function validateFormChangePsw(){
 	if(errore_ == false) return false;
 	else return true;
 }
+
+
 

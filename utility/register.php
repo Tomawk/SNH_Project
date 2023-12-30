@@ -130,15 +130,23 @@ session_start();
         else{
           $username = test_input($_POST['uname'],$con);
 
-          $stmt_user = $con->prepare("SELECT* FROM users WHERE username= ?");
-          $stmt_user->bind_param("s",$username);
-          $stmt_user->execute();
-          $result_user = $stmt_user->get_result();
-          $result_userCount=mysqli_num_rows($result_user);
+          if(strlen($username) < 2){
+              $usernameErr = "Username is too short";
+              $error=1;
+          } elseif (strlen($username) > 10){
+              $usernameErr = "Username is too long";
+              $error=1;
+          } else {
+              $stmt_user = $con->prepare("SELECT* FROM users WHERE username= ?");
+              $stmt_user->bind_param("s",$username);
+              $stmt_user->execute();
+              $result_user = $stmt_user->get_result();
+              $result_userCount=mysqli_num_rows($result_user);
 
-          if($result_userCount > 0){
-            $usernameErr=  "Username or email is already in use."; //The error messages should not give any hints to users
-            $error = 1;
+              if($result_userCount > 0){
+                  $usernameErr=  "Username or email is already in use."; //The error messages should not give any hints to users
+                  $error = 1;
+              }
           }
     }
 

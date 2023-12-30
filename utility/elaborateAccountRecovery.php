@@ -26,7 +26,6 @@
         // VALIDATION
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $emailErr = "Invalid email format";
             echo 0;
         } else {
 

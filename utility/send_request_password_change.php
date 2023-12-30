@@ -16,45 +16,67 @@
         return;
     }else{
 
-        $sql = "SELECT * FROM users Where email = ? ";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("s",$_POST['email']);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $email = $_POST['email'];
+        $username = $_POST['username'];
 
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            //send an email with che password
+        // CLEAR + SANITIZE
+        $email = trim($email); //Remove whitespaces
+        $email = stripcslashes($email);
+        $email = htmlspecialchars($email); //Convert special characters to HTML entities
+        $email = mysqli_real_escape_string($con,$email); //SQL Injection prevention
 
-            
+        $username = trim($username); //Remove whitespaces
+        $username = stripcslashes($username);
+        $username = htmlspecialchars($username); //Convert special characters to HTML entities
+        $username = mysqli_real_escape_string($con,$username); //SQL Injection prevention
 
-            if($row['username'] != $_POST['username']){
-                //username wrong
-                echo 0;
-                return;
-            }
+        // VALIDATION
 
-            $rand = bin2hex(random_bytes('16'));
-            $time = time();
-
-            
-            //insert link into the db
-            $sql = "UPDATE `users` SET `link` = ?, `timestamp` = ? WHERE `users`.`id` = ? ";
-            $stmt = $con->prepare($sql);
-            $stmt->bind_param("ssi",$rand,$time,$row['id']);
-            $stmt->execute();
-
-            $link = "http://localhost/BookStore/SNH_Project/dynamic_change_password.php?link=".$rand;
-            
-            
-            //send the email
-            sendMail($link,$row['email'],"Your link to change the password is: ","Password recovery");
-
-            echo 1;
-            //echo "password sent";
-        }else{
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo 0;
+        } else if (strlen($username) < 2 || strlen($username) > 10){
+            echo 0;
+        } else{
+
+            $sql = "SELECT * FROM users Where email = ? ";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("s",$_POST['email']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                //send an email with che password
+
+
+
+                if($row['username'] != $_POST['username']){
+                    //username wrong
+                    echo 0;
+                    return;
+                }
+
+                $rand = bin2hex(random_bytes('16'));
+                $time = time();
+
+
+                //insert link into the db
+                $sql = "UPDATE `users` SET `link` = ?, `timestamp` = ? WHERE `users`.`id` = ? ";
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("ssi",$rand,$time,$row['id']);
+                $stmt->execute();
+
+                $link = "http://localhost/BookStore/SNH_Project/dynamic_change_password.php?link=".$rand;
+
+
+                //send the email
+                sendMail($link,$row['email'],"Your link to change the password is: ","Password recovery");
+
+                echo 1;
+                //echo "password sent";
+            }else{
+                echo 0;
+            }
         }
-}
 
 ?>
