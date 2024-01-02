@@ -8,10 +8,10 @@ function handleRecoverPassword(){
     event.preventDefault();
 
     email_input = document.getElementById("email");
-    email = email_input.value;
+    email = document.getElementById("email").value;
 
     username_input = document.getElementById("username");
-    username = username_input.value;
+    username = document.getElementById("username").value;
 
     //remove animation if present
 
@@ -67,12 +67,12 @@ function handleRecoverPassword(){
                             jQuery('#result').html("Email sent, the link will expire in 5 minutes");
                             jQuery("#result").css("color", "green");
                         }else{
-                            jQuery('#result').html("Recovery1 problem");
+                            jQuery('#result').html("Error Recovery");
                             jQuery("#result").css("color", "red");
                         }
                     }
                 };
                 xhr.send(data);
 
-        }
     }
+}

@@ -20,6 +20,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
     <script src="JS/dynamic_change_password.js"></script>
+    <script src="JS/mainscript.js"></script>
     
 </head>
 <body>
@@ -55,14 +56,16 @@
   ?>
   <div class="change-password-form">
     <h2>Change password</h2>
-    <form action="utility/elaborate_dynamic_change_password.php" method="post" id="my_form">
+    <form onsubmit="return validateDynamicChangePSW()" action="utility/elaborate_dynamic_change_password.php" method="post" id="my_form" name="dynamic_psw_form">
       <div class="form-group">
         <label for="oldPassword">New Password</label>
         <input type="password" id="new_password" name="new_password" oninput="controlla_sicurezza_password()" required>
+        <p class="error_register" id="error_password"> Invalid new password. Password should at least contain 8 chars, an uppercase char, a lowercase char and a number.</p>
       </div>
       <div class="form-group">
         <label for="newPassword">Confirm Password</label>
         <input type="password" id="confirm_password" name="confirm_password"  required>
+        <p class="error_register" id="error_confirm_password"> Passwords do not match. </p>
         <p id="password_strength"></p>
       </div>
       <input  id="link" name="link" value =<?php echo "'".$link."' " ?> hidden>

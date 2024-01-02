@@ -227,5 +227,38 @@ function validateFormChangePsw(){
 	else return true;
 }
 
+function validateDynamicChangePSW(){
+
+	var errore_ = true;
+
+	var _password = document.forms["dynamic_psw_form"]["new_password"].value; /* Nuova Password inserita */
+	var _rep_password = document.forms["dynamic_psw_form"]["confirm_password"].value; /* Nuova Password inserita */
+
+	if(!validatePassword(_password)){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
+		document.getElementById("new_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
+		document.getElementById("new_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
+		document.getElementById("new_password").focus();
+		document.getElementById("error_password").style.display='block';
+		event.preventDefault();
+		errore_=false;
+	}
+	else {
+		document.getElementById("error_password").style.display='none';
+		document.getElementById("new_password").style.backgroundColor='white';
+	}
+
+	if(_password != _rep_password){
+		document.getElementById("confirm_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
+		document.getElementById("confirm_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
+		document.getElementById("confirm_password").focus();
+		document.getElementById("error_confirm_password").style.display='block';
+		event.preventDefault();
+		errore_=false;
+	}
+
+	if(errore_ == false) return false;
+	else return true;
+}
+
 
 

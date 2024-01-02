@@ -10,7 +10,7 @@ function handleRecoverPassword(){
 
     var email_input = document.getElementById("email");
 
-    var _email = email_input.value;
+    var _email = document.getElementById("email").value;
 
     //remove animation if present
 
