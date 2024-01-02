@@ -76,7 +76,7 @@ session_start();
           $name = test_input($_POST["name"],$con);
 
           if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
-            $nameErr = "Name can contain only alphabetic chars and whitespaces";
+            $nameErr = "Name can contain only alphabetic chars";
             $error = 1;
           }
           elseif (strlen($name) < 2) {
@@ -103,7 +103,7 @@ session_start();
           $surname = test_input($_POST["surname"],$con);
 
           if (!preg_match("/^[a-zA-Z ]*$/",$surname)) {
-            $surnameErr = "Surname can contain only alphabetic chars and whitespaces";
+            $surnameErr = "Surname can contain only alphabetic chars";
             $error = 1;
           }
           elseif (strlen($surname) < 2) {
@@ -210,7 +210,7 @@ session_start();
         else{
           $city = test_input($_POST['city'],$con);
           if (!preg_match("/^[a-zA-Z ]*$/",$city)) {
-            $cityErr = "City can contain only alphabetic chars and whitespaces";
+            $cityErr = "City can contain only alphabetic chars";
             $error = 1;
           }
         }

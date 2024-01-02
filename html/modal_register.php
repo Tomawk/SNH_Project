@@ -14,15 +14,15 @@
 
       <label><b>Name</b></label>
       <input type="text" placeholder="Insert name" name="name" id="modal1_nome" required>
-      <p class="error_register" id="error_nome"> Name is too long or too short, insert a valid name. </p>
+      <p class="error_register" id="error_nome"> Name is too long or too short or invalid, insert a valid name. </p>
 
       <label><b>Surname</b></label>
       <input type="text" placeholder="Insert surname" name="surname" id="modal1_surname" required>
-      <p class="error_register" id="error_surname"> Surname is too long or too short, insert a valid surname. </p>
+      <p class="error_register" id="error_surname"> Surname is too long or too short or invalid, insert a valid surname. </p>
 
       <label><b>Username</b></label>
       <input type="text" placeholder="Insert username" name="uname" id="modal1_uname" required>
-      <p class="error_register" id="error_username"> Username is too long or too short, insert a valid username. </p>
+      <p class="error_register" id="error_username"> Username is too long or too short or invalid, insert a valid username. </p>
 
       <label><b>Password</b></label>
       <input type="password" placeholder="Insert password" name="psw" id="modal1_password" required>
@@ -34,7 +34,7 @@
 
       <label><b>City</b></label>
       <input type="text" placeholder="Insert city" name="city" id="modal1_city" required>
-      <p class="error_register" id="error_city"> Invalid City. Only letters and whitespaces allowed.</p>
+      <p class="error_register" id="error_city"> Invalid City. Only letters allowed.</p>
 
       <label><b>Address</b></label>
       <input type="text" placeholder="Insert address" name="address" id="modal1_address" required>
