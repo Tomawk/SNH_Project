@@ -10,7 +10,16 @@
     </div>
 
     <div class="container">
-		 <p> <strong><?php echo $_SESSION["username"]; ?></strong> </p>
+		 <p> <strong>
+                 <?php
+                 $username = $_SESSION["username"];
+                 $username = trim($username); //Remove whitespaces
+                 $username = stripcslashes($username);
+                 $username = htmlspecialchars($username); //Convert special characters to HTML entities
+                 echo $username;
+                 ?>
+             </strong>
+         </p>
 <br>
 <br>
       <button type="button" onclick="location.href = 'info.php';" class="modalbutton">My information</button>

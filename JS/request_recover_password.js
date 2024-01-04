@@ -4,14 +4,19 @@ function validateEmail(email) { /* Funzione per validare email */
     return re.test(email);
 }
 
+function validateUsername(username){
+    var regex = /^[a-zA-Z0-9!?£$èòàù_.,]+$/;
+    return regex.test(username)
+}
+
 function handleRecoverPassword(){
     event.preventDefault();
 
-    email_input = document.getElementById("email");
-    email = document.getElementById("email").value;
+    var email_input = document.getElementById("email");
+    var email = document.getElementById("email").value;
 
-    username_input = document.getElementById("username");
-    username = document.getElementById("username").value;
+    var username_input = document.getElementById("username");
+    var username = document.getElementById("username").value;
 
     //remove animation if present
 
@@ -45,7 +50,7 @@ function handleRecoverPassword(){
         email_input.focus();
         document.getElementById("error_email_input").style.display='block';
         event.preventDefault(); /* impedisce il refresh della pagina */
-    } else if (username.length < 2 || username.length > 10) {
+    } else if (username.length < 2 || username.length > 10 || !validateUsername(username)) {
         username_input.style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
         username_input.style.backgroundColor = "#f44336"; /* setta colore input a red */
         username_input.focus();

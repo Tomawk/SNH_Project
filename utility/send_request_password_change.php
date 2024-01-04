@@ -34,7 +34,7 @@
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo 0;
-        } else if (strlen($username) < 2 || strlen($username) > 10) {
+        } else if (strlen($username) < 2 || strlen($username) > 10 || !preg_match('/^[a-zA-Z0-9!?£$èòàù_.,]+$/', $username)) {
             echo 0;
         } else {
 

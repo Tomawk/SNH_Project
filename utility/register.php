@@ -122,8 +122,6 @@ session_start();
 
     //USERNAME VALIDATION
 
-//************************* MANCA CONTROLLO SULL'USO DI SPECIAL CHAR E SIMILI *********************
-
     if (empty($_POST["uname"])) { /* Username empty */
         $usernameErr = "Insert an username";
         }
@@ -135,6 +133,9 @@ session_start();
               $error=1;
           } elseif (strlen($username) > 10){
               $usernameErr = "Username is too long";
+              $error=1;
+          } elseif (!preg_match('/^[a-zA-Z0-9!?£$èòàù_.,]+$/', $username)) { // only a selection of special characters allowed
+              $usernameErr = "Username is not supported, retry.";
               $error=1;
           } else {
               $stmt_user = $con->prepare("SELECT* FROM users WHERE username= ?");
@@ -156,7 +157,7 @@ session_start();
     }
 
     //PASSWORD VALIDATION
-//************************* MANCA CONTROLLO SULL'USO DI SPECIAL CHAR E SIMILI *********************
+
     if (empty($_POST["psw"])) { /* Password empty*/
         $pswErr = "Insert a password";
     }

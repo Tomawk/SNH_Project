@@ -25,6 +25,11 @@
 		return regex.test(cap);
 	}
 
+	function validateUsername(username){
+		var regex = /^[a-zA-Z0-9!?£$èòàù_.,]+$/;
+		return regex.test(username)
+	}
+
 
 	var element_email = document.getElementById('modal1_email');
 
@@ -128,7 +133,7 @@
 
 	var _uname = document.forms["register"]["uname"].value;
 
-	if (_uname.length < 2){
+	if (_uname.length < 2 || _uname.length > 10 || !validateUsername(_uname)){
 		document.getElementById("modal1_uname").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
 		document.getElementById("modal1_uname").style.backgroundColor = "#f44336"; /* setta colore input a red */
 		document.getElementById("modal1_uname").focus();
