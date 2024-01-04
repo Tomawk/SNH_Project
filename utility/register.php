@@ -163,8 +163,8 @@ session_start();
     }
         else{
             $psw_clear = $_POST['psw'];
-            if (strlen($psw_clear) <= '7') {
-            $pswErr = "Password should be at least 8 digit long";
+            if (strlen($psw_clear) <= 7 || strlen($psw_clear) > 255) {
+            $pswErr = "Password is too long or too short";
             $error = 1;
             }
             elseif (!preg_match("#[0-9]+#",$psw_clear)) {

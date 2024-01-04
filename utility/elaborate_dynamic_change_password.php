@@ -52,7 +52,7 @@
 
     // VALIDATION
 
-    if (strlen($new_password) <= '7') {
+    if (strlen($new_password) < 7 || strlen($new_password) > 255) {
         echo"<div class='message-container' style='background: #de6666'>";
         echo"<h1>Operation Failed</h1>";
         echo "<p>Password should be at least 8 digit long</p>";

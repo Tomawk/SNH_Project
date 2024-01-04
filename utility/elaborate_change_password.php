@@ -60,8 +60,8 @@
 
     // Validation server-side of $new_password
 
-    if (strlen($new_password) <= '7') {
-        echo "New Password should be at least 8 digit long";
+    if (strlen($new_password) <= 7 || strlen($new_password) > 255) {
+        echo "New Password is too long or too short";
         return;
     }
     elseif (!preg_match("#[0-9]+#",$new_password)) {

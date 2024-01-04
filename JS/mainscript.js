@@ -147,7 +147,7 @@
 
 	var _password = document.forms["register"]["psw"].value; /* Password inserita */
 
-	if(!validatePassword(_password)){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
+	if(!validatePassword(_password) || _password.length > 255){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
 		document.getElementById("modal1_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
 		document.getElementById("modal1_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
 		document.getElementById("modal1_password").focus();
@@ -215,7 +215,7 @@ function validateFormChangePsw(){
 
 	var _password = document.forms["change_psw"]["new_password"].value; /* Nuova Password inserita */
 
-	if(!validatePassword(_password)){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
+	if(!validatePassword(_password) || _password.length > 255){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
 		document.getElementById("new_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
 		document.getElementById("new_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
 		document.getElementById("new_password").focus();
@@ -239,7 +239,7 @@ function validateDynamicChangePSW(){
 	var _password = document.forms["dynamic_psw_form"]["new_password"].value; /* Nuova Password inserita */
 	var _rep_password = document.forms["dynamic_psw_form"]["confirm_password"].value; /* Nuova Password inserita */
 
-	if(!validatePassword(_password)){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
+	if(!validatePassword(_password) || _password.length > 255){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
 		document.getElementById("new_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
 		document.getElementById("new_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
 		document.getElementById("new_password").focus();
