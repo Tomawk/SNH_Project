@@ -29,6 +29,7 @@
     <?php
     session_start();
     require('../inc/db.php');
+    require('../forMail/mail.php');
     require('hashing_psw.php');
 
     if(!isset($_POST["new_password"])  || !isset($_POST["confirm_password"])  || !isset($_POST["link"])){
@@ -98,6 +99,10 @@
             echo"<h1>Operation result</h1>";
             echo "<p>Password correctly changed</p>";
             echo "<a href='../index.php'>Go back to the main page</a>";
+
+            //Sent notification via email
+            sendMail(" ",$row['email'],"Your password has been correctly changed","Password change");
+
         }else{
             echo"<div class='message-container' style='background: #de6666'>";
             echo"<h1>Operation result</h1>";

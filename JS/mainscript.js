@@ -266,4 +266,24 @@ function validateDynamicChangePSW(){
 }
 
 
-
+function controlla_sicurezza_password_register_form(){
+    const password = document.getElementById('modal1_password').value;
+    const result = zxcvbn(password);
+    var guesses = result.guesses_log10;
+    var p = document.getElementById("error_password_zxcvbn");
+    if(guesses <5 ){
+        p.textContent = "password is weak";
+        p.style.color = "red";
+        p.style.fontSize = "0.8em";
+    }
+    else if (guesses < 10){
+        p.textContent = "password not very strong";
+        p.style.color = "#e67014";
+        p.style.fontSize = "0.8em";
+    }
+    else{
+        p.textContent = "password strong";
+        p.style.color = "green";
+        p.style.fontSize = "0.8em";
+    }
+}
