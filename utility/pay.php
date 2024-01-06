@@ -53,8 +53,6 @@
           $result =  $stmt->get_result();
           $resultCount=mysqli_num_rows($result);
           
-
-    // ALTER TABLE `users` ADD `csrf_token` VARCHAR(500) NULL AFTER `bruteforce_exp`;
           if($resultCount == 0){
             exit();
           }
