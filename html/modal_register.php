@@ -1,6 +1,10 @@
 
 <!-- MODAL REGISTRAZIONE -->
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+
+
 <div id="id02" class="modal1"> <!-- Modal1 -->
   <span onclick="closemodal1()" class="close1" title="Close Modal">&times;</span>
   <form class="modal-content1 animate" method="post" name="register" onsubmit="return validateFormRegister()" action="utility/register.php">
@@ -24,9 +28,11 @@
       <input type="text" placeholder="Insert username" name="uname" id="modal1_uname" required>
       <p class="error_register" id="error_username"> Username is too long or too short or invalid, insert a valid username. </p>
 
-      <label><b>Password</b></label>
-      <input type="password" placeholder="Insert password" name="psw" id="modal1_password" required>
+      <label><b>Password </b></label>
+      <label id="error_password_zxcvbn"></label>
+      <input type="password" placeholder="Insert password" name="psw" id="modal1_password" oninput="controlla_sicurezza_password_register_form()" required>
       <p class="error_register" id="error_password"> Invalid password. Password should at least contain 8 chars, an uppercase char, a lowercase char and a number.</p>
+     
 
       <label><b>Repeat Password</b></label>
       <input type="password" placeholder="Repeat password" name="psw-repeat" id="modal1_repeat" required>
@@ -101,5 +107,6 @@
   </form>
 
 </div>
+
 <!-- Fine Modal Registrazione -->
 

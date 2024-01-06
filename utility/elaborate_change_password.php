@@ -29,6 +29,7 @@
     <?php
     session_start();
     require('../inc/db.php');
+    require('../forMail/mail.php');
     require('hashing_psw.php');
     require("log.php");
     if(!isset($_SERVER['HTTPS'])){
@@ -107,6 +108,7 @@
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
+            
             //old password matches
 
             // create new salt
@@ -115,7 +117,6 @@
             // hash the new pasw
             $hashed_psw = hash_psw($new_password);
             $psw_final = hash('sha256', $new_salt . $hashed_psw); //hashed psw with hash
-
 
             $sql = "UPDATE `users` SET `password` = ?,`salt` = ?  WHERE `users`.`id` = ?";
             $stmt = $con->prepare($sql);
@@ -130,6 +131,10 @@
             // LOG SUCCESSFUL CHANGE PSW
             $log_msg = "PASSWORD CHANGE CORRECTLY: username: ".$username;
             log_message($log_msg);
+
+            //Sent notification via email
+            sendMail(" ",$row['email'],"Your password has been correctly changed","Password change");
+
         }else{
             echo"<div class='message-container' style='background: #de6666'>";
             echo"<h1>Operation result</h1>";
