@@ -41,6 +41,26 @@
             exit();
         }
 
+
+        if(!isset($_SESSION["csrf_token"])){
+          exit();
+        }else{
+          //check if its the same saved into the db
+          $sql = "SELECT * from users where username = ? and csrf_token = ?";
+          $stmt = $con->prepare($sql);
+          $stmt->bind_param("ss",$_SESSION["username"],$_SESSION["csrf_token"]);
+          $stmt->execute();
+          $result =  $stmt->get_result();
+          $resultCount=mysqli_num_rows($result);
+          
+
+    // ALTER TABLE `users` ADD `csrf_token` VARCHAR(500) NULL AFTER `bruteforce_exp`;
+          if($resultCount == 0){
+            exit();
+          }
+        }
+
+
     if($_SESSION["state"]!="summary")
     {
       header("location: ".$_SESSION["state"].".php") ;
@@ -59,6 +79,8 @@
     }else{
         $username = $_SESSION["username"];
     }
+
+    
 
 
     
