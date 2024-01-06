@@ -47,7 +47,7 @@
       exit();
     }
     else{
-        $_SESSION["state"]!="outside";
+        $_SESSION["state"]="outside";
     }
 
 
@@ -61,6 +61,7 @@
     }
 
 
+    
     $sql = "UPDATE `ordini` 
         SET `totale` = ? ,`stato_ordine` = 'shipped', 
         `indirizzo` = ?,`citta`=?,`paese`=?      
