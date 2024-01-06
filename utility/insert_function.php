@@ -1,4 +1,9 @@
 <?php 
+    if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
+
     function insert_book($ISBN,$username,$con){
         $query = "SELECT * FROM ordini where stato_ordine is null";
         $result=mysqli_query($con,$query);

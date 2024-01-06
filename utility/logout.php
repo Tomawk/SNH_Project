@@ -1,6 +1,11 @@
 <?php
 require("rememberme.php");
 require("../inc/db.php");
+if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
+
 session_start();
 if(isset($_SESSION["username"])){
         delete_user_token($_SESSION['username'],$con);

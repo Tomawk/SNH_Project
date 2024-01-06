@@ -2,6 +2,12 @@
     session_start();
     require('../inc/db.php');
     require("insert_function.php");
+    require('sessionManager.php');
+    checkSession($con);
+    if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
 
     $ISBN = $_POST["ISBN"];
     $username = $_POST["username"];

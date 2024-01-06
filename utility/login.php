@@ -4,6 +4,10 @@ require('sessionManager.php');
 require('rememberme.php');
 require("insert_function.php");
 require("log.php");
+if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
 
 session_start();
 

@@ -2,7 +2,7 @@
    
     session_start();
     require('../inc/db.php');
-    
+ 
     $sql = "";
     $search_field = $_POST['Search_filed'];
     $value = $_POST['Value'];

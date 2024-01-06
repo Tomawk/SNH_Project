@@ -1,4 +1,16 @@
 <?php
+    session_start();
+    require('../inc/db.php');
+    require('sessionManager.php');
+    checkSession($con);
+    if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
+
+?>
+<?php
+/*
 function send_book($file){
     # $file contains the name of the book
     #$file = 'pdf.pdf';

@@ -1,4 +1,5 @@
 <?php
+
 function token_is_valid(string $token,$con): bool { 
     [$selector, $validator] = parse_token2($token);
     $tokens = find_user_token_by_selector($selector,$con);
@@ -114,6 +115,10 @@ function regenerateSession($username,$remember_selected,$reload = false,$state)
 
 function checkSession($con)
 {
+        if(!isset($_SERVER['HTTPS'])){
+            $url = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+            header("location:".$url);
+        }
         if(isset($_SESSION["username"]) )
             return true;
         if(!isset($_COOKIE["remember_me"]))

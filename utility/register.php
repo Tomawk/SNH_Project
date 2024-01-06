@@ -1,8 +1,13 @@
 <?php
 require('../inc/db.php');
 require("hashing_psw.php");
+
 // If form submitted, insert values into the database.
 session_start();
+if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
 
 //*+++++++++++++++++++++++++++++
 //*+++++++++++++++++++++++++++++

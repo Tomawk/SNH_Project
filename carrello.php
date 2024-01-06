@@ -1,7 +1,8 @@
 <?php
 session_start();
 require('inc/db.php');
-
+require('utility/sessionManager.php');
+checkSession($con);
 if(!isset($_SESSION['username'])){
 	//header('location: accesso1.php');
 }

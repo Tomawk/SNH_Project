@@ -1,6 +1,11 @@
 <?php
     session_start();
     require('inc/db.php');
+if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
+
 ?>
 
 

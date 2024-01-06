@@ -1,6 +1,5 @@
 <?php
 require("../inc/db.php");
-
 function generate_tokens(): array
 {
     $selector = bin2hex(random_bytes(16));

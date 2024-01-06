@@ -1,5 +1,10 @@
 <?php
 session_start();
+if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
+
 ?>
 <!DOCTYPE HTML>
 <html lang="eng">

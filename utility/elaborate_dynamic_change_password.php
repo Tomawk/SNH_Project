@@ -30,6 +30,10 @@
     session_start();
     require('../inc/db.php');
     require('hashing_psw.php');
+    if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
 
     if(!isset($_POST["new_password"])  || !isset($_POST["confirm_password"])  || !isset($_POST["link"])){
         echo "some field are missing";

@@ -1,5 +1,11 @@
 <?php
+if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
+
  	$daily_date = date("Y-m-d"); // Data corrente
+
 ?>
 <!DOCTYPE html>
 <html lang="it">

@@ -2,6 +2,10 @@
     session_start();
     require('../inc/db.php');
     require('../forMail/mail.php');
+    if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
 
     // Check connection
     if ($con->connect_error) {

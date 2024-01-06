@@ -36,6 +36,10 @@
     session_start();
     require('../inc/db.php');
     require('log.php');
+    if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
 
     if($_SESSION["state"]!="summary")
     {

@@ -1,4 +1,8 @@
 <?php
+if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
 
 date_default_timezone_set('Europe/Rome');
 

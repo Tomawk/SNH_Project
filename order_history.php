@@ -1,6 +1,12 @@
 <?php
 session_start();
 require('inc/db.php');
+require('utility/sessionManager.php');
+checkSession($con);
+if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
 
 if(!isset($_SESSION['username'])){
     header('location: index.php');
@@ -20,7 +26,7 @@ if(!isset($_SESSION['username'])){
     <link href="CSS/history_style.css" rel="stylesheet" type="text/css">
     <link href="CSS/modals.css" rel="stylesheet" type="text/css">
     <link href="CSS/topnav.css" rel="stylesheet" type="text/css">
-    <link href="CSS/rightnav.css" rel="stylesheet" type="text/css"
+    <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
 
 
     <link rel="icon" href="immagini/icon.png" sizes="32x32">
@@ -152,7 +158,10 @@ if(!isset($_SESSION['username'])){
             <div class="book_genre"> Genre: <p style="display:inline; font-weight: normal;">'.$row_article_details['genre'].'</div>
             <div class="book_date"> Year: <p style="display:inline; font-weight: normal;">'.$row_article_details['publication_year'].'</p></div>
             <div class="book_price"> Bought at: '.$row_article_details['price'].'€</div>
-            <button type="submit" class="book_button">Download <i class="fa-solid fa-download"></i></button>
+            <form action="/download.php" method="post" id="downloadbook">
+                <input type="hidden" text="'.$row_article_details['ISBN'].'id="book" name="bookname">
+            </form>
+            <button type="submit" form="downloadbook" class="book_button">Download <i class="fa-solid fa-download"></i></button>
             </div>
             <hr>
             ';

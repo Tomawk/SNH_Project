@@ -31,6 +31,10 @@
     require('../inc/db.php');
     require('hashing_psw.php');
     require("log.php");
+    if(!isset($_SERVER['HTTPS'])){
+            header("HTTPS 404 nosecure");
+            exit();
+        }
 
     if(!isset($_SESSION['username'])){
       echo "you have to log in first!";
