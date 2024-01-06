@@ -233,7 +233,7 @@ function validateFormChangePsw(){
 }
 
 function validateDynamicChangePSW(){
-
+	// a strong password for debug purposes is -> Asdfghjk1lkgtyio
 	var errore_ = true;
 
 	var _password = document.forms["dynamic_psw_form"]["new_password"].value; /* Nuova Password inserita */
@@ -260,6 +260,20 @@ function validateDynamicChangePSW(){
 		event.preventDefault();
 		errore_=false;
 	}
+
+	const new_password = document.getElementById('new_password').value;
+	const result = zxcvbn(new_password);
+	var guesses = result.guesses_log10;
+    if(guesses < 10){
+		console.log("no");
+		document.getElementById("new_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
+		document.getElementById("new_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
+		document.getElementById("new_password").focus();
+		document.getElementById("error_password").style.display='block';
+		event.preventDefault();
+		errore_=false;
+	}
+
 
 	if(errore_ == false) return false;
 	else return true;
