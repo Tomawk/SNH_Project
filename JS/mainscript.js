@@ -32,7 +32,7 @@
 
 
 	var element_email = document.getElementById('modal1_email');
-	if(element_email == null) return;
+	
 	element_email.addEventListener('webkitAnimationEnd', function(){ 
    	 this.style.webkitAnimationName = '';
 	}, false);

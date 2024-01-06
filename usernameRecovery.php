@@ -22,7 +22,7 @@ if(!isset($_SERVER['HTTPS'])){
     <link href="CSS/rightnav.css" rel="stylesheet" type="text/css">
     <link href="CSS/modals.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
     <!-- Modal js include -->
     <script src="JS/modal.js" ></script>

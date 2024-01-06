@@ -2,7 +2,6 @@ body{
     background-color: #e6e6e6;
 }
 
-@font-face { font-family: Open Sans; src: url('http://localhost/Progetto%20PWEB/CSS/Font/OpenSans-Light.ttf'); } 
 
 #center_div {
     position:absolute;
@@ -67,6 +66,7 @@ body{
     font-size: 1vw;
     font-family: 'Open Sans', sans-serif;
 }
+/*@font-face { font-family: Open Sans; src: url('http://localhost/Progetto%20PWEB/CSS/Font/OpenSans-Light.ttf'); } */
 
 #p2 a{
     text-decoration: none;
