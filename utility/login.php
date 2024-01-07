@@ -136,6 +136,7 @@ if (isset($_POST['username']) && isset($_POST['password'])){
                       //to prevent session fixation attack
                       $rememberme_selected = isset($_POST["rememberme"]) ? true : false;
                       $_SESSION["state"] = "outside";
+                      //this for csrf
                       $_SESSION["csrf_token"] = bin2hex(random_bytes(128));
                       $sql = "UPDATE users set csrf_token = ? where username = ? ";
                       $stmt = $con->prepare($sql);

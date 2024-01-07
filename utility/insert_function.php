@@ -5,10 +5,15 @@
         }
 
     function insert_book($ISBN,$username,$con){
-        $query = "SELECT * FROM ordini where stato_ordine is null";
-        $result=mysqli_query($con,$query);
+
+        $sql = "SELECT o.id as id FROM ordini o inner join contenutoordini c on o.id = c.id 
+                where username = ? and stato_ordine is null limit 1";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("s",$_SESSION['username']);
+        $stmt->execute();
+        $result = $stmt->get_result();
         $resultCount=mysqli_num_rows($result);
-    
+
     
         if($resultCount == 0){
             //carrello vuoto
@@ -18,6 +23,7 @@
                     VALUES (NULL, '".$currentDate."', '0', NULL)";
             $result=mysqli_query($con,$query);
 
+            
         
             //get the id
             $query = "SELECT id from `ordini` order by id DESC limit 1";
