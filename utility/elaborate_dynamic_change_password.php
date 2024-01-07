@@ -38,6 +38,7 @@
 
     if(!isset($_POST["new_password"])  || !isset($_POST["confirm_password"])  || !isset($_POST["link"])){
         echo "some field are missing";
+        exit();
     }
 
     $link = $_POST['link'];

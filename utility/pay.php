@@ -41,13 +41,31 @@
             exit();
         }
 
+
+        if(!isset($_SESSION["csrf_token"])){
+          exit();
+        }else{
+          //check if its the same saved into the db
+          $sql = "SELECT * from users where username = ? and csrf_token = ?";
+          $stmt = $con->prepare($sql);
+          $stmt->bind_param("ss",$_SESSION["username"],$_SESSION["csrf_token"]);
+          $stmt->execute();
+          $result =  $stmt->get_result();
+          $resultCount=mysqli_num_rows($result);
+          
+          if($resultCount == 0){
+            exit();
+          }
+        }
+
+
     if($_SESSION["state"]!="summary")
     {
       header("location: ".$_SESSION["state"].".php") ;
       exit();
     }
     else{
-        $_SESSION["state"]!="outside";
+        $_SESSION["state"]="outside";
     }
 
 
@@ -60,7 +78,10 @@
         $username = $_SESSION["username"];
     }
 
+    
 
+
+    
     $sql = "UPDATE `ordini` 
         SET `totale` = ? ,`stato_ordine` = 'shipped', 
         `indirizzo` = ?,`citta`=?,`paese`=?      

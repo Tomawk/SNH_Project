@@ -69,7 +69,7 @@ if(!isset($_SERVER['HTTPS'])){
                 $stmt->bind_param("ssi", $rand, $time, $row['id']);
                 $stmt->execute();
 
-                $link = "http://localhost/BookStore/SNH_Project/dynamic_change_password.php?link=" . $rand;
+                $link = "https://localhost/BookStore/SNH_Project/dynamic_change_password.php?link=" . $rand;
 
 
                 //send the email

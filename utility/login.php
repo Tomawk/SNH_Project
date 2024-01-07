@@ -11,6 +11,8 @@ if(!isset($_SERVER['HTTPS'])){
 
 session_start();
 
+
+
 function redirect(){
     if(isset($_SERVER['HTTP_REFERER'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']); // SAFE (?)
@@ -20,6 +22,9 @@ function redirect(){
         header("location: ../index.php");
     }
 }
+
+
+
 // If form submitted, insert values into the database.
 if (isset($_POST['username']) && isset($_POST['password'])){
 
@@ -131,6 +136,12 @@ if (isset($_POST['username']) && isset($_POST['password'])){
                       //to prevent session fixation attack
                       $rememberme_selected = isset($_POST["rememberme"]) ? true : false;
                       $_SESSION["state"] = "outside";
+                      $_SESSION["csrf_token"] = bin2hex(random_bytes(128));
+                      $sql = "UPDATE users set csrf_token = ? where username = ? ";
+                      $stmt = $con->prepare($sql);
+                      $stmt->bind_param("ss",$_SESSION["csrf_token"],$_SESSION["username"]);
+                      $stmt->execute();
+
                       $state = $_SESSION["state"];
                       if(regenerateSession($username,$rememberme_selected,"",$state)){
                           if($_SESSION["rememberme"]==true)

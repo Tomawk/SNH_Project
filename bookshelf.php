@@ -61,7 +61,7 @@ $_SESSION["state"] ="outside";
 </div>
 <?php include 'html/aside.php';?>
     <div id="seach_div">
-        <input type="text" placeholder="inserisci qui" id="input_field_search">
+        <input type="text" placeholder="inserisci qui" id="input_field_search" onkeypress="sendRequest()">
         <select id="field_search">
           <option value="none">Select a filter</option>
           <option value="ISBN">ISBN</option>
@@ -122,10 +122,4 @@ if($resultCount%4 != 0){
 echo '</div>';
 
 ?>
-
-
-    
-   
-
-<!-- TODO: Non è stata impostata una immagine di default se non è presente o non carica una dei link nel db per le copertine dei libri-->
 </body>

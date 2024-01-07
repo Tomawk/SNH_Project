@@ -33,42 +33,42 @@
     $rows[] = $row;
 }
 
+$stinga = "";
 for ($i = 0; $i < $resultCount; $i++) {
-    if($i%4 == 0){
-        echo '<div class="article_line">
-        <div class="article_box">
-        <div class="book_image" style="background-image: url('.$rows[$i]['image_url'].');"></div>
-        <div class="book_title">'.$rows[$i]['title'].'</div>
-        <div class="book_author">Di <p style="display:inline; text-decoration: underline;">'.$rows[$i]['author'].'</div>
-        <div class="book_isbn"> ISBN: <p style="display:inline; font-weight: normal;">'.$rows[$i]['ISBN'].'</div>
-        <div class="book_genre"> Gendddre: <p style="display:inline; font-weight: normal;">'.$rows[$i]['genre'].'</div>
-        <div class="book_date"> Year: <p style="display:inline; font-weight: normal;">'.$rows[$i]['publication_year'].'</p></div>
-        <div class="book_price">'.$rows[$i]['price'].'€</div>
-        <button type="submit" class="book_button">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
-        </div>';
-    } else {
-        echo '<div class="article_box">
-        <div class="book_image" style="background-image: url('.$rows[$i]['image_url'].');"></div>
-        <div class="book_title">'.$rows[$i]['title'].'</div>
-        <div class="book_author">Di <p style="display:inline; text-decoration: underline;">'.$rows[$i]['author'].'</div>
-        <div class="book_isbn"> ISBN: <p style="display:inline; font-weight: normal;">'.$rows[$i]['ISBN'].'</div>
-        <div class="book_genre"> Genre: <p style="display:inline; font-weight: normal;">'.$rows[$i]['genre'].'</div>
-        <div class="book_date"> Year: <p style="display:inline; font-weight: normal;">'.$rows[$i]['publication_year'].'</p></div>
-        <div class="book_price">'.$rows[$i]['price'].'€</div>
-        <button type="submit" class="book_button">Add to cart <i class="fa-solid fa-cart-shopping"></i></button>
-        </div>';
         
-        $temp = $i+1;
-        if($temp%4 == 0){
-            echo '</div>';
+        if($i%4 == 0){
+            $stinga = $stinga."<div class='article_line'>|";
+        }else{
+            $temp = $i+1;
         }
-    }
+        $stinga =$stinga. 
+            "start_start|".
+            $rows[$i]['image_url']."|".
+            $rows[$i]['title']."|".
+            $rows[$i]['author']."|".
+            $rows[$i]['ISBN']."|".
+            $rows[$i]['genre']."|".
+            $rows[$i]['publication_year']."|".
+            $rows[$i]['price']."|".
+            "end_end|";
+    
+        if($i%4 != 0){
+            if($temp%4 == 0){
+                $stinga =$stinga.'</div>|';
+            }
+        }
 }
 
 if($resultCount%4 != 0){
-    echo '</div>';
+    $stinga =$stinga.'</div>';
 }
-
+    echo $stinga; // send string over XML
     // Close the database conection
     $con->close();
+?>
+
+<?php
+    
+    
+   
 ?>

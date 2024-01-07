@@ -39,7 +39,7 @@ if(!isset($_SESSION['username'])){
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
     <!-- Modal js include -->
     <script src="JS/modal.js" ></script>
