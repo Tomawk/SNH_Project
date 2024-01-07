@@ -31,6 +31,9 @@ if(!isset($_SERVER['HTTPS'])){
     <!-- Validation register/login js include -->
     <script src="JS/mainscript.js"> </script>
 
+    <!-- Font Awesome Import -->
+    <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
+
 </head>
 <body
     <?php

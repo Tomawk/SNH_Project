@@ -125,7 +125,7 @@ if(!isset($_SERVER['HTTPS'])){
         else{
           $username = test_input($_POST['uname'],$con);
 
-          if(strlen($username) < 2){
+          if(strlen($username) <= 2){
               $usernameErr = "Username is too short";
               $error=1;
           } elseif (strlen($username) > 10){

@@ -30,56 +30,40 @@
 		return regex.test(username)
 	}
 
-	document.getElementById('modal1_email').addEventListener('webkitAnimationEnd', function(){
-   	 this.style.webkitAnimationName = '';
-	}, false);
+	function resetAnimations(){
 
-	document.getElementById('modal1_email').addEventListener('animationend', function(){
-   	 this.style.animationName = '';
-	}, false);
+		document.getElementById('modal1_email').style.animation = 'none';
+		document.getElementById('modal1_email').offsetHeight; /* trigger reflow */
+		document.getElementById('modal1_email').style.animation = null;
 
-	document.getElementById('modal1_nome').addEventListener('webkitAnimationEnd', function(){ 
-   	 this.style.webkitAnimationName = '';
-	}, false);
+		document.getElementById('modal1_uname').style.animation = 'none';
+		document.getElementById('modal1_uname').offsetHeight; /* trigger reflow */
+		document.getElementById('modal1_uname').style.animation = null;
 
-	document.getElementById('modal1_nome').addEventListener('animationend', function(){ 
-   	 this.style.animationName = '';
-	}, false);
+		document.getElementById('modal1_nome').style.animation = 'none';
+		document.getElementById('modal1_nome').offsetHeight; /* trigger reflow */
+		document.getElementById('modal1_nome').style.animation = null;
 
-	document.getElementById('modal1_surname').addEventListener('webkitAnimationEnd', function(){ 
-   	 this.style.webkitAnimationName = '';
-	}, false);
+		document.getElementById('modal1_surname').style.animation = 'none';
+		document.getElementById('modal1_surname').offsetHeight; /* trigger reflow */
+		document.getElementById('modal1_surname').style.animation = null;
 
-	document.getElementById('modal1_surname').addEventListener('animationend', function(){ 
-   	 this.style.animationName = '';
-	}, false);
+		document.getElementById('modal1_password').style.animation = 'none';
+		document.getElementById('modal1_password').offsetHeight; /* trigger reflow */
+		document.getElementById('modal1_password').style.animation = null;
 
-	document.getElementById('modal1_password').addEventListener('webkitAnimationEnd', function(){ 
-   	 this.style.webkitAnimationName = '';
-	}, false);
+		document.getElementById('modal1_repeat').style.animation = 'none';
+		document.getElementById('modal1_repeat').offsetHeight; /* trigger reflow */
+		document.getElementById('modal1_repeat').style.animation = null;
 
-	document.getElementById('modal1_password').addEventListener('animationend', function(){ 
-   	 this.style.animationName = '';
-	}, false);
-
-	document.getElementById('modal1_repeat').addEventListener('webkitAnimationEnd', function(){ 
-   	 this.style.webkitAnimationName = '';
-	}, false);
-
-	document.getElementById('modal1_repeat').addEventListener('animationend', function(){ 
-   	 this.style.animationName = '';
-	}, false);
-
-	document.getElementById('modal1_cap').addEventListener('webkitAnimationEnd', function(){ 
-   	 this.style.webkitAnimationName = '';
-	}, false);
-
-	document.getElementById('modal1_cap').addEventListener('animationend', function(){ 
-   	 this.style.animationName = '';
-	}, false);
-
+		document.getElementById('modal1_cap').style.animation = 'none';
+		document.getElementById('modal1_cap').offsetHeight; /* trigger reflow */
+		document.getElementById('modal1_cap').style.animation = null;
+	}
 
 	function validateFormRegister(){
+
+	resetAnimations();
 
 	var errore_ = true;
 
@@ -130,7 +114,7 @@
 
 	var _uname = document.forms["register"]["uname"].value;
 
-	if (_uname.length < 2 || _uname.length > 10 || !validateUsername(_uname)){
+	if (_uname.length <= 2 || _uname.length > 10 || !validateUsername(_uname)){
 		document.getElementById("modal1_uname").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
 		document.getElementById("modal1_uname").style.backgroundColor = "#f44336"; /* setta colore input a red */
 		document.getElementById("modal1_uname").focus();
