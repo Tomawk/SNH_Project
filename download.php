@@ -9,21 +9,23 @@
         }
     $file = null;
     if(isset($_POST["book"])){
-        $file = $_POST["book"].".pdf";
+        $file = stripslashes($_POST['book']);
+        $file = mysqli_real_escape_string($con,$file);
+        $file = $file.".pdf";
     }else{
         echo "error ".$file;
         exit();
     }
     $stmt = mysqli_prepare($con,"SELECT * FROM contenutoordini WHERE ISBN = ? AND username = ?");
-    $stmt->bind_param("is", $_POST["book"],$_SESSION["username"]);
+    $stmt->bind_param("is", $file,$_SESSION["username"]);
     $stmt->execute();
     $result= $stmt->get_result(); //only one row
     $resultCount=mysqli_num_rows($result);
     if($resultCount != 0){
         # $file contains the name of the book
         # directory in which book is in
-        #$pathUnder = '../books/';
-        $pathUnder = 'books2/';
+        $pathUnder = '../books2/';
+        #$pathUnder = 'books2/';
         #i check if the file exist, then i prepare the header of the response
         #then i send the file with readfile()
         if (file_exists($pathUnder.$file)) {
@@ -41,7 +43,7 @@
             exit();
         }
     }else{
-        echo "no file in db".$_SESSION["username"];
+        echo "no file in db".$_SESSION["username"].",".$file;
         exit();
     }
 ?>

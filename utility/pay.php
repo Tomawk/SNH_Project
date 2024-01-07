@@ -36,13 +36,15 @@
     session_start();
     require('../inc/db.php');
     require('log.php');
+    require("sessionManager.php");
+    checkSession($con);
     if(!isset($_SERVER['HTTPS'])){
             header("HTTPS 404 nosecure");
             exit();
         }
 
-
         if(!isset($_SESSION["csrf_token"])){
+          echo "errore2";
           exit();
         }else{
           //check if its the same saved into the db
@@ -54,6 +56,7 @@
           $resultCount=mysqli_num_rows($result);
           
           if($resultCount == 0){
+            echo "error3";
             exit();
           }
         }
