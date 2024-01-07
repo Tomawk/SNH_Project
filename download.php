@@ -1,13 +1,49 @@
 <?php
     session_start();
-    require('../inc/db.php');
-    require('sessionManager.php');
+    require('inc/db.php');
+    require("utility/sessionManager.php");
     checkSession($con);
     if(!isset($_SERVER['HTTPS'])){
             header("HTTPS 404 nosecure");
             exit();
         }
-
+    $file = null;
+    if(isset($_POST["book"])){
+        $file = $_POST["book"].".pdf";
+    }else{
+        echo "error ".$file;
+        exit();
+    }
+    $stmt = mysqli_prepare($con,"SELECT * FROM contenutoordini WHERE ISBN = ? AND username = ?");
+    $stmt->bind_param("is", $_POST["book"],$_SESSION["username"]);
+    $stmt->execute();
+    $result= $stmt->get_result(); //only one row
+    $resultCount=mysqli_num_rows($result);
+    if($resultCount != 0){
+        # $file contains the name of the book
+        # directory in which book is in
+        #$pathUnder = '../books/';
+        $pathUnder = 'books2/';
+        #i check if the file exist, then i prepare the header of the response
+        #then i send the file with readfile()
+        if (file_exists($pathUnder.$file)) {
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="'.basename($pathUnder.$file).'"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($pathUnder.$file));
+            readfile($pathUnder.$file);
+            exit;
+        }
+        else{
+            echo "no file:".$file;
+            exit();
+        }
+    }else{
+        echo "no file in db".$_SESSION["username"];
+        exit();
+    }
 ?>
 <?php
 /*

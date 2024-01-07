@@ -159,7 +159,7 @@ if(!isset($_SESSION['username'])){
             <div class="book_date"> Year: <p style="display:inline; font-weight: normal;">'.$row_article_details['publication_year'].'</p></div>
             <div class="book_price"> Bought at: '.$row_article_details['price'].'€</div>
             <form action="/download.php" method="post" id="downloadbook">
-                <input type="hidden" text="'.$row_article_details['ISBN'].'id="book" name="bookname">
+                <input type="hidden" value="'.$row_article_details['ISBN'].'" id="book" name="book">
             </form>
             <button type="submit" form="downloadbook" class="book_button">Download <i class="fa-solid fa-download"></i></button>
             </div>
