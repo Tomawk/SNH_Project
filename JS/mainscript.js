@@ -30,14 +30,11 @@
 		return regex.test(username)
 	}
 
-
-	var element_email = document.getElementById('modal1_email');
-	
-	element_email.addEventListener('webkitAnimationEnd', function(){ 
+	document.getElementById('modal1_email').addEventListener('webkitAnimationEnd', function(){
    	 this.style.webkitAnimationName = '';
 	}, false);
 
-	element_email.addEventListener('animationend', function(){ 
+	document.getElementById('modal1_email').addEventListener('animationend', function(){
    	 this.style.animationName = '';
 	}, false);
 
