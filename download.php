@@ -24,10 +24,11 @@
     if($resultCount != 0){
         # $file contains the name of the book
         # directory in which book is in
-        $pathUnder = '../books2/';
+        $pathUnder = '../../books2/';
         #$pathUnder = 'books2/';
         #i check if the file exist, then i prepare the header of the response
         #then i send the file with readfile()
+
         if (file_exists($pathUnder.$file)) {
             header('Content-Type: application/octet-stream');
             header('Content-Disposition: attachment; filename="'.basename($pathUnder.$file).'"');
@@ -39,7 +40,7 @@
             exit;
         }
         else{
-            echo "no file:".$file;
+            echo "no file: ".$file;
             exit();
         }
     }else{
