@@ -9,8 +9,6 @@ function validateUsername(username){
     return regex.test(username)
 }
 
-
-
 function handleRecoverPassword(){
     event.preventDefault();
 

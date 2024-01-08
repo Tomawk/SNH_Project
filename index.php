@@ -27,11 +27,9 @@ require('utility/sessionManager.php');
   <?php 
     if(isset($_SESSION["error"])){
       echo 'onload ="openmodal()"';
-	  unset($_SESSION["error"]);
     }
 	if(isset($_SESSION["signup_error"])){
       echo 'onload ="openmodal1()"';
-	  unset($_SESSION["signup_error"]);
 	}
     ?>
 >
