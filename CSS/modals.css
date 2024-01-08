@@ -383,6 +383,10 @@ span.psw {
         top: 51vw;
     }
 
+    #signupErr{
+        top: 52.5vw;
+    }
+
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0){

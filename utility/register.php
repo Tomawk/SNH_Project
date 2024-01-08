@@ -269,7 +269,7 @@ if(!isset($_SERVER['HTTPS'])){
         redirect();
 
     } else {
-        $_SESSION["signup_error"] = "error";
+        $_SESSION["signup_error"] = "An unknown error has occurred.";
         redirect();
     }
 

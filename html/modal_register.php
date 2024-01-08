@@ -102,6 +102,11 @@
         unset($_SESSION['capErr']);
         }
 
+        if(isset($_SESSION['signup_error'])){
+        echo '<p class="err_register" id="signupErr">'.$_SESSION['signup_error'].'</p>';
+        unset($_SESSION['signup_error']);
+        }
+
       ?>
     </div>
   </form>
