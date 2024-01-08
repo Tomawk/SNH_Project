@@ -430,6 +430,10 @@ span.psw {
     #capErr{
         top: 52vw;
     }
+
+    #signupErr{
+        top: 53vw;
+    }
 }
 
 
