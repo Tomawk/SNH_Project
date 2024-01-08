@@ -58,53 +58,93 @@
       <?php
 
         if(isset($_SESSION['emailErr'])){
-        echo '<p class="err_register" id="emailErr">'.$_SESSION['emailErr'].'</p>';
-        unset($_SESSION['emailErr']);
+            $emailErr_data = $_SESSION["emailErr"];
+            $trimmed_emailErr = trim($emailErr_data);
+            $unescaped_emailErr = stripcslashes($trimmed_emailErr);
+            $emailErr_sanitized = htmlspecialchars($unescaped_emailErr , ENT_QUOTES, 'UTF-8'); //Convert special characters to HTML entities
+            echo '<p class="err_register" id="emailErr">'.$emailErr_sanitized.'</p>';
+            unset($_SESSION['emailErr']);
         }
 
         if(isset($_SESSION['nameErr'])){
-        echo '<p class="err_register" id="nomeErr">'.$_SESSION['nameErr'].'</p>';
-        unset($_SESSION['nameErr']);
+            $nameErr_data = $_SESSION["nameErr"];
+            $trimmed_nameErr = trim($nameErr_data);
+            $unescaped_nameErr = stripcslashes($trimmed_nameErr);
+            $nameErr_sanitized = htmlspecialchars($unescaped_nameErr , ENT_QUOTES, 'UTF-8');
+            echo '<p class="err_register" id="nomeErr">'.$nameErr_sanitized.'</p>';
+            unset($_SESSION['nameErr']);
         }
 
         if(isset($_SESSION['surnameErr'])){
-        echo '<p class="err_register" id="surnameErr">'.$_SESSION['surnameErr'].'</p>';
-        unset($_SESSION['surnameErr']);
+            $surnameErr_data = $_SESSION["surnameErr"];
+            $trimmed_surnameErr = trim($surnameErr_data);
+            $unescaped_surnameErr = stripcslashes($trimmed_surnameErr);
+            $surnameErr_sanitized = htmlspecialchars($unescaped_surnameErr , ENT_QUOTES, 'UTF-8');
+            echo '<p class="err_register" id="surnameErr">'.$surnameErr_sanitized.'</p>';
+            unset($_SESSION['surnameErr']);
         }
 
         if(isset($_SESSION['usernameErr'])){
-        echo '<p class="err_register" id="usernameErr">'.$_SESSION['usernameErr'].'</p>';
-        unset($_SESSION['usernameErr']);
+            $usernameErr_data = $_SESSION["usernameErr"];
+            $trimmed_usernameErr = trim($usernameErr_data);
+            $unescaped_usernameErr = stripcslashes($trimmed_usernameErr);
+            $usernameErr_sanitized = htmlspecialchars($unescaped_usernameErr , ENT_QUOTES, 'UTF-8');
+            echo '<p class="err_register" id="usernameErr">'.$usernameErr_sanitized.'</p>';
+            unset($_SESSION['usernameErr']);
         }
 
         if(isset($_SESSION['pswErr'])){
-        echo '<p class="err_register" id="pswErr">'.$_SESSION['pswErr'].'</p>';
-        unset($_SESSION['pswErr']);
+            $pswErr_data = $_SESSION["pswErr"];
+            $trimmed_pswErr = trim($pswErr_data);
+            $unescaped_pswErr = stripcslashes($trimmed_pswErr);
+            $pswErr_sanitized = htmlspecialchars($unescaped_pswErr , ENT_QUOTES, 'UTF-8');
+            echo '<p class="err_register" id="pswErr">'.$pswErr_sanitized.'</p>';
+            unset($_SESSION['pswErr']);
         }
 
         if(isset($_SESSION['psw_repeatErr'])){
-        echo '<p class="err_register" id="psw_repeatErr">'.$_SESSION['psw_repeatErr'].'</p>';
-        unset($_SESSION['psw_repeatErr']);
+            $psw_repeatErr_data = $_SESSION["psw_repeatErr"];
+            $trimmed_psw_repeatErr = trim($psw_repeatErr_data);
+            $unescaped_psw_repeatErr = stripcslashes($trimmed_psw_repeatErr);
+            $psw_repeatErr_sanitized = htmlspecialchars($unescaped_psw_repeatErr , ENT_QUOTES, 'UTF-8');
+            echo '<p class="err_register" id="psw_repeatErr">'.$psw_repeatErr_sanitized.'</p>';
+            unset($_SESSION['psw_repeatErr']);
         }
 
         if(isset($_SESSION['cityErr'])){
-        echo '<p class="err_register" id="cittaErr">'.$_SESSION['cityErr'].'</p>';
-        unset($_SESSION['cityErr']);
+            $cityErr_data = $_SESSION["cityErr"];
+            $trimmed_cityErr = trim($cityErr_data);
+            $unescaped_cityErr = stripcslashes($trimmed_cityErr);
+            $cityErr_sanitized = htmlspecialchars($unescaped_cityErr , ENT_QUOTES, 'UTF-8');
+            echo '<p class="err_register" id="cittaErr">'.$cityErr_sanitized.'</p>';
+            unset($_SESSION['cityErr']);
         }
 
         if(isset($_SESSION['addressErr'])){
-        echo '<p class="err_register" id="indirizzoErr">'.$_SESSION['addressErr'].'</p>';
-        unset($_SESSION['addressErr']);
+            $addressErr_data = $_SESSION["addressErr"];
+            $trimmed_addressErr = trim($addressErr_data);
+            $unescaped_addressErr = stripcslashes($trimmed_addressErr);
+            $addressErr_sanitized = htmlspecialchars($unescaped_addressErr , ENT_QUOTES, 'UTF-8');
+            echo '<p class="err_register" id="indirizzoErr">'.$addressErr_sanitized.'</p>';
+            unset($_SESSION['addressErr']);
         }
 
         if(isset($_SESSION['capErr'])){
-        echo '<p class="err_register" id="capErr">'.$_SESSION['capErr'].'</p>';
-        unset($_SESSION['capErr']);
+            $capErr_data = $_SESSION["capErr"];
+            $trimmed_capErr = trim($capErr_data);
+            $unescaped_capErr = stripcslashes($trimmed_capErr);
+            $capErr_sanitized = htmlspecialchars($unescaped_capErr , ENT_QUOTES, 'UTF-8');
+            echo '<p class="err_register" id="capErr">'.$capErr_sanitized.'</p>';
+            unset($_SESSION['capErr']);
         }
 
         if(isset($_SESSION['signup_error'])){
-        echo '<p class="err_register" id="signupErr">'.$_SESSION['signup_error'].'</p>';
-        unset($_SESSION['signup_error']);
+            $signup_error_data = $_SESSION["signup_error"];
+            $trimmed_signup_error = trim($signup_error_data);
+            $unescaped_signup_error = stripcslashes($trimmed_signup_error);
+            $signup_error_sanitized = htmlspecialchars($unescaped_signup_error , ENT_QUOTES, 'UTF-8');
+            echo '<p class="err_register" id="signupErr">'.$signup_error_sanitized.'</p>';
+            unset($_SESSION['signup_error']);
         }
 
       ?>

@@ -22,11 +22,13 @@
 
       <?php
       if(isset($_SESSION["error"])){
-
-      echo '<p id="errore_login">'.' '.$_SESSION['error'].'<p>';
-      unset($_SESSION['error']);
+          $error_login_data = $_SESSION["error"];
+          $trimmed_error_login = trim($error_login_data);
+          $unescaped_error_login = stripcslashes($trimmed_error_login);
+          $error_login_sanitized = htmlspecialchars($unescaped_error_login , ENT_QUOTES, 'UTF-8');
+          echo '<p id="errore_login">'.' '.$error_login_sanitized.'<p>';
+          unset($_SESSION['error']);
       }
-
       ?>
     </div>
 

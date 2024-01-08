@@ -12,11 +12,11 @@
     <div class="container">
 		 <p> <strong>
                  <?php
-                 $username = $_SESSION["username"];
-                 $username = trim($username); //Remove whitespaces
-                 $username = stripcslashes($username);
-                 $username = htmlspecialchars($username); //Convert special characters to HTML entities
-                 echo $username;
+                 $username_data = $_SESSION["username"];
+                 $trimmed_username = trim($username_data); //Remove whitespaces
+                 $unescaped_username = stripcslashes($trimmed_username);
+                 $username_sanitized = htmlspecialchars($unescaped_username , ENT_QUOTES, 'UTF-8'); //Convert special characters to HTML entities
+                 echo $username_sanitized;
                  ?>
              </strong>
          </p>
