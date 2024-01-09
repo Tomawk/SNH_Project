@@ -96,7 +96,7 @@ function is_user_logged_in($con): bool
 {
 
     // check the remember_me in cookie
-    $token = filter_input(INPUT_COOKIE, 'remember_me', FILTER_SANITIZE_STRING);
+    $token = filter_input(INPUT_COOKIE, 'rememberme', FILTER_SANITIZE_STRING);
 
     if ($token && token_is_valid($token,$con)) {
 
@@ -139,8 +139,8 @@ function logout($con): void
         unset($_SESSION['username'], $_SESSION['user_id`']);
 
         // remove the remember_me cookie
-        if (isset($_COOKIE['remember_me'])) {
-            unset($_COOKIE['remember_me']);
+        if (isset($_COOKIE['rememberme'])) {
+            unset($_COOKIE['rememberme']);
             setcookie('remember_user', null, -1);
         }
 
@@ -169,7 +169,7 @@ function remember_me(int $username,$con)
     $expiry = date('Y-m-d H:i:s', $expired_seconds);
 
     if (insert_user_token($username, $selector, $hash_validator, $expiry,$con)) {
-        setcookie('remember_me', $token, $expired_seconds,"/","localhost",true,true);
+        setcookie('rememberme', $token, $expired_seconds,"/","localhost",true,true);
     }
 }
 

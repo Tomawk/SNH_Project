@@ -2,8 +2,6 @@
 session_start();
 require('inc/db.php');
 require('utility/sessionManager.php');
-include 'html/topnav.php';
-include 'html/aside.php';
 checkSession($con);
 
 ?>
@@ -38,7 +36,6 @@ checkSession($con);
     ?>
 >
 <?php
-    checkSession($con);
 	include 'html/topnav.php';
     include 'html/aside.php';
     $_SESSION["state"] ="outside";

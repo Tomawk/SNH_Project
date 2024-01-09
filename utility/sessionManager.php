@@ -122,13 +122,16 @@ function find_user_by_token(string $token,$con)
         $last_act = $_SESSION["timestamp"];
         $now = time();
         #if($now < $last_act + 60*60  )
-        if($now < $last_act + 5  )
+        if($now < $last_act + 5  ){
             return true;
+        }
         else{
-            unset($_SESSION["remember_me"]);
+            /*
+            unset($_SESSION["rememberme"]);
             unset($_SESSION["state"]);
             unset($_SESSION["username"]);
             unset($_SESSION["timestamp"]);
+            */
         }
         return false;
 }
@@ -140,12 +143,19 @@ function checkSession($con)
             header("location:".$url);
         }
         if(isset($_SESSION["username"]) ){
-            if(checkExpiration())
-                return true;
+                if(!checkExpiration())
+                    if(!isset($_COOKIE["rememberme"]))
+                        {
+                        unset($_SESSION["rememberme"]);
+                        unset($_SESSION["state"]);
+                        unset($_SESSION["username"]);
+                        unset($_SESSION["timestamp"]);
+                        return false;
+                        }
         }
-        if(!isset($_COOKIE["remember_me"]))
+        if(!isset($_COOKIE["rememberme"]))
             return false;
-        $token = $_COOKIE["remember_me"];
+        $token = $_COOKIE["rememberme"];
         //header("location:"+$token);
         if(!token_is_valid($token,$con))
             return false;
@@ -155,7 +165,7 @@ function checkSession($con)
         if($user != null){
             $_SESSION["username"] = $user;
             $_SESSION["state"] = $state;
-            $_SESSION["timestamp"] = time();
+            $_SESSION["timestamp"] = isset($_COOKIE["rememberme"])?time()+60*60*24:time();
             return true;
         }
         else    

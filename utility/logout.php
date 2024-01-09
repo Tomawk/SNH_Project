@@ -11,9 +11,9 @@ if(isset($_SESSION["username"])){
         delete_user_token($_SESSION['username'],$con);
         unset($_SESSION['username']);
 }
-if (isset($_COOKIE['remember_me'])) {
-            unset($_COOKIE['remember_me']);
-            setcookie('remember_me', '', 1,'/');
+if (isset($_COOKIE['rememberme'])) {
+            unset($_COOKIE['rememberme']);
+            setcookie('rememberme', '', 1,'/');
         }
 session_unset();
 session_destroy();
