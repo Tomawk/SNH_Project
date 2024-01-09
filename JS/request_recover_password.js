@@ -55,10 +55,10 @@ function handleRecoverPassword(){
                     if (xhr.readyState == 4 && xhr.status == 200) {
 
                         if(parseInt(xhr.responseText) == 1){
-                            jQuery('#result').html("Email sent, the link will expire in 5 minutes");
+                            jQuery('#result').html("Email sent");
                             jQuery("#result").css("color", "green");
                         }else{
-                            jQuery('#result').html("Error Recovery");
+                            jQuery('#result').html("An error occurred");
                             jQuery("#result").css("color", "red");
                         }
                     }

@@ -73,7 +73,7 @@ if(!isset($_SERVER['HTTPS'])){
 
 
                 //send the email
-                sendMail($link, $row['email'], "Your link to change the password is: ", "Password recovery");
+                sendMail($link, $row['email'], "Your link (will exipire in 5 minutes) to change the password is: ", "Password recovery");
 
                 echo 1;
                 //echo "password sent";
