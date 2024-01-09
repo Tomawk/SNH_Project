@@ -150,6 +150,7 @@ if (isset($_POST['username']) && isset($_POST['password'])){
                           //remember_me();
                           unset($_SESSION["rememberme"]);
                       }
+                      $_SESSION["timestamp"]=time();
 
                   }else { //username exist but password wrong
 

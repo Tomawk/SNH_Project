@@ -2,6 +2,10 @@
 session_start();
 require('inc/db.php');
 require('utility/sessionManager.php');
+include 'html/topnav.php';
+include 'html/aside.php';
+checkSession($con);
+
 ?>
 <!DOCTYPE html>
 <html lang="eng">
@@ -25,7 +29,7 @@ require('utility/sessionManager.php');
 	</head>
 <body
   <?php 
-    if(isset($_SESSION["error"])){
+	    if(isset($_SESSION["error"])){
       echo 'onload ="openmodal()"';
     }
 	if(isset($_SESSION["signup_error"])){
@@ -34,10 +38,7 @@ require('utility/sessionManager.php');
     ?>
 >
 <?php
-	checkSession($con);
-	include 'html/topnav.php';
-    include 'html/aside.php';
-    $_SESSION["state"] ="outside";
+	    $_SESSION["state"] ="outside";
 ?>
 <div class="mainpic">
 		<h1 id="title">BOOK WORM</h1>

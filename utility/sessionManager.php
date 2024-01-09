@@ -27,6 +27,9 @@ function find_user_token_by_selector(string $selector,$con)
                     expiry >= now()
                 LIMIT 1';
 
+    $selector = stripslashes($selector);
+    $selector = mysqli_real_escape_string($con,$selector);
+
     $statement = $con->prepare($sql);
     $statement->bind_param('s', $selector);
     $statement->execute();
@@ -58,59 +61,75 @@ function find_user_by_token(string $token,$con)
                 expiry > now()
             LIMIT 1';
 
-    $statement = $con->prepare($sql);
-    $statement->bind_param('s', $tokens[0]);
-    $statement->execute();
-    //$result = $statement->get_result();
-    //if(mysqli_num_row($result) != 1)
-        //return null;
-    //else
-    $statement->bind_result($username);
-    $statement->fetch();
-    return ($username);
-}
+    $tok = stripslashes($token[0]);
+        $selector = mysqli_real_escape_string($con,$tok);
+        $statement = $con->prepare($sql);
+        $statement->bind_param('s', $tok);
+        $statement->execute();
+        //$result = $statement->get_result();
+        //if(mysqli_num_row($result) != 1)
+            //return null;
+        //else
+        $statement->bind_result($username);
+        $statement->fetch();
+        return ($username);
+    }
 
-function regenerateSession($username,$remember_selected,$reload = false,$state)
-{
-    /*
-    // This token is used by forms to prevent cross site forgery attempts
-    #if(!isset($_SESSION['nonce']) || $reload)
-        #$_SESSION['nonce'] = md5(microtime(true));
+    function regenerateSession($username,$remember_selected,$reload = false,$state)
+    {
+        /*
+        // This token is used by forms to prevent cross site forgery attempts
+        #if(!isset($_SESSION['nonce']) || $reload)
+            #$_SESSION['nonce'] = md5(microtime(true));
 
-    #check if the IPaddress is the same 
-    if(!isset($_SESSION['IPaddress']) || $reload)
-        //$_SESSION['IPaddress'] = $_SERVER['REMOTE_ADDR'];
-        $ipaddress = $_SERVER["REMOTE_ADDR"];
+        #check if the IPaddress is the same 
+        if(!isset($_SESSION['IPaddress']) || $reload)
+            //$_SESSION['IPaddress'] = $_SERVER['REMOTE_ADDR'];
+            $ipaddress = $_SERVER["REMOTE_ADDR"];
 
-    #check if the user agent is the same
-    if(!isset($_SESSION['userAgent']) || $reload)
-        //$_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
-        $useragent = $_SERVER["HTTP_USER_AGENT"];
+        #check if the user agent is the same
+        if(!isset($_SESSION['userAgent']) || $reload)
+            //$_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
+            $useragent = $_SERVER["HTTP_USER_AGENT"];
 
-    // Set current session to expire in 1 minute
-    $_SESSION['OBSOLETE'] = true;
-    $_SESSION['EXPIRES'] = time() + 60;
-    */
+        // Set current session to expire in 1 minute
+        $_SESSION['OBSOLETE'] = true;
+        $_SESSION['EXPIRES'] = time() + 60;
+        */
 
-    // Create new session without destroying the old one
-    session_regenerate_id(false);
+        // Create new session without destroying the old one
+        session_regenerate_id(false);
 
-    // Grab current session ID and close both sessions to allow other scripts to use them
-    $newSession = session_id();
-    session_write_close();
+        // Grab current session ID and close both sessions to allow other scripts to use them
+        $newSession = session_id();
+        session_write_close();
 
-    // Set session ID to the new one, and start it back up again
-    session_id($newSession);
-    session_start();
+        // Set session ID to the new one, and start it back up again
+        session_id($newSession);
+        session_start();
 
-    $_SESSION["username"]=$username;
-    $_SESSION["rememberme"]=$remember_selected;
-    $_SESSION["state"]=$state;
+        $_SESSION["username"]=$username;
+        $_SESSION["rememberme"]=$remember_selected;
+        $_SESSION["state"]=$state;
 
-    return true;
-    // Don't want this one to expire
-    //unset($_SESSION['OBSOLETE']);
-    //unset($_SESSION['EXPIRES']);
+        return true;
+        // Don't want this one to expire
+        //unset($_SESSION['OBSOLETE']);
+        //unset($_SESSION['EXPIRES']);
+    }
+
+    function checkExpiration(){
+        $last_act = $_SESSION["timestamp"];
+        $now = time();
+        if($now < $last_act + 5  )
+            return true;
+        else{
+            unset($_SESSION["remember_me"]);
+            unset($_SESSION["state"]);
+            unset($_SESSION["username"]);
+            unset($_SESSION["timestamp"]);
+        }
+        return false;
 }
 
 function checkSession($con)
@@ -119,8 +138,10 @@ function checkSession($con)
             $url = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
             header("location:".$url);
         }
-        if(isset($_SESSION["username"]) )
-            return true;
+        if(isset($_SESSION["username"]) ){
+            if(checkExpiration())
+                return true;
+        }
         if(!isset($_COOKIE["remember_me"]))
             return false;
         $token = $_COOKIE["remember_me"];
@@ -133,6 +154,7 @@ function checkSession($con)
         if($user != null){
             $_SESSION["username"] = $user;
             $_SESSION["state"] = $state;
+            $_SESSION["timestamp"] = time();
             return true;
         }
         else    

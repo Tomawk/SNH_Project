@@ -3,11 +3,14 @@
 <?php
     session_start();
     require('inc/db.php');
+    require('utility/sessionManager.php');
+    checkSession($con);
 if(!isset($_SERVER['HTTPS'])){
             header("HTTPS 404 nosecure");
             exit();
         }
-
+    if(isset($_SESSION["username"]))
+        header("location: index.php");
 ?>
 
 

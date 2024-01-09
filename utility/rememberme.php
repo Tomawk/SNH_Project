@@ -23,6 +23,15 @@ function insert_user_token(int $user_id, string $selector, string $hashed_valida
     $sql = 'INSERT INTO user_tokens(user_id, selector, hashed_validator, expiry)
             VALUES(?,?,?,?)';
 
+    $user_id = stripslashes($user_id);
+    $user_id = mysqli_real_escape_string($con,$user_id);
+    $selector = stripslashes($selector);
+    $selector = mysqli_real_escape_string($con,$selector);
+    $hashed_validator = stripslashes($hash_validator);
+    $hashed_validator = mysqli_real_escape_string($con,$hash_validator);
+    $expiry = stripslashes($expiry);
+    $expiry = mysqli_real_escape_string($con,$expiry);
+
     $statement = $con->prepare($sql);
     $statement->bind_param("isss",$user_id,$selector,$hashed_validator,$expiry);
     return $statement->execute();
@@ -53,6 +62,8 @@ function delete_user_token(string $user_id,$con): bool
     $sql = 'DELETE FROM "user_tokens" WHERE user_id = (select id from users as us where us.username = ? )';
     $sql = 'DELETE FROM `user_tokens` WHERE user_id = (select id from users as us where us.username = ?)';
     $statement = $con->prepare($sql);
+    $user_id=stripslashes($user_id);
+    $user_id = mysqli_real_escape_string($con,$use_id);
     $statement->bind_param("s", $user_id);
 
     return $statement->execute();
@@ -164,6 +175,8 @@ function remember_me(int $username,$con)
 
 function getuserId($user,$con):int{
     $prepared = $con -> prepare("SELECT id from users where username = ?");;
+    $user = stripslashes($user);
+    $user = mysqli_real_escape_string($con,$user);
     $prepared->bind_param("s",$user);
     $prepared->execute();
     $result=$prepared->get_result()->fetch_array(MYSQLI_NUM)[0];
