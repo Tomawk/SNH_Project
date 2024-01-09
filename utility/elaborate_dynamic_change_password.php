@@ -45,6 +45,7 @@
     $link = $_POST['link'];
     $new_password = $_POST["new_password"];
     $confirm_password = $_POST["confirm_password"];
+    $old_password = $_POST["old_password"];
 
     // CLEAR + SANITIZE
     $new_password = trim($new_password); //Remove whitespaces
@@ -56,6 +57,12 @@
     $confirm_password = stripcslashes($confirm_password);
     $confirm_password = htmlspecialchars($confirm_password); //Convert special characters to HTML entities
     $confirm_password = mysqli_real_escape_string($con,$confirm_password); //SQL Injection prevention
+
+    $old_password = trim($old_password); //Remove whitespaces
+    $old_password = stripcslashes($old_password);
+    $old_password = htmlspecialchars($old_password); //Convert special characters to HTML entities
+    $old_password = mysqli_real_escape_string($con,$old_password); //SQL Injection prevention
+
 
     // VALIDATION
 
@@ -88,30 +95,53 @@
 
         if (($result->num_rows > 0) and ($new_password == $confirm_password)) {
             //user present and password correct
+            $old_password;
+            $row = mysqli_fetch_assoc($result);
 
-            // creating a new salt and hashing the password
-            $hashed_psw = hash_psw($new_password);
-            $salt = create_salt();
-            $psw_final = hash('sha256', $salt . $hashed_psw); //hashed psw with hash
+            $salt = $row['salt'];
+            $old_hashed_psw = hash('sha256',$old_password);
+            $old_final_psw = hash('sha256', $salt . $old_hashed_psw); //hashed psw with hash
 
-            $sql = "UPDATE `users` SET `password` = ?, `salt` = ? WHERE `users`.`id` = ?";
+            $sql = "SELECT * FROM users where username = ? and password = ? ";
+
             $stmt = $con->prepare($sql);
-            $row = $result->fetch_assoc();
-
-            $stmt->bind_param("ssi",$psw_final,$salt,$row["id"]);
+            $stmt->bind_param("ss",$row['username'],$old_final_psw);
             $stmt->execute();
+            $result = $stmt->get_result();
 
-            $log_msg = "SUCCESSFUL PASSWORD CHANGE (FROM RECOVERY): username_id: ".$row['id'];
-            log_message($log_msg);
+            if ($result->num_rows > 0) {
 
-            echo"<div class='message-container' style='background: green'>";
-            echo"<h1>Operation result</h1>";
-            echo "<p>Password correctly changed</p>";
-            echo "<a href='../index.php'>Go back to the main page</a>";
+                // creating a new salt and hashing the password
+                $hashed_psw = hash_psw($new_password);
+                $salt = create_salt();
+                $psw_final = hash('sha256', $salt . $hashed_psw); //hashed psw with hash
 
-            //Sent notification via email
-            sendMail(" ",$row['email'],"Your password has been correctly changed","Password change");
+                $sql = "UPDATE `users` SET `password` = ?, `salt` = ? WHERE `users`.`id` = ?";
+                $stmt = $con->prepare($sql);
+                $row = $result->fetch_assoc();
 
+                $stmt->bind_param("ssi",$psw_final,$salt,$row["id"]);
+                $stmt->execute();
+
+                $log_msg = "SUCCESSFUL PASSWORD CHANGE (FROM RECOVERY): username_id: ".$row['id'];
+                log_message($log_msg);
+
+                echo"<div class='message-container' style='background: green'>";
+                echo"<h1>Operation result</h1>";
+                echo "<p>Password correctly changed</p>";
+                echo "<a href='../index.php'>Go back to the main page</a>";
+
+                //Sent notification via email
+                sendMail(" ",$row['email'],"Your password has been correctly changed","Password change");
+            }
+            else{
+                $log_msg = "FAILED PASSWORD CHANGE (FROM RECOVERY): old password not correct";
+                log_message($log_msg);
+
+                echo"<div class='message-container' style='background: #de6666'>";
+                echo"<h1>Operation result</h1>";
+                echo "<p>Username not exist or incorrect password, retry.</p>";
+            }
         }else{
 
             $log_msg = "FAILED PASSWORD CHANGE (FROM RECOVERY): user not found";
