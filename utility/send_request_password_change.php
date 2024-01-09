@@ -3,6 +3,7 @@
     require('../inc/db.php');
     require('../forMail/mail.php');
     require('hashing_psw.php');
+    require('log.php');
 if(!isset($_SERVER['HTTPS'])){
             header("HTTPS 404 nosecure");
             exit();
@@ -56,6 +57,8 @@ if(!isset($_SERVER['HTTPS'])){
 
                 if (strcasecmp($row['username'], $username) != 0 ) {
                     //username wrong
+                    $log_msg = "EMAIL PASSWORD RECOVERY FAILED USERNAME NON VALID: email: ". $email . " username: " .$username ;
+                    log_message($log_msg);
                     echo 0;
                     return;
                 }
@@ -81,9 +84,15 @@ if(!isset($_SERVER['HTTPS'])){
                 //send the email
                 sendMail($link, $row['email'], "Your link (will expire in 5 minutes) to change the password is: ", "Password recovery");
 
+                $log_msg = "EMAIL PASSWORD RECOVERY CORRECTLY SENT: email: ".$email." username: ".$username;
+                log_message($log_msg);
+
                 echo 1;
                 //echo "password sent";
             } else {
+
+                $log_msg = "EMAIL PASSWORD RECOVERY FAILED INVALID EMAIL: email: ". $email;
+                log_message($log_msg);
                 echo 0;
             }
         }

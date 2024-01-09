@@ -31,6 +31,7 @@
     require('../inc/db.php');
     require('../forMail/mail.php');
     require('hashing_psw.php');
+    require('log.php');
     if(!isset($_SERVER['HTTPS'])){
             header("HTTPS 404 nosecure");
             exit();
@@ -100,6 +101,9 @@
             $stmt->bind_param("ssi",$psw_final,$salt,$row["id"]);
             $stmt->execute();
 
+            $log_msg = "SUCCESSFUL PASSWORD CHANGE (FROM RECOVERY): username_id: ".$row['id'];
+            log_message($log_msg);
+
             echo"<div class='message-container' style='background: green'>";
             echo"<h1>Operation result</h1>";
             echo "<p>Password correctly changed</p>";
@@ -109,9 +113,14 @@
             sendMail(" ",$row['email'],"Your password has been correctly changed","Password change");
 
         }else{
+
+            $log_msg = "FAILED PASSWORD CHANGE (FROM RECOVERY): user not found";
+            log_message($log_msg);
+
             echo"<div class='message-container' style='background: #de6666'>";
             echo"<h1>Operation result</h1>";
             echo "<p>Username not exist or incorrect password, retry.</p>";
+
         }
 
     }
