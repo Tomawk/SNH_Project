@@ -121,7 +121,7 @@ function find_user_by_token(string $token,$con)
     function checkExpiration(){
         $last_act = $_SESSION["timestamp"];
         $now = time();
-        if($now < $last_act + 5  )
+        if($now < $last_act + 60*60  )
             return true;
         else{
             unset($_SESSION["remember_me"]);
