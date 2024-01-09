@@ -3,7 +3,7 @@
     require('inc/db.php');
     require("utility/sessionManager.php");
     checkSession($con);
-    if(!isset($_SERVER["username"]))
+    if(!isset($_SESSION["username"]))
     {
         header("location: index.php");
         exit();
