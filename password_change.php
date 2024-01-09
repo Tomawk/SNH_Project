@@ -23,6 +23,10 @@
     <script src="JS/mainscript.js"> </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+
+    <!-- Font Awesome Import -->
+    <script src="https://kit.fontawesome.com/a30f811c28.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
   <?php
