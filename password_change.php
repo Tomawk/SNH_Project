@@ -54,7 +54,11 @@
         <p class="error_register" id="error_password"> Invalid new password. Password should at least contain 8 chars, an uppercase char, a lowercase char and a number.</p>
         <p id="password_strength"></p>
       </div>
-      
+      <div class="form-group">
+        <label for="newPasswordRepeat">Repeat New Password</label>
+        <input type="password" id="new_password_repeat" name="new_password_repeat" required>
+        <p class="error_register" id="error_rep_password">Passwords don't match.</p>
+      </div>
       <div class="form-group">
         <input type="submit" value="Change password" id="submit_button">
         <p id="password_strength_validation"></p>

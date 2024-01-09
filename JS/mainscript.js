@@ -196,6 +196,20 @@ function validateFormChangePsw(){
 
 	var _password = document.forms["change_psw"]["new_password"].value; /* Nuova Password inserita */
 
+	var _password_repeat = document.forms["change_psw"]["new_password_repeat"].value; /* Repeat Nuova Password inserita */
+
+	if(_password != _password_repeat){
+		document.getElementById("new_password_repeat").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
+		document.getElementById("new_password_repeat").style.backgroundColor = "#f44336"; /* setta colore input a red */
+		document.getElementById("new_password_repeat").focus();
+		document.getElementById("error_rep_password").style.display='block';
+		event.preventDefault();
+		errore_=false;
+	}else{
+		document.getElementById("error_rep_password").style.display='none';
+		document.getElementById("new_password_repeat").style.backgroundColor='white';
+	}
+
 	if(!validatePassword(_password) || _password.length > 255){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
 		document.getElementById("new_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
 		document.getElementById("new_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
