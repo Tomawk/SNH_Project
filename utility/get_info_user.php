@@ -27,8 +27,18 @@
         echo $array;
     }
 
-	if(isset($_POST['link'])){
-        
+	if(isset($_POST['id'])){
+
+        $id= $_POST['id'];
+        $query = "SELECT * FROM users WHERE id = ? ";
+    	$stmt = $con->prepare($query);
+    	$stmt->bind_param("s",$id);
+    	$stmt->execute();
+    	$row = $stmt->get_result();
+        $result = mysqli_fetch_assoc($row);
+
+        $array = $result['username']."|".$result['nome']."|".$result['cognome']."|".$result['email'];
+        echo $array;
     }
 
 ?>
