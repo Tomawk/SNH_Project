@@ -167,11 +167,11 @@ $_SESSION["payment_info"]=array(
             <h2 class="summary_h2">Your credit card:</h2>
                 <div class='line'></div>
             Card Number
-            <p class='input-field'><?php echo $_POST["cardnumber"];?></p>
+            <p class='input-field'><?php echo htmlspecialchars($_POST["cardnumber"]);?></p>
             <h2 class="summary_h2">Your address:</h2>
                 <div class='line'></div>
             Address
-            <p class='input-field'><?php echo $_POST["address"].",".$_POST["city"];?></p>
+            <p class='input-field'><?php echo htmlspecialchars($_POST["address"]).",".htmlspecialchars($_POST["city"]);?></p>
 
             <table class='half-input-table'>
                 <button class='back-btn' onclick="location.href='carrello.php'">Cancel</button>
