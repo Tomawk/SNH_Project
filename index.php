@@ -38,7 +38,10 @@ checkSession($con);
     ?>
 >
 <?php
-	    $_SESSION["state"] ="outside";
+    checkSession($con);
+	include 'html/topnav.php';
+    include 'html/aside.php';
+    $_SESSION["state"] ="outside";
 ?>
 <div class="mainpic">
 		<h1 id="title">BOOK WORM</h1>

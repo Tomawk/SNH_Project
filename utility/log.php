@@ -103,7 +103,7 @@ function getBrowser() {
 
 function log_message($log_msg)
 {
-    $log_filename = "../../log";
+    $log_filename = "../../../log";
     if (!file_exists($log_filename))
     {
         // create directory/folder uploads.

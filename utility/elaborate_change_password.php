@@ -42,7 +42,8 @@
       return;
     }
 
-    if(!isset($_POST["old_password"])  || !isset($_POST["new_password"])  ||!isset($_SESSION['username']) ){
+    if(!isset($_POST["old_password"])  || !isset($_POST["new_password"])
+        || !isset($_SESSION['username']) || !isset($_POST['new_password_repeat'])){
         echo "some field are missing";
         return;
     }
@@ -50,6 +51,7 @@
     $username = $_SESSION['username'];
     $old_password = $_POST["old_password"];
     $new_password = $_POST["new_password"];
+    $new_password_repeat = $_POST['new_password_repeat'];
 
     //sanitize + clean inputs
 
@@ -62,6 +64,11 @@
     $new_password = stripcslashes($new_password);
     $new_password = htmlspecialchars($new_password); //Convert special characters to HTML entities
     $new_password = mysqli_real_escape_string($con,$new_password); //SQL Injection prevention
+
+    $new_password_repeat = trim($new_password_repeat); //Remove whitespaces
+    $new_password_repeat = stripcslashes($new_password_repeat);
+    $new_password_repeat = htmlspecialchars($new_password_repeat); //Convert special characters to HTML entities
+    $new_password_repeat = mysqli_real_escape_string($con,$new_password_repeat); //SQL Injection prevention
 
     // Validation server-side of $new_password
 
@@ -79,6 +86,11 @@
     }
     elseif(!preg_match("#[a-z]+#",$new_password)) {
         echo "New Password should contain at least one lowercase char";
+        return;
+    }
+
+    if($new_password_repeat != $new_password){
+        echo "The new inserted password don't match";
         return;
     }
 

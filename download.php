@@ -18,7 +18,7 @@
         $file = mysqli_real_escape_string($con,$file);
         $file = $file.".pdf";
     }else{
-        echo "error ".$file;
+        echo "error ".htmlspecialchars($file);
         exit();
     }
     $stmt = mysqli_prepare($con,"SELECT * FROM contenutoordini WHERE ISBN = ? AND username = ?");
@@ -45,11 +45,11 @@
             exit;
         }
         else{
-            echo "no file: ".$file;
+            echo "no file: ".htmlspecialchars($file);
             exit();
         }
     }else{
-        echo "no file in db".$_SESSION["username"].",".$file;
+        echo "no file in db".htmlspecialchars($_SESSION["username"]).",".htmlspecialchars($file);
         exit();
     }
 ?>

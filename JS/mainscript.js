@@ -189,12 +189,65 @@
 		else return true;
 	}
 
+function check_correctness_password(){
+		const password = document.getElementById('modal1_password').value;
+		const name = document.getElementById('modal1_nome').value;
+		const surname = document.getElementById('modal1_surname').value;
+		const username = document.getElementById('modal1_uname').value;
+		const email = document.getElementById('modal1_email').value;
+		const array = [name,surname,username,email];
+	
+		const result = zxcvbn(password,array);
+		console.log(result.feedback);
+	
+		var guesses = result.guesses_log10;
+		var p = document.getElementById("error_password_zxcvbn");
+	
+		if(password.includes(name)) {p.textContent = "password doesn't have to contain the name";  p.style.color = "red"; p.style.fontSize = "0.8em"; return false}
+		if(password.includes(surname)) {p.textContent = "password doesn't have to contain the surname";  p.style.color = "red"; p.style.fontSize = "0.8em"; return false}
+		if(password.includes(email)) {p.textContent = "password doesn't have to contain the email";  p.style.color = "red"; p.style.fontSize = "0.8em"; return false}
+		if(password.includes(username)) {p.textContent = "password doesn't have to contain the username";  p.style.color = "red"; p.style.fontSize = "0.8em"; return false}
+		
+		if(guesses <5){
+			
+			p.textContent = "password is weak";
+			p.style.color = "red";
+			p.style.fontSize = "0.8em";
+			return false;
+		}
+		else if (guesses < 10){
+			p.textContent = "password not very strong";
+			p.style.color = "#e67014";
+			p.style.fontSize = "0.8em";
+			return false;
+		}
+		else{
+			p.textContent = "password strong";
+			p.style.color = "green";
+			p.style.fontSize = "0.8em";
+			return true;
+		}
+	}
 
 function validateFormChangePsw(){
 
 	var errore_ = true;
 
 	var _password = document.forms["change_psw"]["new_password"].value; /* Nuova Password inserita */
+
+	var _password_repeat = document.forms["change_psw"]["new_password_repeat"].value; /* Repeat Nuova Password inserita */
+
+	if(_password != _password_repeat){
+		document.getElementById("new_password_repeat").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
+		document.getElementById("new_password_repeat").style.backgroundColor = "#f44336"; /* setta colore input a red */
+		document.getElementById("new_password_repeat").focus();
+		document.getElementById("error_rep_password").style.display='block';
+		event.preventDefault();
+		errore_=false;
+	}else{
+		document.getElementById("error_rep_password").style.display='none';
+		document.getElementById("new_password_repeat").style.backgroundColor='white';
+	}
 
 	if(!validatePassword(_password) || _password.length > 255){ /* Controlla password, almeno 8 caratteri di cui una lettera maiuscola, una minuscola e un numero*/
 		document.getElementById("new_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
@@ -209,9 +262,15 @@ function validateFormChangePsw(){
 		document.getElementById("new_password").style.backgroundColor='white';
 	}
 
+	if(check_correctness_password()){
+		errore_ == false;
+	}
+
 	if(errore_ == false) return false;
 	else return true;
 }
+
+
 
 function validateDynamicChangePSW(){
 	// a strong password for debug purposes is -> Asdfghjk1lkgtyio
@@ -233,6 +292,18 @@ function validateDynamicChangePSW(){
 		document.getElementById("new_password").style.backgroundColor='white';
 	}
 
+	const new_password = document.getElementById('new_password').value;
+	const result = zxcvbn(new_password);
+	var guesses = result.guesses_log10;
+    if(guesses < 10){
+		document.getElementById("new_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
+		document.getElementById("new_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
+		document.getElementById("new_password").focus();
+		document.getElementById("error_password").style.display='block';
+		event.preventDefault();
+		errore_=false;
+	}
+
 	if(_password != _rep_password){
 		document.getElementById("confirm_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
 		document.getElementById("confirm_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
@@ -242,19 +313,9 @@ function validateDynamicChangePSW(){
 		errore_=false;
 	}
 
-	const new_password = document.getElementById('new_password').value;
-	const result = zxcvbn(new_password);
-	var guesses = result.guesses_log10;
-    if(guesses < 10){
-		console.log("no");
-		document.getElementById("new_password").style.webkitAnimation = "shake .5s"; /*animazione keyframe shake sull'input*/
-		document.getElementById("new_password").style.backgroundColor = "#f44336"; /* setta colore input a red */
-		document.getElementById("new_password").focus();
-		document.getElementById("error_password").style.display='block';
-		event.preventDefault();
+	if(check_correctness_password() == false){
 		errore_=false;
 	}
-
 
 	if(errore_ == false) return false;
 	else return true;
@@ -262,23 +323,5 @@ function validateDynamicChangePSW(){
 
 
 function controlla_sicurezza_password_register_form(){
-    const password = document.getElementById('modal1_password').value;
-    const result = zxcvbn(password);
-    var guesses = result.guesses_log10;
-    var p = document.getElementById("error_password_zxcvbn");
-    if(guesses <5 ){
-        p.textContent = "password is weak";
-        p.style.color = "red";
-        p.style.fontSize = "0.8em";
-    }
-    else if (guesses < 10){
-        p.textContent = "password not very strong";
-        p.style.color = "#e67014";
-        p.style.fontSize = "0.8em";
-    }
-    else{
-        p.textContent = "password strong";
-        p.style.color = "green";
-        p.style.fontSize = "0.8em";
-    }
+	check_correctness_password();
 }
