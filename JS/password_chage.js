@@ -12,8 +12,11 @@ function get_info_user(){
                 array = response.split("|");
                 var p = document.getElementById("password_strength");
                 const password = document.getElementById('new_password').value;
-                if(array.includes(password)){p.textContent = "password doesn't have to be equal to the username/name/surname/email";  p.style.color = "red"; p.style.fontSize = "0.8em"}
-
+                for (var a in array){
+                    var element = array[a].toLowerCase();
+                    var pwd = password.toLowerCase();
+                    if(pwd.includes(element)){p.textContent = "password doesn't have to be equal to the username/name/surname/email";  p.style.color = "red"; p.style.fontSize = "0.8em"}
+                }
             }
         }
         xhr.send(data);
@@ -23,9 +26,6 @@ function check(){
     const password = document.getElementById('new_password').value;
     const password_old = document.getElementById('old_password').value;
     const username = document.getElementById('username').text.trim();
-    
-  
-
     
 
     const result = zxcvbn(password);
