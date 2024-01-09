@@ -48,6 +48,7 @@
         <label for="oldPassword">Old Password</label>
         <input type="password" id="old_password" name="old_password" required>
       </div>
+      
       <div class="form-group">
         <label for="newPassword">New Password</label>
         <input type="password" id="new_password" name="new_password" oninput="controlla_sicurezza_password()" required>

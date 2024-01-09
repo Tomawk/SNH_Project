@@ -2,7 +2,10 @@ document.getElementById("submit_button").addEventListener("click", function(even
     event.preventDefault();
     const new_password = document.getElementById('new_password').value;
     const password = document.getElementById('confirm_password').value;
-    
+    const password_old = document.getElementById('old_password').value;
+
+	if(new_password.includes(password_old)) {p.textContent = "password doesn't have to be equal to the old password";  p.style.color = "red"; p.style.fontSize = "0.8em"; return false}
+
     const result = zxcvbn(new_password);
     var guesses = result.guesses_log10;
     if(guesses < 10){
@@ -26,6 +29,12 @@ function controlla_sicurezza_password(){
     const result = zxcvbn(password);
     var guesses = result.guesses_log10;
     var p = document.getElementById("password_strength");
+
+    const password_old = document.getElementById('old_password').value;
+
+	if(password.includes(password_old)) {p.textContent = "password doesn't have to be equal to the old password";  p.style.color = "red"; p.style.fontSize = "0.8em"; return false}
+
+    
     if(guesses <5 ){
         p.textContent = "password debole";
         p.style.color = "red";

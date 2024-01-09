@@ -82,7 +82,12 @@ if(!isset($_SERVER['HTTPS'])){
   <div class="change-password-form">
     <h2>Change password</h2>
     <form onsubmit="return validateDynamicChangePSW()" action="utility/elaborate_dynamic_change_password.php" method="post" id="my_form" name="dynamic_psw_form">
-      <div class="form-group">
+    <div class="form-group">
+        <label for="old_password">Old Password</label>
+        <input type="password" id="old_password" name="old_password"  required>
+        <p class="error_register" id="error_old_password"> Passwords do not match. </p>
+      </div>
+    <div class="form-group">
         <label for="oldPassword">New Password</label>
         <input type="password" id="new_password" name="new_password" oninput="controlla_sicurezza_password()" required>
         <p class="error_register" id="error_password"> Invalid new password. Password should at least contain 8 chars, an uppercase char, a lowercase char and a number.</p>
