@@ -2,6 +2,7 @@
     session_start();
     require('../inc/db.php');
     require('../forMail/mail.php');
+    require('hashing_psw.php');
 if(!isset($_SERVER['HTTPS'])){
             header("HTTPS 404 nosecure");
             exit();
@@ -62,18 +63,23 @@ if(!isset($_SERVER['HTTPS'])){
                 $rand = bin2hex(random_bytes('16'));
                 $time = time();
 
+                // Hashing and salting rand
+
+                $salt = create_salt();
+                $hashed_link = hash('sha256',$rand);
+                $final_link= hash('sha256', $salt . $hashed_link); //hashed psw with hash
+
 
                 //insert link into the db
-                $sql = "UPDATE `users` SET `link` = ?, `timestamp` = ? WHERE `users`.`id` = ? ";
+                $sql = "UPDATE `users` SET `link` = ?, `link_salt` = ?, `timestamp` = ? WHERE `users`.`id` = ? ";
                 $stmt = $con->prepare($sql);
-                $stmt->bind_param("ssi", $rand, $time, $row['id']);
+                $stmt->bind_param("sssi", $final_link, $salt, $time, $row['id']);
                 $stmt->execute();
 
-                $link = "https://localhost/SNH_Project/dynamic_change_password.php?link=" . $rand;
-
+                $link = "https://localhost/SNH_Project/dynamic_change_password.php?userid=". $row['id'] ."&link=" . $rand;
 
                 //send the email
-                sendMail($link, $row['email'], "Your link (will exipire in 5 minutes) to change the password is: ", "Password recovery");
+                sendMail($link, $row['email'], "Your link (will expire in 5 minutes) to change the password is: ", "Password recovery");
 
                 echo 1;
                 //echo "password sent";

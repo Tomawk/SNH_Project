@@ -34,7 +34,7 @@ require('utility/sessionManager.php');
     ?>
 >
 <?php
-	checkSession($con);
+    checkSession($con);
 	include 'html/topnav.php';
     include 'html/aside.php';
     $_SESSION["state"] ="outside";

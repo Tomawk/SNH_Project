@@ -35,13 +35,33 @@ if(!isset($_SERVER['HTTPS'])){
     include 'html/aside.php';
 
     include "html/modal_user.php";
+    $id = $_GET['userid'];
     $link = $_GET['link'];
 
-    if(!isset($link)) return;
+    if(!isset($link) && !isset($id)) return;
 
-    $query = "SELECT * FROM users WHERE link = ? ";
+        // retrieve salt
+
+    $stmt_salt = $con->prepare("SELECT * from users WHERE id = ?");
+    $stmt_salt->bind_param("i",$id);
+    $stmt_salt->execute();
+    $result_salt = $stmt_salt->get_result();
+
+    if(mysqli_num_rows($result_salt) == 0){
+      echo "Some error occurred";
+      return;
+    }
+
+    $row_salt = mysqli_fetch_assoc($result_salt);
+
+    $salt = $row_salt['link_salt'];
+
+    $hashed_link = hash('sha256',$link);
+    $final_link= hash('sha256', $salt . $hashed_link); //hashed psw with hash
+
+    $query = "SELECT * FROM users WHERE link = ? AND id = ?";
     $stmt = $con->prepare($query);
-    $stmt->bind_param("s",$link);
+    $stmt->bind_param("si",$final_link,$id);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -73,7 +93,7 @@ if(!isset($_SERVER['HTTPS'])){
         <p class="error_register" id="error_confirm_password"> Passwords do not match. </p>
         <p id="password_strength"></p>
       </div>
-      <input  id="link" name="link" value =<?php echo "'".$link."' " ?> hidden>
+      <input  id="link" name="link" value =<?php echo "'".$final_link."' " ?> hidden>
       <div class="form-group">
         <input type="submit" value="Change password" id="submit_button">
         <p id="password_strength_validation"></p>
