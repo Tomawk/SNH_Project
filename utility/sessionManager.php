@@ -123,6 +123,7 @@ function find_user_by_token(string $token,$con)
         $now = time();
         #if($now < $last_act + 60*60  )
         if($now < $last_act + 5  ){
+            $_SESSION["timestamp"];
             return true;
         }
         else{
